@@ -1,0 +1,71 @@
+.userSettingsPage {
+  &__container {
+    height: 100vh;
+    display: flex;
+  }
+  &__comeback {
+    width: 64px;
+    background: $color-bg;
+    border-right: 2px solid $color-grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__main {
+    margin-top: 60px;
+    width: calc(100% - 64px);
+  }
+  &__content {
+    width: min(100%, 510px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px
+  }
+  &__avatar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items:center; 
+    justify-content: center;
+  }
+  &__userInfo {
+  }
+  &__buttons {
+  }
+}
+
+.avatar {
+  &__img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: $color-grey;
+  }
+}
+.text {
+  &-xl {
+  }
+}
+
+.comeback {
+  &__icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    border-radius: 50%;
+    background: url("../../assets/icons/arrowRight.svg") 50% 50%  no-repeat;
+    background-color: $color-main;
+  }
+}
+
+.separatop {
+  width: 100%;
+  height: 1px;
+  background: $color-grey;
+  margin: 10px 0;
+}
+
+.hidden {
+  display: none
+}

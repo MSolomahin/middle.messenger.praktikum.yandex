@@ -1,0 +1,21 @@
+/* Config */
+@import "./assets/style/uikit.css";
+@import "./assets/style/common.css";
+@import "./assets/fonts/fonts.css";
+
+
+/* Pages */
+@import "./pages/authorization/authorization.style.css";
+@import "./pages/registration/registration.style.css";
+@import "./pages/messenger/messenger.style.css";
+@import "./pages/userSettings/userSettings.style.css";
+
+
+
+
+/* Components */
+@import "./components/componentsStyle.css";
+
+/* Layout */
+@import "./layout/errorLayout/errorLayout.style.css";
+

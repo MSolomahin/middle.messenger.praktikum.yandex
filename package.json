@@ -1,0 +1,23 @@
+{
+  "name": "yp-messenger",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "keywords": [],
+  "engines": {
+    "node": ">=18.12.1"
+  },
+  "author": "MSolomakhin",
+  "devDependencies": {
+    "parcel": "^2.0.1",
+    "postcss": "^8.0.0",
+    "postcss-autoreset": "^3.0.4",
+    "postcss-custom-properties": "^12.1.11",
+    "postcss-import": "^15.1.0",
+    "postcss-url": "^10.1.3",
+    "precss": "^4.0.0"
+  }
+}

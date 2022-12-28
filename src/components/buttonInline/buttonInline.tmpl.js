@@ -1,0 +1,1 @@
+export default button = `<a href="{{ linkTo }}" class="{{ className }}">{{ label }}</a>` 
