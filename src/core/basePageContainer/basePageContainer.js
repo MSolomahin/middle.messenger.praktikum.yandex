@@ -12,12 +12,11 @@ export default class BasePageContainer {
 
     this.element = element.firstElementChild;
     this.subElements = this.getSubElements(this.element);
-
     if (this.initComponents) await this.initComponents();
     if (this.renderComponents && !isEmpty(this.subElements)) this.renderComponents();
     
     if (this.initEventListeners) this.initEventListeners();
-
+    console.log(this.element)
     return this.element;
   }
  

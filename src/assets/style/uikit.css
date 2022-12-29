@@ -20,3 +20,5 @@ $font-size-l: 15px;
 $font-size-xl: 16px;
 $font-size-xxl: 20px;
 $font-size-xxxl: 40px;
+
+$transition-base: all 0.3s ease;

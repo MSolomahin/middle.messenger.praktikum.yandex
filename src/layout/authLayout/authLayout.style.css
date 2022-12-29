@@ -1,4 +1,4 @@
-.registrationPage {
+.authLayout {
   &__container {
     display: flex;
     justify-content: center;
@@ -11,7 +11,7 @@
     gap: 40px;
     width: min(100%, 340px);
     text-align: center;
-    height: 615px;
+    min-height: 450px;
     padding: 50px 30px 30px;
     background: $color-white;
     box-shadow: $shadow;

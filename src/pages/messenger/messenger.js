@@ -1,7 +1,6 @@
 import template from "./messenger.tmpl";
-import ButtonInline from "../../components/buttonInline";
-import BasePageContainer from "../../containers/basePageContainer/basePageContainer";
-import Templator from "../../utils/templator";
+import BasePageContainer from "../../core/basePageContainer/basePageContainer";
+import Avatar from "../../components/avatar";
 
 export default class MessengerPage extends BasePageContainer {
   constructor() {
@@ -10,14 +9,13 @@ export default class MessengerPage extends BasePageContainer {
   }
 
   initComponents = async () => {
-    const buttonInline = new ButtonInline({
-      label: "Create account",
-      linkTo: "/registration",
-      isSmall: true,
-    });
+    const avatar = new Avatar({
+      size: "tiny",
+      title: "MS"
+    })
 
     this.components = {
-      buttonInline,
+      avatar
     };
   };
 }

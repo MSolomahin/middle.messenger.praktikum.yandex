@@ -7,7 +7,7 @@
     border-bottom: 1.5px solid $color-main;
     padding: 11px 0;
     width: 100%;
-    transition: 0.1s ease-in;
+    transition: $transition-base;
     font-family: $font-base;
     font-size: 13px;
 
@@ -16,9 +16,14 @@
       outline: none;
       & + label {
         transform: translateY(-20px);
-        transition: 0.1s ease-in;
+        transition: $transition-base;
         font-size: 9px;
       }
+    }
+    &:hover + label {
+      color: $color-main;
+      transition: $transition-base;
+      
     }
   }
 
@@ -27,7 +32,7 @@
     font-size: 13px;
     top: 15px;
     left: 0;
-    transition: 0.1s ease-in;
+    transition: $transition-base;
     color: $color-text-secondary;
     pointer-events: none;
   }

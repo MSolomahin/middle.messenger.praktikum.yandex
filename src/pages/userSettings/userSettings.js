@@ -1,8 +1,9 @@
 import template from "./userSettings.tmpl";
 import ButtonInline from "../../components/buttonInline";
-import BasePageContainer from "../../containers/basePageContainer/basePageContainer";
+import BasePageContainer from "../../core/basePageContainer/basePageContainer";
 import SecondInput from "../../components/secondInput";
 import ButtonPrimary from "../../components/buttonPrimary"
+import Avatar from "../../components/avatar"
 
 export default class UserSettingsPage extends BasePageContainer {
   constructor() {
@@ -22,11 +23,12 @@ export default class UserSettingsPage extends BasePageContainer {
 
   handleChangeInfo = (e) => {
     e.preventDefault()
-    const footer = document.querySelectorAll(".js-userSettings")
-    const inputs = document.querySelectorAll(".js-field")
+    const footer = this.element.querySelectorAll(".js-userSettings")
+    const inputs = this.element.querySelectorAll(".js-field")
 
     Array.from(inputs).map((input) => {
         input.disabled = !input.disabled
+        input.classList.toggle("secondInput-container__input_active")
     })
 
     Array.from(footer).map((item) => {
@@ -37,47 +39,55 @@ export default class UserSettingsPage extends BasePageContainer {
   async initComponents() {
     const inputEmail = new SecondInput({
       label: "Email",
-      value: "m.solomahin@mail.ru"
+      value: "m.solomahin@mail.ru",
+      name: "email"
     });
     const inputLogin = new SecondInput({
       label: "Login",
-      value: "solomax"
+      value: "solomaxim",
+      name: "login"
     });
     const inputFirstName = new SecondInput({
       label: "First Name",
-      value: "Maxim"
+      value: "Maxim",
+      name: "first_name"
     });
     const inputSecondName = new SecondInput({
       label: "Second Name",
-      value: "Solomakhin"
+      value: "Solomakhin",
+      name: "second_name"
     });
     const inputDisplayName = new SecondInput({
       label: "Login",
-      value: "Max"
+      value: "Max",
+      name: "display_name"
     });
     const inputPhone = new SecondInput({
       label: "Phone",
-      value: "8 (906) 678-93-82"
+      value: "8 (906) 678-93-82",
+      name: "phone"
     });
 
     const buttonChangeInfo = new ButtonInline({
       label: "Change personal info",
-      linkTo: ""
     });
     const buttonChangePassword = new ButtonInline({
       label: "Change password",
-      linkTo: "/authorization",
     });
     const buttonLogOut = new ButtonInline({
       label: "Log out",
-      linkTo: "/authorization",
       isRed: true
     });
 
     const buttonSave = new ButtonPrimary({
       label: "Save",
-      handleClick: () => {}
     });
+
+    const avatar = new Avatar({
+      size: "large",
+      isEditable: true,
+      title: "MS"
+    })
 
     this.components = {
       inputFirstName,
@@ -89,7 +99,8 @@ export default class UserSettingsPage extends BasePageContainer {
       buttonChangeInfo,
       buttonChangePassword,
       buttonLogOut,
-      buttonSave
+      buttonSave,
+      avatar
     };
   }
 }

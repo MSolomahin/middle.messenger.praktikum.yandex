@@ -9,7 +9,7 @@ export default `
       <div class="userSettingsPage__main">
         <div class="userSettingsPage__content">
           <div class="userSettingsPage__avatar avatar">
-            <div class="avatar__img"></div>
+            <div data-element="avatar"></div>
             <p class="text-xl">Maxim</p>
           </div>
           <div class="userSettingsPage__userInfo">
@@ -29,7 +29,6 @@ export default `
           </div>
           <div class="userSettingsPage__buttons js-userSettings hidden">
             <div data-element="buttonSave"></div>
-          
           </div>
         </div>
       </div>

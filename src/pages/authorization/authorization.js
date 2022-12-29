@@ -1,39 +1,41 @@
 import BaseInput from "../../components/baseInput";
-import ButtonPrimary from "../../components/buttonPrimary";
-import template from "./authorization.tmpl";
-import ButtonInline from "../../components/buttonInline";
-import BasePageContainer from "../../containers/basePageContainer/basePageContainer";
+import AuthLayout from "../../layout/authLayout/authLayout";
 
-export default class AuthPage extends BasePageContainer {
-  constructor() {
-    super();
-    this.template = template;
-  }
-
+export default class AuthPage {
   initComponents = async () => {
     const inputLogin = new BaseInput({
       label: "Login",
+      name: "login"
     });
     const inputPassword = new BaseInput({
       label: "Password",
-      type: "password"
+      type: "password",
+      name: "password"
     });
-    const buttonPrimary = new ButtonPrimary({
-      label: "Sign in",
-      handleClick: (e) => e.preventDefault(),
-    });
-    const buttonInline = new ButtonInline({
-      label: "Create account",
-      linkTo: "/registration",
-      isSmall: true,
-    });
+    const children = inputLogin.template + inputPassword.template
+
+    const authLayout = new AuthLayout({
+      title: "Log in",
+      children: children,
+      primaryText: "Sign in", 
+      inlineText: "Create account",
+      inlineLink: "/registration"
+    })
 
     this.components = {
-      inputLogin,
-      inputPassword,
-      buttonPrimary,
-      buttonInline,
+      authLayout
     };
-    
   };
+
+  render = async () => {
+    await this.initComponents();
+    this.element = this.components.authLayout.element;
+    return this.element;
+  }
+
+  destroy = () => {
+    for (const component of Object.values(this.components)) {
+      component.destroy();
+    }
+  }
 }

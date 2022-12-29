@@ -5,17 +5,12 @@
 
 
 /* Pages */
-@import "./pages/authorization/authorization.style.css";
-@import "./pages/registration/registration.style.css";
-@import "./pages/messenger/messenger.style.css";
-@import "./pages/userSettings/userSettings.style.css";
-
-
-
+@import "./pages/pagesStyle.css";
 
 /* Components */
 @import "./components/componentsStyle.css";
 
 /* Layout */
-@import "./layout/errorLayout/errorLayout.style.css";
+@import "./layout/layoutStyle.css";
+
 

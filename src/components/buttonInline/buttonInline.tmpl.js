@@ -1,1 +1,1 @@
-export default button = `<a href="{{ linkTo }}" class="{{ className }}">{{ label }}</a>` 
+export default `<{{ tag }} href="{{ linkTo }}" class="{{ className }}" onclick="{{ handleClick }}">{{ label }}</{{ tag }}>` 

@@ -6,7 +6,8 @@
   display: grid;
   grid-template-columns: 150px 1fr;
 
-  & input {
+
+  &__input {
     border: 0; 
     width: 100%;
     font-family: $font-base;
@@ -17,10 +18,17 @@
     &:focus {
       outline: none;
     }
+    &:hover {
+      
+    }
     &:disabled {
       background: none;
     }
+    &_active {
+      color: $color-text-primary;
+    }
   }
+
 
   & label {
 

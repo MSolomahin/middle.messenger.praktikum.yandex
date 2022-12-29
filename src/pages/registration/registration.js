@@ -1,50 +1,40 @@
 import BaseInput from "../../components/baseInput";
 import ButtonPrimary from "../../components/buttonPrimary";
-import template from "./registration.tmpl";
 import ButtonInline from "../../components/buttonInline";
-import BasePageContainer from "../../containers/basePageContainer/basePageContainer";
+import AuthLayout from "../../layout/authLayout/authLayout";
 
-export default class RegistrationPage extends BasePageContainer {
-  constructor() {
-    super();
-    this.template = template;
-  }
-
+export default class RegistrationPage {
   async initComponents() {
     const inputFirstName = new BaseInput({
       label: "First Name",
+      name: "first_name",
     });
     const inputSecondName = new BaseInput({
       label: "Second Name",
+      name: "second_name",
     });
     const inputLogin = new BaseInput({
       label: "Login",
+      name: "login",
     });
     const inputEmail = new BaseInput({
       label: "Email",
-      type: "email"
+      type: "email",
+      name: "email",
     });
     const inputPassword = new BaseInput({
       label: "Password",
-      type: "password"
+      type: "password",
+      name: "password",
     });
     const inputPasswordRepeat = new BaseInput({
       label: "Password (repeat)",
-      type: "password"
+      type: "password",
     });
     const inputPhone = new BaseInput({
       label: "Phone",
-      type: "tel"
-    });
-
-    const buttonPrimary = new ButtonPrimary({
-      label: "Create account",
-      handleClick: () => console.log("click"),
-    });
-    const buttonInline = new ButtonInline({
-      label: "Log in",
-      linkTo: "/authorization",
-      isSmall: true,
+      type: "tel",
+      name: "phone",
     });
 
     this.components = {
@@ -52,11 +42,37 @@ export default class RegistrationPage extends BasePageContainer {
       inputSecondName,
       inputLogin,
       inputEmail,
+      inputPhone,
       inputPassword,
       inputPasswordRepeat,
-      inputPhone,
-      buttonPrimary,
-      buttonInline,
     };
   }
+
+  initLayout = () => {
+    const children = Object.values(this.components).reduce(
+      (result, component) => result + component.template,
+      ""
+    );
+
+    this.components.authLayout = new AuthLayout({
+      title: "Create account",
+      children: children,
+      primaryText: "Create account",
+      inlineText: "Log in",
+      inlineLink: "/authorization",
+    });
+  };
+
+  render = async () => {
+    await this.initComponents();
+    this.initLayout();
+    this.element = this.components.authLayout.element;
+    return this.element;
+  };
+
+  destroy = () => {
+    for (const component of Object.values(this.components)) {
+      component.destroy();
+    }
+  };
 }
