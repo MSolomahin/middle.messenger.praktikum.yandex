@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "engines": {
-    "node": ">=18.12.1"
+    "node": ">=16.19.0"
   },
   "author": "MSolomakhin",
   "devDependencies": {
