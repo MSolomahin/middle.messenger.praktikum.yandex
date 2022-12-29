@@ -24,3 +24,12 @@ Builds the app for production to the `dist` folder.\
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
+## Explanations
+This project has specific file associations. To display correctly, you need to add the following lines to your settings.json:
+
+```
+"files.associations": {
+    "*.tmpl.js": "html"
+}
+```
+
