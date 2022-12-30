@@ -16,8 +16,6 @@ export default class AuthLayout extends BasePageContainer  {
       title,
       children
     })
-
-    console.log(this.template)
     this.render()
   }
 
@@ -26,7 +24,7 @@ export default class AuthLayout extends BasePageContainer  {
       label: this.primaryText,
       handleClick: (e) => e.preventDefault(),
     });
-    
+
     const buttonInline = new ButtonInline({
       label: this.inlineText,
       linkTo: this.inlineLink,

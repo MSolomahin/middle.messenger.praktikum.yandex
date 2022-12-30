@@ -1,9 +1,9 @@
-import AuthPage from "../pages/authorization/index.js";
-import MessengerPage from "../pages/messenger/messenger.js";
-import NotFoundPage from "../pages/notFound/notFound.js";
-import RegistrationPage from "../pages/registration/registration.js";
-import ServerErrorPage from "../pages/serverError/serverError.js";
-import UserSettings from "../pages/userSettings/index.js";
+import AuthPage from "../pages/authorization";
+import MessengerPage from "../pages/messenger";
+import NotFoundPage from "../pages/notFound";
+import RegistrationPage from "../pages/registration";
+import ServerErrorPage from "../pages/serverError";
+import UserSettings from "../pages/userSettings";
 
 const pages = {
   authorization: AuthPage,
@@ -18,7 +18,7 @@ export default async function (path, match) {
 
   main.classList.add("is-loading");
 
-  // const { default: Page } = await import(`../pages/authorization/index.js`);
+  // const { default: Page } = await import(`../pages/${path}`);
 
   const Page = pages[path] || NotFoundPage;
 

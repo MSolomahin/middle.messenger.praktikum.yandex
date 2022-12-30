@@ -16,7 +16,6 @@ export default class BasePageContainer {
     if (this.renderComponents && !isEmpty(this.subElements)) this.renderComponents();
     
     if (this.initEventListeners) this.initEventListeners();
-    console.log(this.element)
     return this.element;
   }
  

@@ -9,5 +9,6 @@ router
   .addRoute(/^404$/, 'notFound')
   .addRoute(/^500$/, 'serverError')
   .addRoute(/^userSettings$/, 'userSettings')
+  .setNotFoundPagePath('notFound')
   .listen();
 

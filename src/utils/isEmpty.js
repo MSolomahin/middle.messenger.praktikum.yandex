@@ -38,7 +38,7 @@ function isLength(value) {
     return isObjectLike(value) && getTag(value) === "[object Arguments]";
   }
   
-  export default isEmpty = (value) => {
+  const isEmpty = (value) => {
     if (value === null) {
       return true;
     }
@@ -72,3 +72,5 @@ function isLength(value) {
   
     return true;
   }
+
+  export default isEmpty;

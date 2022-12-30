@@ -9,7 +9,7 @@
 
 In the project directory, you can run:
 
-### `yarn dev`
+### `yarn start`
 
 Runs the app in the development mode.\
 And in the console you can see where your dev server is available
