@@ -76,6 +76,7 @@ export default class UserSettingsPage extends BasePageContainer {
     });
     const buttonLogOut = new ButtonInline({
       label: "Log out",
+      linkTo: "/authorization",
       isRed: true
     });
 
