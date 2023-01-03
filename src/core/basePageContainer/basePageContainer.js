@@ -1,21 +1,27 @@
 import isEmpty from "../../utils/isEmpty"
+import createElement from "../../utils/createElement"
 
 export default class BasePageContainer {
   element;
   subElements = {};
   components = {};
+  layout;
 
   render = async () => {
-    const element = document.createElement("div");
-
-    element.innerHTML = this.template;
-
-    this.element = element.firstElementChild;
-    this.subElements = this.getSubElements(this.element);
     if (this.initComponents) await this.initComponents();
+
+    if (this.initLayout) {
+      await this.initLayout()
+      this.element = this.layout.element;
+      return this.element;
+    }
+
+    this.element = createElement(this.template)
+    this.subElements = this.getSubElements(this.element);
+
     if (this.renderComponents && !isEmpty(this.subElements)) this.renderComponents();
-    
     if (this.initEventListeners) this.initEventListeners();
+
     return this.element;
   }
  
@@ -28,6 +34,7 @@ export default class BasePageContainer {
   }
 
   getSubElements = ($element) => {
+    console.log($element)
     const elements = $element.querySelectorAll("[data-element]");
     return [...elements].reduce((accum, subElement) => {
       accum[subElement.dataset.element] = subElement;

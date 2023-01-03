@@ -1,9 +1,9 @@
 import BaseInput from "../../components/baseInput";
-import ButtonPrimary from "../../components/buttonPrimary";
-import ButtonInline from "../../components/buttonInline";
+import BasePageContainer from "../../core/basePageContainer/basePageContainer";
 import AuthLayout from "../../layout/authLayout/authLayout";
+import getChildrenTemplate from "../../utils/getChildrenTemplate";
 
-export default class RegistrationPage {
+export default class RegistrationPage extends BasePageContainer {
   async initComponents() {
     const inputFirstName = new BaseInput({
       label: "First Name",
@@ -49,30 +49,14 @@ export default class RegistrationPage {
   }
 
   initLayout = () => {
-    const children = Object.values(this.components).reduce(
-      (result, component) => result + component.template,
-      ""
-    );
+    const children = getChildrenTemplate(this.components);
 
-    this.components.authLayout = new AuthLayout({
+    this.layout = new AuthLayout({
       title: "Create account",
       children: children,
       primaryText: "Create account",
       inlineText: "Log in",
       inlineLink: "/authorization",
     });
-  };
-
-  render = async () => {
-    await this.initComponents();
-    this.initLayout();
-    this.element = this.components.authLayout.element;
-    return this.element;
-  };
-
-  destroy = () => {
-    for (const component of Object.values(this.components)) {
-      component.destroy();
-    }
   };
 }

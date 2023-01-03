@@ -1,30 +1,13 @@
 import ErrorLayout from "../../layout/errorLayout";
+import BasePageContainer from "../../core/basePageContainer/basePageContainer";
 
-export default class NotFoundPage {
-  element;
-  subElements = {};
-  components = {};
-
-  async initComponents() {
+export default class NotFoundPage extends BasePageContainer {
+  async initLayout() {
     const errorLayout = new ErrorLayout({
       title: "404",
       description: "Page not found",
     });
 
-    this.components = {
-      errorLayout,
-    };
-  }
-
-  async render() {
-    await this.initComponents();
-    this.element = this.components.errorLayout.element;
-    return this.element;
-  }
-
-  destroy() {
-    for (const component of Object.values(this.components)) {
-      component.destroy();
-    }
+    this.layout = errorLayout
   }
 }
