@@ -34,11 +34,9 @@ export default class BasePageContainer {
   }
 
   getSubElements = ($element) => {
-    console.log($element)
     const elements = $element.querySelectorAll("[data-element]");
     return [...elements].reduce((accum, subElement) => {
       accum[subElement.dataset.element] = subElement;
-
       return accum;
     }, {});
   }

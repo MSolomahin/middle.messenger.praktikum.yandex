@@ -9,7 +9,7 @@
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn dev`
 
 Runs the app in the development mode.\
 And in the console you can see where your dev server is available
@@ -17,12 +17,13 @@ And in the console you can see where your dev server is available
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+### `yarn start`
+
+Builds the app for production to the `dist` folder and start node server on 3000 port.\
+
 ### `yarn build`
 
 Builds the app for production to the `dist` folder.\
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
 ## Explanations
 This project has specific file associations. To display correctly, you need to add the following lines to your settings.json:
