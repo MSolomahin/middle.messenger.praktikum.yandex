@@ -13,9 +13,8 @@
   },
   "author": "MSolomakhin",
   "devDependencies": {
-    "@parcel/transformer-css": "^2.8.2",
-    "parcel": "^2.8.2",
     "@parcel/css": "^1.14.0",
+    "parcel": "^2.8.2",
     "postcss": "^8.0.0",
     "postcss-autoreset": "^3.0.4",
     "postcss-custom-properties": "^12.1.11",
