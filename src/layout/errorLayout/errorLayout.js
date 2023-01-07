@@ -1,7 +1,7 @@
 import template from "./errorLayout.tmpl";
 import ButtonInline from "../../components/buttonInline";
 import Templator from "../../utils/templator";
-import BaseComponent from "../../core/BaseComponent";
+import BaseComponent from "../../core/baseComponent";
 
 export default class ErrorLayout extends BaseComponent {
   element;

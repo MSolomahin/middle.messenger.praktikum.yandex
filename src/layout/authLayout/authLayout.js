@@ -1,8 +1,7 @@
 import template from "./authLayout.tmpl";
 import ButtonInline from "../../components/buttonInline";
-import createElement from "../../utils/createElement";
 import Templator from "../../utils/templator";
-import BaseComponent from "../../core/BaseComponent";
+import BaseComponent from "../../core/baseComponent";
 import ButtonPrimary from "../../components/buttonPrimary";
 
 export default class AuthLayout extends BaseComponent  {
