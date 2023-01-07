@@ -1,5 +1,7 @@
 # Yandex.Practicum - Messenger
 
+Educational project implementing the functionality of the messenger
+
 ## Links
 ### Netlify domen: https://voluble-kheer-3015b6.netlify.app
 ### Figma design: https://www.figma.com/file/0iDa39bg5KGv6x05btygbv/Yandex.Practicum-Messenger?node-id=0%3A1&t=QHpmNcBNU8Q8hvBr-1
@@ -9,7 +11,7 @@
 
 In the project directory, you can run:
 
-### `yarn dev`
+### `npm run dev`
 
 Runs the app in the development mode.\
 And in the console you can see where your dev server is available
@@ -17,11 +19,11 @@ And in the console you can see where your dev server is available
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn start`
+### `npm run start`
 
 Builds the app for production to the `dist` folder and start node server on 3000 port.\
 
-### `yarn build`
+### `npm run build`
 
 Builds the app for production to the `dist` folder.\
 
