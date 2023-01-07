@@ -1,29 +1,20 @@
 export default class Templator {
   constructor(template) {
-    this._template = template;
+    this.template = template;
   }
 
   compile(ctx) {
-    const templateVariableRe = /\{\{(.*?)\}\}/g;
+    const templateVariableReg = /\{\{(.*?)\}\}/g;
     let match = null;
-    let result = this._template;
+    let result = this.template;
 
-    while ((match = templateVariableRe.exec(this._template))) {
+    while ((match = templateVariableReg.exec(this.template))) {
       const variableName = match[1].trim();
       if (!variableName) {
         continue;
       }
 
       const data = ctx[variableName];
-      
-      if (typeof data === "function") {
-        window[variableName] = data;
-        result = result.replace(
-          new RegExp(match[0], "gi"),
-          `window.${variableName}()`
-        );
-        continue;
-      }
       result = result.replace(new RegExp(match[0], "gi"), data);
     }
     return result;
