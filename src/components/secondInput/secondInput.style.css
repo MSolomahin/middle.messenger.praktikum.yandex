@@ -4,7 +4,7 @@
   padding: 10px 0;
   border-bottom: 1px solid $color-grey;
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 100px 1fr;
 
 
   &__input {

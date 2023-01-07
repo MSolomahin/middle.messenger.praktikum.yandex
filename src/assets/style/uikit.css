@@ -23,3 +23,7 @@ $font-size-xxl: 20px;
 $font-size-xxxl: 40px;
 
 $transition-base: all 0.3s ease;
+
+$mediaDesktop: 1050px;
+$mediaTablet: 768px;
+$mediaMobile: 480px;

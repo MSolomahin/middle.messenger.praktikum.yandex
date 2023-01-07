@@ -11,6 +11,9 @@
     height: 100vh;
     background: $color-bg; 
     border-right: 2px solid $color-grey;
+    @media (max-width: $mediaTablet) {
+      width: 100vw;
+    }
   }
   &__right {
     width: 75vw;
@@ -18,6 +21,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width: $mediaTablet) {
+      display: none;
+    }
   }
 }
 

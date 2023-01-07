@@ -13,10 +13,21 @@
     &:hover {
       background: $color-bg;
     }
+    @media (max-width: $mediaTablet) {
+      background: none;
+      border: none;
+      position: absolute;
+      top: 20px;
+      left: 0;
+    }
   }
   &__main {
     margin-top: 60px;
     width: calc(100% - 64px);
+    padding: 10px;
+    @media (max-width: $mediaTablet) {
+      width: 100%;
+    }
   }
   &__content {
     width: min(100%, 510px);
