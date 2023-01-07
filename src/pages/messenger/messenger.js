@@ -1,9 +1,6 @@
 import template from "./messenger.tmpl";
 import BaseComponent from "../../core/baseComponent";
 import Avatar from "../../components/avatar";
-import ChatItem from "../../components/chatItem/chatItem";
-import createElement from "../../utils/createElement";
-import Templator from "../../utils/templator";
 
 const messages = [
   {

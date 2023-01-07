@@ -22,7 +22,6 @@ export default class AuthLayout extends BaseComponent  {
   initComponents = async () => {
     const buttonPrimary = new ButtonPrimary({
       label: this.primaryText,
-      handleClick: (e) => e.preventDefault(),
     });
 
     const buttonInline = new ButtonInline({

@@ -1,5 +1,5 @@
 import ErrorLayout from "../../layout/errorLayout";
-import BaseComponent from "../../core/baseComponent/";
+import BaseComponent from "../../core/baseComponent";
 
 export default class NotFoundPage extends BaseComponent {
   async initLayout() {
