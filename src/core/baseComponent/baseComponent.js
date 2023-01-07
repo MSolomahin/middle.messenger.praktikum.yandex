@@ -1,6 +1,5 @@
 import isEmpty from "../../utils/isEmpty"
 import createElement from "../../utils/createElement"
-import Templator from "../../utils/templator"
 
 export default class BaseComponent {
   element;
@@ -21,7 +20,7 @@ export default class BaseComponent {
     this.element = createElement(this.template)
     this.subElements = this.getSubElements(this.element);
 
-    if (this.renderComponents && !isEmpty(this.subElements)) this.renderComponents();
+    if (!isEmpty(this.subElements)) this.renderComponents();
     if (this.initEventListeners) this.initEventListeners();
 
     return this.element;

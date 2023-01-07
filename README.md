@@ -11,6 +11,10 @@ Educational project implementing the functionality of the messenger
 
 In the project directory, you can run:
 
+### `npm install` 
+
+Install all required dependencies 
+
 ### `npm run dev`
 
 Runs the app in the development mode.\
