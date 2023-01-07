@@ -4,7 +4,6 @@ export default class Templator {
   }
 
   compile(ctx) {
-
     const templateVariableRe = /\{\{(.*?)\}\}/g;
     let match = null;
     let result = this._template;
@@ -15,11 +14,9 @@ export default class Templator {
         continue;
       }
 
-      
       const data = ctx[variableName];
-
+      
       if (typeof data === "function") {
-        
         window[variableName] = data;
         result = result.replace(
           new RegExp(match[0], "gi"),

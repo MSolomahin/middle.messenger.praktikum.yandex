@@ -1,1 +1,1 @@
-export default `<button class="button-primary" onclick={{ handleRedirect }}>{{ label }}</button>`
+export default `<button class="button-primary">{{ label }}</button>`

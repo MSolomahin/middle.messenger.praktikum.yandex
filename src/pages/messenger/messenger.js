@@ -1,21 +1,42 @@
 import template from "./messenger.tmpl";
-import BasePageContainer from "../../core/basePageContainer/basePageContainer";
+import BaseComponent from "../../core/baseComponent";
 import Avatar from "../../components/avatar";
+import ChatItem from "../../components/chatItem/chatItem";
+import createElement from "../../utils/createElement";
+import Templator from "../../utils/templator";
 
-export default class MessengerPage extends BasePageContainer {
+const messages = [
+  {
+    name: "Maxim",
+    lastMessage: "Hi!",
+    time: "12:34",
+    countUnReading: 1,
+    image:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.simplilearn.com%2Fimage-processing-article&psig=AOvVaw3NorybiFKkK8ibXTHPVw_Q&ust=1673109635892000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNC9hZ6xs_wCFQAAAAAdAAAAABAE",
+  },
+  {
+    name: "Maxim1",
+    lastMessage: "Hi!",
+    time: "12:34",
+    countUnReading: 1,
+    image:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.simplilearn.com%2Fimage-processing-article&psig=AOvVaw3NorybiFKkK8ibXTHPVw_Q&ust=1673109635892000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNC9hZ6xs_wCFQAAAAAdAAAAABAE",
+  },
+];
+export default class MessengerPage extends BaseComponent {
   constructor() {
     super();
-    this.template = template
+    this.template = template;
+    this.messages = messages;
   }
 
   initComponents = async () => {
     const avatar = new Avatar({
       size: "tiny",
-      title: "MS"
-    })
+    });
 
     this.components = {
-      avatar
+      avatar,
     };
   };
 }

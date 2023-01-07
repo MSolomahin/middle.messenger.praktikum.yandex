@@ -10,7 +10,7 @@ export default `
         <div class="userSettingsPage__content">
           <div class="userSettingsPage__avatar avatar">
             <div data-element="avatar"></div>
-            <p class="text-xl">Maxim</p>
+            <h2 class="text-xl">Maxim</h2>
           </div>
           <div class="userSettingsPage__userInfo">
             <div data-element="inputEmail"></div>

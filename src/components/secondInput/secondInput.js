@@ -1,9 +1,9 @@
 import createElement from "../../utils/createElement";
 import Templator from "../../utils/templator";
 import template from "./secondInput.tmpl";
-import BaseComponentContainer from "../../core/baseComponentContainer";
+import BaseComponent from "../../core/baseComponent";
 
-export default class SecondInput extends BaseComponentContainer {
+export default class SecondInput extends BaseComponent {
   constructor({label, value, name=""}) {
     super()
     this.template = new Templator(template).compile({

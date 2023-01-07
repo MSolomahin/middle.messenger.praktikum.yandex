@@ -1,9 +1,8 @@
 import Templator from "../../utils/templator";
 import template from "./baseInput.tmpl";
-import BaseComponentContainer from "../../core/baseComponentContainer";
-import { camelToSnakeCase } from "../../utils/toSnakeCase";
+import BaseComponent from "../../core/baseComponent";
 
-export default class BaseInput extends BaseComponentContainer {
+export default class BaseInput extends BaseComponent {
   constructor({label, type = "text", name=""}) {
     super()
 

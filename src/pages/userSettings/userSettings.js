@@ -1,11 +1,11 @@
 import template from "./userSettings.tmpl";
 import ButtonInline from "../../components/buttonInline";
-import BasePageContainer from "../../core/basePageContainer/basePageContainer";
+import BaseComponent from "../../core/baseComponent";
 import SecondInput from "../../components/secondInput";
 import ButtonPrimary from "../../components/buttonPrimary"
 import Avatar from "../../components/avatar"
 
-export default class UserSettingsPage extends BasePageContainer {
+export default class UserSettingsPage extends BaseComponent {
   constructor() {
     super();
     this.template = template;
@@ -36,7 +36,7 @@ export default class UserSettingsPage extends BasePageContainer {
     })
   }
 
-  async initComponents() {
+  initComponents = () => {
     const inputEmail = new SecondInput({
       label: "Email",
       value: "m.solomahin@mail.ru",
@@ -87,7 +87,6 @@ export default class UserSettingsPage extends BasePageContainer {
     const avatar = new Avatar({
       size: "large",
       isEditable: true,
-      title: "MS"
     })
 
     this.components = {

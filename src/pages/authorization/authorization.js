@@ -1,9 +1,9 @@
 import BaseInput from "../../components/baseInput";
 import AuthLayout from "../../layout/authLayout/authLayout";
-import BasePageContainer from "../../core/basePageContainer/basePageContainer";
+import BaseComponent from "../../core/baseComponent";
 import getChildrenTemplate from "../../utils/getChildrenTemplate";
 
-export default class AuthPage extends BasePageContainer {
+export default class AuthPage extends BaseComponent {
   initComponents = async () => {
     const inputLogin = new BaseInput({
       label: "Login",

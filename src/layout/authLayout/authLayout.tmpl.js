@@ -1,7 +1,7 @@
 export default `
 <div class="authLayout__container">
   <form class="authLayout__content">
-    <p class="text-xxl">{{ title }}</p>
+    <h1 class="text-xxl">{{ title }}</h1>
     <div class="authLayout__form">
       {{ children }}
     </div>

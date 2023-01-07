@@ -1,8 +1,8 @@
 import Templator from "../../utils/templator";
 import template from "./buttonPrimary.tmpl";
-import BaseComponentContainer from "../../core/baseComponentContainer";
+import BaseComponent from "../../core/baseComponent";
 
-export default class ButtonPrimary extends BaseComponentContainer {
+export default class ButtonPrimary extends BaseComponent {
   constructor({label, handleClick}) {
     super()
     this.template = new Templator(template).compile({

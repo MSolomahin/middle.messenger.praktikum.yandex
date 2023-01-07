@@ -1,17 +1,19 @@
 import isEmpty from "../../utils/isEmpty"
 import createElement from "../../utils/createElement"
+import Templator from "../../utils/templator"
 
-export default class BasePageContainer {
+export default class BaseComponent {
   element;
-  subElements = {};
   components = {};
   layout;
+  template;
+  subElements;
 
-  render = async () => {
-    if (this.initComponents) await this.initComponents();
+  render = () => {
+    if (this.initComponents) this.initComponents();
 
     if (this.initLayout) {
-      await this.initLayout()
+      this.initLayout()
       this.element = this.layout.element;
       return this.element;
     }
@@ -41,10 +43,17 @@ export default class BasePageContainer {
     }, {});
   }
 
-  destroy = () => {
-    if (this.removeEventListeners) this.removeEventListeners()
+  destroy() {
+    this.subElements = {};
     for (const component of Object.values(this.components)) {
       component.destroy();
+    }
+    this.remove();
+  }
+
+  remove() {
+    if (this.element) {
+      this.element.remove();
     }
   }
 }

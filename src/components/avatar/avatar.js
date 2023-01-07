@@ -1,8 +1,8 @@
 import Templator from "../../utils/templator";
 import template from "./avatar.tmpl";
-import BaseComponentContainer from "../../core/baseComponentContainer";
+import BaseComponent from "../../core/baseComponent";
 
-export default class Avatar extends BaseComponentContainer {
+export default class Avatar extends BaseComponent {
   constructor({size, isEditable = false, title}) {
     super()
     this.template = new Templator(template).compile({

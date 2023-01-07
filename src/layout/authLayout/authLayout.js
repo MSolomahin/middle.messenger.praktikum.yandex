@@ -2,10 +2,10 @@ import template from "./authLayout.tmpl";
 import ButtonInline from "../../components/buttonInline";
 import createElement from "../../utils/createElement";
 import Templator from "../../utils/templator";
-import BasePageContainer from "../../core/basePageContainer/basePageContainer";
+import BaseComponent from "../../core/BaseComponent";
 import ButtonPrimary from "../../components/buttonPrimary";
 
-export default class AuthLayout extends BasePageContainer  {
+export default class AuthLayout extends BaseComponent  {
   constructor({title, children, primaryText, inlineText, inlineLink}) {
     super()
     this.primaryText = primaryText;

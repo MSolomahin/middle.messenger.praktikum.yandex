@@ -20,7 +20,7 @@ export default class ErrorLayout {
   async initComponents() {
     const buttonInline = new ButtonInline({
       label: "Back to chats",
-      linkTo: "/authorization",
+      linkTo: "/",
       isSmall: true,
     });
 
