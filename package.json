@@ -13,7 +13,7 @@
   },
   "author": "MSolomakhin",
   "devDependencies": {
-    "parcel": "^2.0.1",
+    "parcel": "^2.8.2",
     "postcss": "^8.0.0",
     "postcss-autoreset": "^3.0.4",
     "postcss-custom-properties": "^12.1.11",
