@@ -1,0 +1,39 @@
+.input-container {
+  position: relative;
+  flex: 1 1 auto;
+
+  & input {
+    border: 0; 
+    border-bottom: 1.5px solid $color-main;
+    padding: 11px 0;
+    width: 100%;
+    transition: $transition-base;
+    font-family: $font-base;
+    font-size: 13px;
+
+    &:focus,
+    &:valid {
+      outline: none;
+      & + label {
+        transform: translateY(-20px);
+        transition: $transition-base;
+        font-size: 9px;
+      }
+    }
+    &:hover + label {
+      color: $color-main;
+      transition: $transition-base;
+      
+    }
+  }
+
+  & label {
+    position: absolute;
+    font-size: 13px;
+    top: 15px;
+    left: 0;
+    transition: $transition-base;
+    color: $color-text-secondary;
+    pointer-events: none;
+  }
+}
