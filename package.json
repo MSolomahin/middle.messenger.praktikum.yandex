@@ -14,8 +14,9 @@
   "author": "MSolomakhin",
   "devDependencies": {
     "@parcel/css": "1.14.0",
+    "@parcel/transformer-postcss": "^2.8.2",
     "parcel": "2.8.2",
-    "postcss": "8.2.1",
+    "postcss": "8.4.21",
     "postcss-autoreset": "3.0.4",
     "postcss-custom-properties": "12.1.11",
     "postcss-import": "15.1.0",
