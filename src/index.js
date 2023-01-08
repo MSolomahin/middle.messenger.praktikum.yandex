@@ -1,4 +1,5 @@
 import Router from './router/index.js';
+import "./navBar";
 
 const router = Router.instance();
 

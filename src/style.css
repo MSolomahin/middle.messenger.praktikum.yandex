@@ -2,7 +2,7 @@
 @import "./assets/style/uikit.css";
 @import "./assets/style/common.css";
 @import "./assets/fonts/fonts.css";
-
+@import "./assets/style/navBar.css";
 
 /* Pages */
 @import "./pages/pagesStyle.css";
@@ -12,5 +12,3 @@
 
 /* Layout */
 @import "./layout/layoutStyle.css";
-
-
