@@ -1,1 +1,3 @@
-export default `<{{ tag }} href="{{ linkTo }}" class="{{ className }}" onclick="{{ handleClick }}">{{ label }}</{{ tag }}>` 
+export default `
+<{{ tag }} href='{{ linkTo }}' class='{{ className }}' onclick='{{ handleClick }}'>{{ label }}</{{ tag }}>
+`

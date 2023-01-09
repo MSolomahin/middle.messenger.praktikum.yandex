@@ -1,1 +1,1 @@
-export {default} from "./buttonInline"
+export { default } from './buttonInline'

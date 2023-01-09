@@ -1,1 +1,1 @@
-export {default} from "./secondInput"
+export { default } from './secondInput'

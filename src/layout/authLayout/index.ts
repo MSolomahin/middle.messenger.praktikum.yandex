@@ -1,1 +1,1 @@
-export {default} from "./authLayout"
+export { default } from './authLayout'

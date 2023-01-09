@@ -18,4 +18,4 @@ export default `
     <div class="messenger__right chat">
       <p class="text-s chat__placeholder">Select a chat to send a message</p>
     </div>
-  </div>`;
+  </div>`

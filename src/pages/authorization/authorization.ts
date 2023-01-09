@@ -1,36 +1,36 @@
-import BaseInput from "../../components/baseInput";
-import AuthLayout from "../../layout/authLayout/authLayout";
-import BaseComponent from "../../core/baseComponent";
-import createSubElements from "../../utils/createSubElements";
+import BaseInput from '../../components/baseInput'
+import AuthLayout from '../../layout/authLayout/authLayout'
+import BaseComponent from '../../core/baseComponent'
+import createSubElements from '../../utils/createSubElements'
 
 export default class AuthPage extends BaseComponent {
   initComponents = async () => {
     const inputLogin = new BaseInput({
-      label: "Login",
-      name: "login",
-    });
+      label: 'Login',
+      name: 'login'
+    })
     const inputPassword = new BaseInput({
-      label: "Password",
-      type: "password",
-      name: "password",
-    });
+      label: 'Password',
+      type: 'password',
+      name: 'password'
+    })
 
     this.components = {
       inputLogin,
-      inputPassword,
-    };
-  };
+      inputPassword
+    }
+  }
 
   initLayout = () => {
     const subComponents = createSubElements(this.components)
 
     const authLayout = new AuthLayout({
-      title: "Log in",
-      subComponents: subComponents,
-      primaryText: "Sign in",
-      inlineText: "Create account",
-      inlineLink: "/registration",
-    });
-    this.layout = authLayout;
-  };
+      title: 'Log in',
+      subComponents,
+      primaryText: 'Sign in',
+      inlineText: 'Create account',
+      inlineLink: '/registration'
+    })
+    this.layout = authLayout
+  }
 }

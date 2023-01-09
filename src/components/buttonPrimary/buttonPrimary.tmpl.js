@@ -1,1 +1,3 @@
-export default `<button class="button-primary">{{ label }}</button>`
+export default `
+<button class="button-primary">{{ label }}</button>
+`

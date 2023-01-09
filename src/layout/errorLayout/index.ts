@@ -1,1 +1,1 @@
-export {default} from "./errorLayout"
+export { default } from './errorLayout'

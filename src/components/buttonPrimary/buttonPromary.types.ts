@@ -1,3 +1,3 @@
 export interface ButtonPrimaryProps {
-    label: string
+  label: string
 }

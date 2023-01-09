@@ -13,4 +13,4 @@ export default `
             <div class="chatItem__label-text text-xs text-white">{{ countUnReading }}</div>
         </div>
     </div>
-</div>`;
+</div>`

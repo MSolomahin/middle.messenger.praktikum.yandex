@@ -1,7 +1,7 @@
-import Router from './router/index.js';
-import "./navBar";
+import Router from './router/index.js'
+import './navBar'
 
-const router = Router.instance();
+const router = Router.instance()
 
 router
   .addRoute(/^authorization$/, 'authorization')
@@ -11,5 +11,4 @@ router
   .addRoute(/^500$/, 'serverError')
   .addRoute(/^userSettings$/, 'userSettings')
   .setNotFoundPagePath('notFound')
-  .listen();
-
+  .listen()

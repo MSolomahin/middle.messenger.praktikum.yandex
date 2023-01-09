@@ -1,5 +1,5 @@
 export interface SecondInputProps {
-    label: string;
-    value: string;
-    name: string;
-  }
+  label: string
+  value: string
+  name: string
+}
