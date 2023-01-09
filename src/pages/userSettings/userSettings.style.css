@@ -1,8 +1,9 @@
-.userSettingsPage {
+.user-settings {
   &__container {
     height: 100vh;
     display: flex;
   }
+
   &__comeback {
     width: 64px;
     background: $color-bg;
@@ -10,9 +11,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     &:hover {
       background: $color-bg;
     }
+
     @media (max-width: $mediaTablet) {
       background: none;
       border: none;
@@ -21,31 +24,31 @@
       left: 0;
     }
   }
+
   &__main {
     margin-top: 60px;
     width: calc(100% - 64px);
     padding: 10px;
+
     @media (max-width: $mediaTablet) {
       width: 100%;
     }
   }
+
   &__content {
     width: min(100%, 510px);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 60px
+    gap: 60px;
   }
+
   &__avatar {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items:center; 
+    align-items: center;
     justify-content: center;
-  }
-  &__userInfo {
-  }
-  &__buttons {
   }
 }
 
@@ -57,10 +60,6 @@
     background: $color-grey;
   }
 }
-.text {
-  &-xl {
-  }
-}
 
 .comeback {
   &__icon {
@@ -68,7 +67,7 @@
     height: 28px;
     display: flex;
     border-radius: 50%;
-    background: url("../../assets/icons/arrowRight.svg") 50% 50%  no-repeat;
+    background: url("../../assets/icons/arrowRight.svg") 50% 50% no-repeat;
     background-color: $color-main;
   }
 }
@@ -77,9 +76,9 @@
   width: 100%;
   height: 1px;
   background: $color-grey;
-  margin: 10px 0;
+  margin: 10px 0 !important;
 }
 
 .hidden {
-  display: none
+  display: none;
 }

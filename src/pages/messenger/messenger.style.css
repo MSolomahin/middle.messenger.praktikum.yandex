@@ -4,29 +4,31 @@
     height: 100vh;
     width: 100vw;
     display: flex;
-    
   }
+
   &__left {
     width: 25vw;
     height: 100vh;
-    background: $color-bg; 
+    background: $color-bg;
     border-right: 2px solid $color-grey;
+
     @media (max-width: $mediaTablet) {
       width: 100vw;
     }
   }
+
   &__right {
     width: 75vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+
     @media (max-width: $mediaTablet) {
       display: none;
     }
   }
 }
-
 
 .chats {
   &__header {
@@ -36,11 +38,11 @@
     align-items: center;
     padding: 15px 10px 0;
   }
+
   &__userInfo {
     display: flex;
     align-items: center;
     gap: 15px;
-  
   }
 
   &__search {
@@ -49,7 +51,8 @@
     height: 32px;
     margin: 0 10px 14px;
     position: relative;
-    &:after {
+
+    &::after {
       content: "";
       position: absolute;
       width: calc(100% + 20px);
@@ -59,13 +62,10 @@
       bottom: -15px;
     }
   }
-  &__list {
-
-  }
 }
 
 .chat {
-  &__placeholder{
-    color: $color-text-secondary
+  &__placeholder {
+    color: $color-text-secondary;
   }
 }

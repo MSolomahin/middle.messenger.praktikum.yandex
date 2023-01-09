@@ -1,15 +1,15 @@
-$color-main: #3369F3;
-$color-text-primary: #1E1E1E;
-$color-text-secondary: #999999;
-$color-error: #FF2F2F;
+$color-main: #3369f3;
+$color-text-primary: #1e1e1e;
+$color-text-secondary: #999;
+$color-error: #ff2f2f;
 $color-white: #fff;
-$color-bg: #FBFBFB;
-$color-grey: #EAEAEA;
-$color-grey-2: #EFEFEF;
-$color-red: #FF0000;
-$color-main-hover: #E4EDFD;
+$color-bg: #fbfbfb;
+$color-grey: #eaeaea;
+$color-grey-2: #efefef;
+$color-red: #f00;
+$color-main-hover: #e4edfd;
 
-$shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+$shadow: 0 0 6px rgb(0 0 0 / 14%);
 $font-base: "Inter", sans-serif;
 
 $font-size-xxxs: 8px;

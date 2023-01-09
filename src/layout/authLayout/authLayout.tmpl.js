@@ -1,16 +1,16 @@
 export default `
-<div class="authLayout__container">
-  <form class="authLayout__content">
+<div class="auth-layout__container">
+  <form class="auth-layout__content">
     <h1 class="text-xxl">{{ title }}</h1>
-    <div class="authLayout__form" data-element="subComponents">
+    <div class="auth-layout__form" data-element="subComponents">
 
     </div>
-    <div class="authLayout__footer">
+    <div class="auth-layout__footer">
       <div
         data-element="buttonPrimary"
-        class="authLayout__button_primary"
+        class="auth-layout__button_primary"
       ></div>
-      <div data-element="buttonInline" class="authLayout__button_inline"></div>
+      <div data-element="buttonInline" class="auth-layout__button_inline"></div>
     </div>
   </form>
 </div>

@@ -1,11 +1,12 @@
-.authLayout {
+.auth-layout {
   &__container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 0 10 0;
+    padding: 0 10;
   }
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -17,26 +18,30 @@
     background: $color-white;
     box-shadow: $shadow;
     border-radius: 12px;
+
     @media (max-width: $mediaMobile) {
       padding: 50px 20px 30px;
     }
   }
+
   &__link {
     font-size: 11px;
     color: $color-main;
   }
+
   &__form {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
+
   &__footer {
-    margin-top: auto
+    margin-top: auto;
   }
+
   &__button {
     &_primary {
-    margin-bottom: 14px;
-
+      margin-bottom: 14px;
     }
   }
 }

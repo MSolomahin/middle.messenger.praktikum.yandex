@@ -29,7 +29,7 @@ export default class UserSettingsPage extends BaseComponent {
 
     Array.from(inputs).forEach((input) => {
       input.disabled = !input.disabled
-      input.classList.toggle('secondInput-container__input_active')
+      input.classList.toggle('second-input__input_active')
     })
 
     Array.from(footer).forEach((item) => {

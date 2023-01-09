@@ -1,2 +1,2 @@
-@import "./errorLayout/errorLayout.style.css";
-@import "./authLayout/authLayout.style.css";
+@import url("./errorLayout/errorLayout.style.css");
+@import url("./authLayout/authLayout.style.css");

@@ -1,14 +1,14 @@
 /* Config */
-@import "./assets/style/uikit.css";
-@import "./assets/style/common.css";
-@import "./assets/fonts/fonts.css";
-@import "./assets/style/navBar.css";
+@import url("./assets/style/uikit.css");
+@import url("./assets/style/common.css");
+@import url("./assets/fonts/fonts.css");
+@import url("./assets/style/navBar.css");
 
 /* Pages */
-@import "./pages/pagesStyle.css";
+@import url("./pages/pagesStyle.css");
 
 /* Components */
-@import "./components/componentsStyle.css";
+@import url("./components/componentsStyle.css");
 
 /* Layout */
-@import "./layout/layoutStyle.css";
+@import url("./layout/layoutStyle.css");

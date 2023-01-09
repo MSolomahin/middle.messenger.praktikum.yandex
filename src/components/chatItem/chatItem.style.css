@@ -1,4 +1,4 @@
-.chatItem {
+.chat-item {
   display: flex;
   align-items: flex-start;
   padding: 12px 10px;
@@ -7,6 +7,7 @@
   height: 71px;
   cursor: pointer;
   transition: $transition-base;
+
   &:hover {
     background: $color-main-hover;
     transition: $transition-base;
@@ -17,36 +18,40 @@
     flex-direction: column;
     gap: 4px;
     margin-right: auto;
+
     &__name {
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 5px;
     }
+
     &__message {
       font-size: 14px;
       color: #999;
     }
-}
-&__right {
+  }
+
+  &__right {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
     height: 100%;
-}
-    &__time {
-      font-size: 12px;
-      color: #999;
-      margin-bottom: 5px;
-    }
-    &__label {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: $color-main;
-    }
   }
 
+  &__time {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 5px;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $color-main;
+  }
+}

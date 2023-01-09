@@ -1,2 +1,2 @@
-@import "./messenger/messenger.style.css";
-@import "./userSettings/userSettings.style.css";
+@import url("./messenger/messenger.style.css");
+@import url("./userSettings/userSettings.style.css");
