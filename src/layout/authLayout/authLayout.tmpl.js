@@ -2,8 +2,8 @@ export default `
 <div class="authLayout__container">
   <form class="authLayout__content">
     <h1 class="text-xxl">{{ title }}</h1>
-    <div class="authLayout__form">
-      {{ children }}
+    <div class="authLayout__form" data-element="subComponents">
+
     </div>
     <div class="authLayout__footer">
       <div

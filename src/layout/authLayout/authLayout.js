@@ -5,15 +5,15 @@ import BaseComponent from "../../core/baseComponent";
 import ButtonPrimary from "../../components/buttonPrimary";
 
 export default class AuthLayout extends BaseComponent  {
-  constructor({title, children, primaryText, inlineText, inlineLink}) {
+  constructor({title, subComponents, primaryText, inlineText, inlineLink}) {
     super()
     this.primaryText = primaryText;
     this.inlineText = inlineText;
     this.inlineLink = inlineLink;
+    this.subComponents = subComponents;
 
     this.template = new Templator(template).compile({
       title,
-      children
     })
     this.render()
   }
@@ -32,6 +32,7 @@ export default class AuthLayout extends BaseComponent  {
     this.components = {
       buttonPrimary,
       buttonInline,
+      subComponents: this.subComponents
     };
     
   };

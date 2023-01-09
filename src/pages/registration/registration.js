@@ -1,7 +1,7 @@
 import BaseInput from "../../components/baseInput";
 import BaseComponent from "../../core/baseComponent";
 import AuthLayout from "../../layout/authLayout/authLayout";
-import getChildrenTemplate from "../../utils/getChildrenTemplate";
+import createSubElements from "../../utils/createSubElements";
 
 export default class RegistrationPage extends BaseComponent {
   async initComponents() {
@@ -49,11 +49,11 @@ export default class RegistrationPage extends BaseComponent {
   }
 
   initLayout = () => {
-    const children = getChildrenTemplate(this.components);
+    const subComponents = createSubElements(this.components)
 
     this.layout = new AuthLayout({
       title: "Create account",
-      children: children,
+      subComponents: subComponents,
       primaryText: "Create account",
       inlineText: "Log in",
       inlineLink: "/authorization",
