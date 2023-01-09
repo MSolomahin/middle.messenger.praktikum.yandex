@@ -1,6 +1,9 @@
 # Yandex.Practicum - Messenger
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9c68d4e2-9ba2-4ec1-a9fd-014200bd7d43/deploy-status)](https://app.netlify.com/sites/voluble-kheer-3015b6/deploys)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 
 Educational project implementing the functionality of the messenger
 
