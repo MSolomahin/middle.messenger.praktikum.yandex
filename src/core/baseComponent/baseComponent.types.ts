@@ -1,5 +1,5 @@
 export interface IBaseComponent {
-  element: Element | null
+  element: Element
   components: Record<string, IBaseComponent>
   layout?: IBaseComponent
   template: string
@@ -7,7 +7,7 @@ export interface IBaseComponent {
   initComponents?: () => void
   initLayout?: () => void
   initEventListeners: () => void
-  render: () => Element | null
+  render: () => Element
   renderComponents: () => void
   getSubElements: ($element: Element) => Record<string, HTMLElement>
   destroy: () => void

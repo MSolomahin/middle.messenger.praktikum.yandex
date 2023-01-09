@@ -19,7 +19,7 @@ export default class Avatar extends BaseComponent {
   }
 
   initEventListeners = () => {
-    this.fileInput = this.element?.querySelector("input[type='file']")
+    this.fileInput = this.element.querySelector("input[type='file']") as HTMLInputElement
     this.fileInput?.addEventListener('change', this.uploadAvatar)
   }
 
