@@ -1,11 +1,13 @@
 export default class Templator {
-  constructor(template) {
+  template: string;
+
+  constructor(template: string) {
     this.template = template;
   }
 
-  compile(ctx) {
+  compile(ctx: Record<string, string | number>) {
     const templateVariableReg = /\{\{(.*?)\}\}/g;
-    let match = null;
+    let match: RegExpExecArray | null = null;
     let result = this.template;
 
     while ((match = templateVariableReg.exec(this.template))) {
@@ -15,7 +17,7 @@ export default class Templator {
       }
 
       const data = ctx[variableName];
-      result = result.replace(new RegExp(match[0], "gi"), data);
+      result = result.replace(new RegExp(match[0], "gi"), String(data));
     }
     return result;
   }

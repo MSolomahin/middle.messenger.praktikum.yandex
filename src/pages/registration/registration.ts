@@ -4,7 +4,7 @@ import AuthLayout from "../../layout/authLayout/authLayout";
 import createSubElements from "../../utils/createSubElements";
 
 export default class RegistrationPage extends BaseComponent {
-  async initComponents() {
+  initComponents = () => {
     const inputFirstName = new BaseInput({
       label: "First Name",
       name: "first_name",

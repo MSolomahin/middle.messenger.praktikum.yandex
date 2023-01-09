@@ -2,11 +2,15 @@ import Templator from "../../utils/templator";
 import template from "./chatItem.tmpl";
 import BaseComponent from "../../core/baseComponent";
 import Avatar from "../avatar/avatar";
+import { ChatItemProps } from "./chatItem.types";
 
 
 export default class ChatItem extends BaseComponent {
-  constructor({ image, name, lastMessage, countUnReading, time }) {
+  image: string;
+
+  constructor(props: ChatItemProps) {
     super();
+    const {image, name, lastMessage, countUnReading, time} = props
     this.image = image;
     this.template = new Templator(template).compile({
       name,

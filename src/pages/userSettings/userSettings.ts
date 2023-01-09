@@ -12,19 +12,20 @@ export default class UserSettingsPage extends BaseComponent {
   }
 
   initEventListeners = () => {
-    this.components.buttonChangeInfo.element.addEventListener("click", this.handleChangeInfo)
-    this.components.buttonSave.element.addEventListener("click", this.handleChangeInfo)
+    this.components.buttonChangeInfo.element?.addEventListener("click", this.handleChangeInfo)
+    this.components.buttonSave.element?.addEventListener("click", this.handleChangeInfo)
   } 
 
   removeEventListeners = () => {
-    this.components.buttonChangeInfo.element.removeEventListener("click", this.handleChangeInfo)
-    this.components.buttonSave.element.removeEventListener("click", this.handleChangeInfo)
+    this.components.buttonChangeInfo.element?.removeEventListener("click", this.handleChangeInfo)
+    this.components.buttonSave.element?.removeEventListener("click", this.handleChangeInfo)
   }
 
-  handleChangeInfo = (e) => {
+  handleChangeInfo = (e: MouseEvent) => {
     e.preventDefault()
-    const footer = this.element.querySelectorAll(".js-userSettings")
-    const inputs = this.element.querySelectorAll(".js-field")
+    const footer = this.element?.querySelectorAll(".js-userSettings")
+    const inputs = this.element?.querySelectorAll(".js-field") as NodeListOf<HTMLInputElement>
+    if (!inputs || !footer) return
 
     Array.from(inputs).map((input) => {
         input.disabled = !input.disabled

@@ -3,8 +3,14 @@ import ButtonInline from "../../components/buttonInline";
 import Templator from "../../utils/templator";
 import BaseComponent from "../../core/baseComponent";
 import ButtonPrimary from "../../components/buttonPrimary";
+import { IBaseComponent } from "../../core/baseComponent/baseComponent.types";
 
 export default class AuthLayout extends BaseComponent  {
+  primaryText: string;
+  inlineText: string;
+  inlineLink: string;
+  subComponents: IBaseComponent;
+
   constructor({title, subComponents, primaryText, inlineText, inlineLink}) {
     super()
     this.primaryText = primaryText;

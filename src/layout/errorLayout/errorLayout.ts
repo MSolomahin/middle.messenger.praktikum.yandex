@@ -4,10 +4,6 @@ import Templator from "../../utils/templator";
 import BaseComponent from "../../core/baseComponent";
 
 export default class ErrorLayout extends BaseComponent {
-  element;
-  subElements = {};
-  components = {};
-
   constructor({title, description}) {
     super()
     this.template = new Templator(template).compile({
@@ -18,7 +14,7 @@ export default class ErrorLayout extends BaseComponent {
     this.render()
   }
 
-  async initComponents() {
+  initComponents = () => {
     const buttonInline = new ButtonInline({
       label: "Back to chats",
       linkTo: "/",

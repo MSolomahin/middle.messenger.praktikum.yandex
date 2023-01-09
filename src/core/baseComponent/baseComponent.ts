@@ -1,12 +1,16 @@
 import isEmpty from "../../utils/isEmpty"
 import createElement from "../../utils/createElement"
+import { IBaseComponent } from "./baseComponent.types";
 
-export default class BaseComponent {
-  element;
-  components = {};
-  layout;
-  template;
-  subElements;
+export default class BaseComponent implements IBaseComponent {
+  element: Element | null;
+  components: Record<string, IBaseComponent> = {};
+  layout: IBaseComponent;
+  template: string;
+  subElements: Record<string, HTMLElement>;
+  initComponents: () => void;
+  initLayout: () => void;
+  initEventListeners: () => void;
 
   render = () => {
     if (this.initComponents) this.initComponents();
@@ -30,7 +34,9 @@ export default class BaseComponent {
     Object.keys(this.components).forEach((component) => {
       const root = this.subElements[component];
       const { element } = this.components[component];
-      root.append(element);
+      if (element){  
+        root.append(element);
+      }
     });
   }
 

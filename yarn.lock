@@ -617,21 +617,7 @@
     "@parcel/plugin" "2.8.2"
     json5 "^2.2.0"
 
-"@parcel/transformer-postcss@2.8.2":
-  version "2.8.2"
-  resolved "https://registry.npmjs.org/@parcel/transformer-postcss/-/transformer-postcss-2.8.2.tgz"
-  integrity sha512-0Vb4T2e0QinNDps1/PxYsZwEzWieVxoW++AAUD3gzg0MfSyRc72MPc27CLOnziiRDyOUl+62gqpnNzq9xaKExA==
-  dependencies:
-    "@parcel/diagnostic" "2.8.2"
-    "@parcel/hash" "2.8.2"
-    "@parcel/plugin" "2.8.2"
-    "@parcel/utils" "2.8.2"
-    clone "^2.1.1"
-    nullthrows "^1.1.1"
-    postcss-value-parser "^4.2.0"
-    semver "^5.7.1"
-
-"@parcel/transformer-postcss@^2.8.2":
+"@parcel/transformer-postcss@2.8.2", "@parcel/transformer-postcss@^2.8.2":
   version "2.8.2"
   resolved "https://registry.yarnpkg.com/@parcel/transformer-postcss/-/transformer-postcss-2.8.2.tgz#ca1db56e639a6fcef134128cf8c172999c21bc10"
   integrity sha512-0Vb4T2e0QinNDps1/PxYsZwEzWieVxoW++AAUD3gzg0MfSyRc72MPc27CLOnziiRDyOUl+62gqpnNzq9xaKExA==
@@ -2521,6 +2507,11 @@ type-is@~1.6.18:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.24"
+
+typescript@^4.9.4:
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
+  integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
 
 uniq@^1.0.1:
   version "1.0.1"
