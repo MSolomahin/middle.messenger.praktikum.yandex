@@ -1,7 +1,7 @@
 export default `
 <div class="chat-item">
     <div class="chat-item__avatar">
-        <div data-element="avatar"></div>
+        {{ avatar }}
     </div>
     <div class="chat-item__content">
         <p class="chat-item__name text-m">{{ name }}</p>

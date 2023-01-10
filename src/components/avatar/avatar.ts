@@ -1,26 +1,23 @@
-import Templator from '../../utils/templator'
 import template from './avatar.tmpl'
-import BaseComponent from '../../core/baseComponent'
 import { AvatarProps } from './avatar.types'
+import Component from '../../core/component/component'
 
-export default class Avatar extends BaseComponent {
-  fileInput: HTMLInputElement | null | undefined
+export default class Avatar extends Component {
+  fileInput: HTMLInputElement | null
 
   constructor (props: AvatarProps) {
-    super()
-    const { size, isEditable = false, src = '' } = props
-    this.template = new Templator(template).compile({
-      size,
-      isEditable: isEditable ? 'avatar__container_editable' : '',
-      src
-    })
+    super('div', props)
     this.fileInput = null
-    this.render()
+    this.eventBus?.().emit(Avatar.EVENTS.INIT)
   }
 
-  initEventListeners = () => {
-    this.fileInput = this.element.querySelector("input[type='file']") as HTMLInputElement
-    this.fileInput?.addEventListener('change', this.uploadAvatar)
+  // initEventListeners = () => {
+  //   this.fileInput = this.element.querySelector("input[type='file']") as HTMLInputElement
+  //   this.fileInput?.addEventListener('change', this.uploadAvatar)
+  // }
+
+  override render = (): DocumentFragment => {
+    return this.compile(template, { ...this.props })
   }
 
   uploadAvatar = () => {

@@ -24,7 +24,7 @@ export default class UserSettingsPage extends BaseComponent {
   handleChangeInfo = (e: MouseEvent) => {
     e.preventDefault()
     const footer = this.element?.querySelectorAll('.js-userSettings')
-    const inputs = this.element?.querySelectorAll('.js-field') as NodeListOf<HTMLInputElement>
+    const inputs = this.element?.querySelectorAll('.js-field')
     if (!inputs || (footer == null)) return
 
     Array.from(inputs).forEach((input) => {

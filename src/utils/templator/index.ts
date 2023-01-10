@@ -1,3 +1,5 @@
+import { IComponentProps } from '../../core/component/component.types'
+
 export default class Templator {
   template: string
 
@@ -5,7 +7,7 @@ export default class Templator {
     this.template = template
   }
 
-  compile = (ctx: Record<string, string | number>): string => {
+  compile = (ctx: IComponentProps): string => {
     const templateVariableReg = /\{\{(.*?)\}\}/g
     let match: RegExpExecArray | null = null
     let result = this.template

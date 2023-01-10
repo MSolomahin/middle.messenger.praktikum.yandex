@@ -11,7 +11,7 @@
     color: $color-text-secondary;
     pointer-events: none;
   }
-  
+
   & input {
     border: 0;
     border-bottom: 1.5px solid $color-main;
@@ -37,5 +37,4 @@
       transition: $transition-base;
     }
   }
-  
 }

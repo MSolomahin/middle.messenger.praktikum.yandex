@@ -1,34 +1,14 @@
-import Templator from '../../utils/templator'
 import template from './chatItem.tmpl'
-import BaseComponent from '../../core/baseComponent'
-import Avatar from '../avatar/avatar'
 import { ChatItemProps } from './chatItem.types'
+import Component from '../../core/component/component'
 
-export default class ChatItem extends BaseComponent {
-  image: string
-
+export default class ChatItem extends Component {
   constructor (props: ChatItemProps) {
-    super()
-    const { image, name, lastMessage, countUnReading, time } = props
-    this.image = image
-    this.template = new Templator(template).compile({
-      name,
-      lastMessage,
-      countUnReading,
-      time
-    })
-
-    this.render()
+    super('div', props)
+    this.eventBus?.().emit(ChatItem.EVENTS.INIT)
   }
 
-  initComponents = () => {
-    const avatar = new Avatar({
-      size: 'middle',
-      src: this.image
-    })
-
-    this.components = {
-      avatar
-    }
+  override render: () => DocumentFragment = () => {
+    return this.compile(template, { ...this.props })
   }
 }
