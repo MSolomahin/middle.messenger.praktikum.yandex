@@ -4,30 +4,27 @@ import { v4 as makeUUID } from 'uuid'
 import {
   IMeta,
   IComponentChildren,
-  IComponentPropsAndChildren,
-  IComponentProps
+  IComponentPropsAndChildren
 } from './component.types'
 
-abstract class Component {
+class Component<P extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
-    FLOW_RENDER: 'flow:render',
-    FLOW_CDU: 'flow:component-did-update'
-  }
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_RENDER: 'flow:render'
+  } as const
 
-  _element: HTMLElement | null = null
-  _meta: IMeta | null = null
-  props: Record<string, any> | null = null
+  private _element: HTMLElement | null = null
+  private readonly _meta: IMeta
+  protected props: P
+  public id: string = makeUUID()
+  public children: IComponentChildren
+  protected readonly eventBus: () => EventBus
+  // _initLayout: (() => void) | null = null
   // _layout: Component | null = null;
-  _components: Record<string, Component> = {}
-  _id: string = ''
-  children: IComponentChildren
-  eventBus: (() => EventBus) | null = null
-  // _initLayout: (() => void) | null = null;
-  public render: () => DocumentFragment
 
-  constructor (tagName = 'div', propsAndChildren: IComponentPropsAndChildren) {
+  constructor(tagName = 'div', propsAndChildren: P) {
     const { children, props } = this._getChildren(propsAndChildren)
     const eventBus = new EventBus()
 
@@ -36,39 +33,45 @@ abstract class Component {
       tagName,
       props
     }
-    this._id = makeUUID()
 
-    this.props = this._makePropsProxy({ ...props, __id: this._id })
+    this.props = this._makePropsProxy({ ...props, __id: this.id })
 
     this.eventBus = () => eventBus
 
     this._registerEvents(eventBus)
-    // eventBus.emit(Component.EVENTS.INIT);
+    eventBus.emit(Component.EVENTS.INIT)
   }
 
   public initComponent = () => {
     this.eventBus?.().emit(Component.EVENTS.INIT)
   }
 
-  _registerEvents (eventBus: EventBus) {
-    eventBus.on(Component.EVENTS.INIT, this.init)
+  private readonly _registerEvents = (eventBus: EventBus) => {
+    eventBus.on(Component.EVENTS.INIT, this._init)
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount)
+    eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate)
     eventBus.on(Component.EVENTS.FLOW_RENDER, this._render)
-    eventBus.on(Component.EVENTS.FLOW_CDU, (props) => { this._componentDidUpdate(props[0], props[1]) })
   }
 
-  init = () => {
-    if (!this.eventBus) return
-
+  private readonly _init = () => {
+    this.init()
     this._createResources()
     this.eventBus().emit(Component.EVENTS.FLOW_RENDER)
   }
 
-  compile (template: string, props: IComponentPropsAndChildren) {
-    const propsAndStubs = { ...props }
+  protected init = () => {
+  }
 
-    Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+  protected compile = (template: string, props: IComponentPropsAndChildren) => {
+    const propsAndStubs = { ...props }
+    console.log(template, propsAndStubs)
+
+    Object.entries(this.children).forEach(([name, component]) => {
+      if (Array.isArray(component)) {
+        propsAndStubs[name] = component.map(child => `<div data-id="${child.id}"></div>`)
+      } else {
+        propsAndStubs[name] = `<div data-id="${component.id}"></div>`
+      }
     })
 
     const fragment = this._createDocumentElement(
@@ -77,21 +80,30 @@ abstract class Component {
 
     fragment.innerHTML = new Templator(template).compile(propsAndStubs)
 
-    Object.values(this.children).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-      const element = child.getContent()
+    const replaceStub = (component: Component) => {
+      const stub = fragment.content.querySelector(`[data-id="${component.id}"]`)
+      if (!stub) return
 
-      if (stub && element) {
-        stub.replaceWith(element)
+      component.getContent()?.append(...Array.from(stub.childNodes))
+
+      const element = component.getContent()
+      if (element) stub.replaceWith(element)
+    }
+
+    Object.entries(this.children).forEach(([_, component]) => {
+      if (Array.isArray(component)) {
+        component.forEach(replaceStub)
+      } else {
+        replaceStub(component)
       }
     })
 
     return fragment.content
   }
 
-  _getChildren (propsAndChildren: IComponentPropsAndChildren) {
-    const children: IComponentChildren = {}
-    const props: IComponentProps = {}
+  private readonly _getChildren = (propsAndChildren: P): { props: P, children: Record<string, Component | Component[]> } => {
+    const children: Record<string, Component | Component[]> = {}
+    const props: Record<string, unknown> = {}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Component) {
@@ -100,44 +112,41 @@ abstract class Component {
         props[key] = value
       }
     })
-    return { children, props }
+    return { props: props as P, children }
   }
 
-  _createResources () {
-    if (!this._meta) return
-
+  private readonly _createResources = () => {
     const { tagName } = this._meta
     this._element = this._createDocumentElement(tagName)
   }
 
-  _componentDidMount = () => {
+  private readonly _componentDidMount = () => {
     this.componentDidMount()
+  }
 
-    Object.values(this.children).forEach((child) => {
-      child.dispatchComponentDidMount()
+  protected componentDidMount = (oldProps?: P) => {}
+
+  public dispatchComponentDidMount = () => {
+    this.eventBus().emit(Component.EVENTS.FLOW_CDM)
+
+    Object.values(this.children).forEach(child => {
+      if (Array.isArray(child)) {
+        child.forEach(ch => { ch.dispatchComponentDidMount() })
+      } else {
+        child.dispatchComponentDidMount()
+      }
     })
   }
 
-  componentDidMount (oldProps?: IComponentProps) {}
-
-  dispatchComponentDidMount () {
-    if (!this.eventBus) return
-    this.eventBus().emit(Component.EVENTS.FLOW_CDM)
-  }
-
-  _componentDidUpdate (
-    oldProps: IComponentProps,
-    newProps: IComponentProps
-  ) {
+  private readonly _componentDidUpdate = (oldProps: P, newProps: P) => {
     const response = this.componentDidUpdate(oldProps, newProps)
 
     if (response) {
-      this.props = Object.assign(oldProps, newProps)
-      this.eventBus?.().emit(Component.EVENTS.FLOW_RENDER)
+      this.eventBus().emit(Component.EVENTS.FLOW_RENDER)
     }
   }
 
-  componentDidUpdate (oldProps: IComponentProps, newProps: IComponentProps) {
+  protected componentDidUpdate = (oldProps: P, newProps: P) => {
     const needUpdate = Object.entries(newProps).some(([key, value]) => {
       return oldProps[key] !== value
     })
@@ -145,63 +154,66 @@ abstract class Component {
     return needUpdate
   }
 
-  setProps = (nextProps: Record<string, any>) => {
-    if (!nextProps || !this.props) {
-      return
-    }
-    const oldProps = this.props
-    this.eventBus?.().emit(Component.EVENTS.FLOW_CDU, oldProps, nextProps)
+  public setProps = (nextProps: Record<string, unknown>) => {
+    Object.assign(this.props, nextProps)
   }
 
-  get element () {
+  get element() {
     return this._element
   }
 
-  _render = () => {
+  private readonly _render = () => {
     if (!this._element) return
 
-    console.log('render', this.props)
     const block = this.render()
+    console.log(block)
 
     this._element.innerHTML = ''
 
     this._element.appendChild(block)
   }
 
-  getContent () {
+  protected render = (): DocumentFragment => {
+    return document.createElement('template').content
+  }
+
+  public getContent = () => {
     return this.element
   }
 
-  _makePropsProxy = (props: IComponentProps) => {
-    const proxyProps = new Proxy(props, {
-      get (target, prop: string) {
+  private readonly _makePropsProxy = (props: P) => {
+    return new Proxy(props, {
+      get: (target, prop: string) => {
         const value = target[prop]
         return typeof value === 'function' ? value.bind(target) : value
       },
-      set (target, prop: string, value) {
-        target[prop] = value
+      set: (target, prop: string, value) => {
+        const oldProps = { ...target }
+        target[prop as keyof P] = value
+        this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, target)
         return true
+      },
+      deleteProperty: () => {
+        throw new Error('No access')
       }
     })
-
-    return proxyProps
   }
 
-  _createDocumentElement (tagName: string) {
+  private readonly _createDocumentElement = (tagName: string) => {
     const element = document.createElement(tagName)
-    if (this._id) {
-      element.setAttribute('data-id', this._id)
+    if (this.id) {
+      element.setAttribute('data-id', this.id)
     }
     return element
   }
 
-  show () {
+  show = () => {
     const element = this.getContent()
     if (!element) return
     element.style.display = 'block'
   }
 
-  hide () {
+  hide = () => {
     const element = this.getContent()
     if (!element) return
     element.style.display = 'none'

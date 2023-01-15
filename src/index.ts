@@ -1,4 +1,4 @@
-import Router from './router/index.js'
+import Router from './router/index'
 import './navBar'
 
 const router = Router.instance()

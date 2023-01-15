@@ -8,7 +8,7 @@ export default class Avatar extends Component {
   constructor (props: AvatarProps) {
     super('div', props)
     this.fileInput = null
-    this.eventBus?.().emit(Avatar.EVENTS.INIT)
+    this.eventBus().emit(Avatar.EVENTS.INIT)
   }
 
   // initEventListeners = () => {

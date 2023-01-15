@@ -3,7 +3,7 @@ export default `
     <div class="messenger__left chats">
       <div class="chats__header">
         <div class="chats__userInfo">
-          <div data-element="avatar"></div>
+          {{ avatar }}
           <p class="text-s">Maxim</p>
         </div>
         <a href="/userSettings">
@@ -12,7 +12,7 @@ export default `
       </div> 
       <div class="chats__search"></div>
       <div data-element="chatList" class="chats__list">
-        
+        {{ chatList }}
       </div>
     </div>
     <div class="messenger__right chat">

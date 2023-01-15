@@ -7,7 +7,7 @@ export interface IMeta {
 
 export type IComponentProps = Record<string, any>
 
-export type IComponentChildren = Record<string, Component>
+export type IComponentChildren = Record<string, Component | Component[]>
 
 export interface IComponentPropsAndChildren
   extends IComponentProps,

@@ -1,13 +1,13 @@
-import { IComponentProps } from '../component/component.types'
+import { IListeners, IEventProps, IDispatchProps } from './eventBus.types'
 
 export default class EventBus {
-  listeners: Record<string, Array<(...args: Array<string | IComponentProps>) => void>>
+  private readonly listeners: IListeners
 
-  constructor () {
+  constructor() {
     this.listeners = {}
   }
 
-  on (event: string, callback: (...args) => void) {
+  on = (event: IEventProps['event'], callback: IEventProps['callback']) => {
     if (!this.listeners[event]) {
       this.listeners[event] = []
     }
@@ -15,7 +15,7 @@ export default class EventBus {
     this.listeners[event].push(callback)
   }
 
-  off (event: string, callback: (...args) => void) {
+  off = (event: IEventProps['event'], callback: IEventProps['callback']) => {
     if (!this.listeners[event]) {
       throw new Error(`Don't have event: ${event}`)
     }
@@ -25,13 +25,13 @@ export default class EventBus {
     )
   }
 
-  emit (event: string, ...args: Array<string | IComponentProps>) {
+  emit = (event: IDispatchProps['event'], ...args: IDispatchProps['args']) => {
     if (!this.listeners[event]) {
       throw new Error(`Don't have event: ${event}`)
     }
 
     this.listeners[event].forEach((listener) => {
-      listener([...args])
+      listener(...args)
     })
   }
 }

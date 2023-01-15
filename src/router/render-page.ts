@@ -13,24 +13,25 @@ const pages = {
   serverError: ServerErrorPage,
   userSettings: UserSettings
 }
-export default async function (path, match) {
+export default async function (path: string, match?: RegExpMatchArray | null) {
   const main = document.querySelector('main')
 
-  main.classList.add('is-loading')
+  main?.classList.add('is-loading')
 
   // const { default: Page } = await import(`../pages/${path}`);
 
   const Page = pages[path] || NotFoundPage
 
   const page = new Page(match)
-  const element = await page.render()
+  const element = await page.getContent()
 
-  main.classList.remove('is-loading')
+  main?.classList.remove('is-loading')
 
   const contentNode = document.querySelector('#content')
-
-  contentNode.innerHTML = ''
-  contentNode.append(element)
+  if (contentNode) {
+    contentNode.innerHTML = ''
+    contentNode.append(element)
+  }
 
   return page
 }
