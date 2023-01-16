@@ -30,6 +30,8 @@
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/space-before-blocks": "off",
     "no-useless-constructor": "off",
-  "@typescript-eslint/no-useless-constructor": ["off"]
+    "@typescript-eslint/no-useless-constructor": ["off"],
+    "@typescript-eslint/indent": [0, 2]
+    
   }
 }

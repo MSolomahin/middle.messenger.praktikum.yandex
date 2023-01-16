@@ -2,7 +2,7 @@ import BaseInput from '../../components/baseInput'
 import template from './authorization.tmpl'
 import Component from '../../core/component/component'
 import ButtonPrimary from '../../components/buttonPrimary'
-import ButtonInline from '../../components/buttonInline'
+import Link from '../../components/link/link'
 
 export default class AuthPage extends Component {
   constructor() {
@@ -24,7 +24,7 @@ export default class AuthPage extends Component {
       label: 'Sign in'
     })
 
-    const buttonInline = new ButtonInline({
+    const link = new Link({
       label: 'Create account',
       linkTo: '/registration',
       isSmall: true
@@ -35,7 +35,7 @@ export default class AuthPage extends Component {
       inputLogin,
       inputPassword,
       buttonPrimary,
-      buttonInline
+      link
     }
   }
 

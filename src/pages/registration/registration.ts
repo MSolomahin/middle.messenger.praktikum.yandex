@@ -1,6 +1,7 @@
 import BaseInput from '../../components/baseInput'
 import ButtonInline from '../../components/buttonInline'
 import ButtonPrimary from '../../components/buttonPrimary'
+import Link from '../../components/link/link'
 import Component from '../../core/component/component'
 import template from './registration.tmpl'
 
@@ -52,6 +53,8 @@ export default class RegistrationPage extends Component {
       isSmall: true
     })
 
+    const link = new Link({ label: 'Log in', linkTo: '/authorization', isSmall: true })
+
     this.children = {
       ...this.children,
       inputFirstName,
@@ -62,7 +65,8 @@ export default class RegistrationPage extends Component {
       inputPassword,
       inputPasswordRepeat,
       buttonPrimary,
-      buttonInline
+      buttonInline,
+      link
     }
   }
 

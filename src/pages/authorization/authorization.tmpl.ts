@@ -5,7 +5,7 @@ export default `
     <div class="auth-layout__form">{{inputLogin}} {{inputPassword}}</div>
     <div class="auth-layout__footer">
       <div class="auth-layout__button_primary">{{buttonPrimary}}</div>
-      <div class="auth-layout__button_inline">{{buttonInline}}</div>
+      <div class="auth-layout__button_inline">{{link}}</div>
     </div>
   </form>
 </div>
