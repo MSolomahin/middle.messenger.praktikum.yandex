@@ -1,8 +1,8 @@
 import template from './buttonPrimary.tmpl'
 import { ButtonPrimaryProps } from './buttonPrimary.types'
-import component from '../../core/component'
+import Component from '../../core/component'
 
-export default class ButtonPrimary extends component {
+export default class ButtonPrimary extends Component<ButtonPrimaryProps> {
   constructor (props: ButtonPrimaryProps) {
     super(props)
   }

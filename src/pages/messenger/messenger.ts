@@ -7,16 +7,24 @@ import Component from '../../core/component'
 export default class MessengerPage extends Component {
   messages: IMessage[]
 
-  constructor () {
-    super({})
-  }
-
   init() {
     this.children.avatar = new Avatar({
       size: 'tiny'
     })
-    this.children.chatList = new ChatItem({
-      ...messages[0]
+
+    this.children.chatList = this.createChats(messages)
+  }
+
+  private createChats(props: IMessage[]) {
+    return props.map((data) => {
+      return new ChatItem({
+        ...data,
+        events: {
+          click: () => {
+            console.log('click')
+          }
+        }
+      })
     })
   }
 

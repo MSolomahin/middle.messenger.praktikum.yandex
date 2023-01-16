@@ -1,3 +1,4 @@
+import Component from '../core/component'
 import AuthPage from '../pages/authorization'
 import MessengerPage from '../pages/messenger'
 import NotFoundPage from '../pages/notFound'
@@ -20,15 +21,16 @@ export default async function (path: string, match?: RegExpMatchArray | null) {
 
   // const { default: Page } = await import(`../pages/${path}`);
 
-  const Page = pages[path] || NotFoundPage
+  const Page: Component = pages[path] || NotFoundPage
 
-  const page = new Page(match)
-  const element = await page.getContent()
+  const page: Component = new Page()
+  const element = page.getContent()
+  page.dispatchComponentDidMount()
 
   main?.classList.remove('is-loading')
 
   const contentNode = document.querySelector('#content')
-  if (contentNode) {
+  if (contentNode && element) {
     contentNode.innerHTML = ''
     contentNode.append(element)
   }

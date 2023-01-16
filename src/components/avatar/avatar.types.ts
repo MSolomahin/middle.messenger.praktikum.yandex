@@ -1,5 +1,5 @@
 export interface AvatarProps {
   size: string
-  isEditable?: boolean
+  isEditable?: boolean | string
   src?: string
 }

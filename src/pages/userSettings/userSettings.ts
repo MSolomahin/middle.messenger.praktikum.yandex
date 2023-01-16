@@ -6,35 +6,51 @@ import Avatar from '../../components/avatar'
 import Component from '../../core/component'
 
 export default class UserSettingsPage extends Component {
-  constructor () {
-    super({})
+  private _fileInput: HTMLInputElement
+
+  override componentDidMount() {
+    this._fileInput = this.element?.querySelector(
+      "input[type='file']"
+    ) as HTMLInputElement
+    this._fileInput?.addEventListener('change', this._uploadAvatar)
+    console.log(this.element)
   }
 
-  // initEventListeners = () => {
-  //   this.components.buttonChangeInfo.element?.addEventListener('click', this.handleChangeInfo)
-  //   this.components.buttonSave.element?.addEventListener('click', this.handleChangeInfo)
-  // }
+  private readonly _uploadAvatar = () => {
+    const avatar = this.children.avatar as Component
+    const file = this._fileInput?.files?.[0]
+    const reader = new FileReader()
 
-  // removeEventListeners = () => {
-  //   this.components.buttonChangeInfo.element?.removeEventListener('click', this.handleChangeInfo)
-  //   this.components.buttonSave.element?.removeEventListener('click', this.handleChangeInfo)
-  // }
+    reader.onloadend = () => {
+      if (avatar.element && typeof reader.result === 'string') {
+          avatar.element.style.background = `url(${reader.result}) no-repeat center center / cover`
+      }
+    }
 
-  // handleChangeInfo = (e: MouseEvent) => {
-  //   e.preventDefault()
-  //   const footer = this.element?.querySelectorAll('.js-userSettings')
-  //   const inputs = this.element?.querySelectorAll('.js-field')
-  //   if (!inputs || (footer == null)) return
+    if (file != null) {
+      reader.readAsDataURL(file)
+    }
+  }
 
-  //   Array.from(inputs).forEach((input) => {
-  //     input.disabled = !input.disabled
-  //     input.classList.toggle('second-input__input_active')
-  //   })
+  private _handleChangeInfo(e: MouseEvent) {
+    e.preventDefault()
 
-  //   Array.from(footer).forEach((item) => {
-  //     item.classList.toggle('hidden')
-  //   })
-  // }
+    const footer = this.element?.querySelectorAll('.js-userSettings')
+    const inputs = this.element?.querySelectorAll(
+      '.js-field'
+    ) as NodeListOf<HTMLInputElement>
+
+    if (!inputs || footer == null) return
+
+    Array.from(inputs).forEach((input) => {
+      input.disabled = !input.disabled
+      input.classList.toggle('second-input__input_active')
+    })
+
+    Array.from(footer).forEach((item) => {
+      item.classList.toggle('hidden')
+    })
+  }
 
   init() {
     const inputEmail = new SecondInput({
@@ -69,7 +85,10 @@ export default class UserSettingsPage extends Component {
     })
 
     const buttonChangeInfo = new ButtonInline({
-      label: 'Change personal info'
+      label: 'Change personal info',
+      events: {
+        click: this._handleChangeInfo.bind(this)
+      }
     })
     const buttonChangePassword = new ButtonInline({
       label: 'Change password'
@@ -81,7 +100,10 @@ export default class UserSettingsPage extends Component {
     })
 
     const buttonSave = new ButtonPrimary({
-      label: 'Save'
+      label: 'Save',
+      events: {
+        click: this._handleChangeInfo.bind(this)
+      }
     })
 
     const avatar = new Avatar({

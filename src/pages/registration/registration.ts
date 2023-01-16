@@ -1,15 +1,11 @@
 import BaseInput from '../../components/baseInput'
 import ButtonInline from '../../components/buttonInline'
 import ButtonPrimary from '../../components/buttonPrimary'
-import Link from '../../components/link/link'
+import Link from '../../components/link'
 import Component from '../../core/component/component'
 import template from './registration.tmpl'
 
 export default class RegistrationPage extends Component {
-  constructor() {
-    super({})
-  }
-
   init() {
     const inputFirstName = new BaseInput({
       label: 'First Name',

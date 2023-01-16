@@ -1,11 +1,7 @@
 import Templator from '../../utils/templator'
-import EventBus from '../eventBus/eventBus'
+import EventBus from '../eventBus'
 import { v4 as makeUUID } from 'uuid'
-import {
-  IMeta,
-  IComponentChildren,
-  IComponentProps
-} from './component.types'
+import { IMeta, IComponentChildren, IComponentProps } from './component.types'
 
 class Component<P extends Record<string, any> = any> {
   static EVENTS = {
@@ -22,7 +18,7 @@ class Component<P extends Record<string, any> = any> {
   public children: IComponentChildren
   protected readonly eventBus: () => EventBus
 
-  constructor(propsAndChildren: P) {
+  constructor(propsAndChildren?: P) {
     const { children, props } = this._getChildren(propsAndChildren)
     const eventBus = new EventBus()
 
@@ -52,15 +48,20 @@ class Component<P extends Record<string, any> = any> {
     this.eventBus().emit(Component.EVENTS.FLOW_RENDER)
   }
 
-  protected init() {
-  }
+  protected init() {}
 
-  protected compile = (template: string, props: IComponentProps | IComponentChildren) => {
+  protected compile = (
+    template: string,
+    props: IComponentProps | IComponentChildren
+  ) => {
     const propsAndStubs = { ...props }
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
-        propsAndStubs[name] = component.map(child => `<div data-id="${child.id}"></div>`)
+        propsAndStubs[name] = component.reduce(
+          (acc, child) => (acc += `<div data-id="${child.id}"></div>`),
+          ''
+        )
       } else {
         propsAndStubs[name] = `<div data-id="${component.id}"></div>`
       }
@@ -93,17 +94,20 @@ class Component<P extends Record<string, any> = any> {
     return fragment.content
   }
 
-  private readonly _getChildren = (propsAndChildren: P): { props: P, children: IComponentChildren } => {
+  private readonly _getChildren = (
+    propsAndChildren?: P
+  ): { props: P, children: IComponentChildren } => {
     const children: IComponentChildren = {}
     const props: IComponentProps = {}
-
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
-      if (value instanceof Component) {
-        children[key] = value
-      } else {
-        props[key] = value
-      }
-    })
+    if (propsAndChildren) {
+      Object.entries(propsAndChildren).forEach(([key, value]) => {
+        if (value instanceof Component) {
+          children[key] = value
+        } else {
+          props[key] = value
+        }
+      })
+    }
     return { props: props as P, children }
   }
 
@@ -115,14 +119,16 @@ class Component<P extends Record<string, any> = any> {
     this.componentDidMount()
   }
 
-  protected componentDidMount = (oldProps?: P) => {}
+  protected componentDidMount(oldProps?: P) {}
 
   public dispatchComponentDidMount = () => {
     this.eventBus().emit(Component.EVENTS.FLOW_CDM)
 
-    Object.values(this.children).forEach(child => {
+    Object.values(this.children).forEach((child) => {
       if (Array.isArray(child)) {
-        child.forEach(ch => { ch.dispatchComponentDidMount() })
+        child.forEach((ch) => {
+          ch.dispatchComponentDidMount()
+        })
       } else {
         child.dispatchComponentDidMount()
       }
@@ -159,18 +165,37 @@ class Component<P extends Record<string, any> = any> {
     const block = this.render()
 
     this._element.innerHTML = ''
+    this._removeEvents()
 
     this._element.appendChild(block)
 
-    const elementFistElement = this._element?.firstElementChild as HTMLElement | null
+    const elementFistElement = this._element
+      ?.firstElementChild as HTMLElement | null
     if (this.id) {
       elementFistElement?.setAttribute('data-id', this.id)
     }
     this._element = elementFistElement
+    this._addEvents()
   }
 
   render() {
     return document.createElement('template').content
+  }
+
+  private readonly _removeEvents = () => {
+    const { events = {} } = this.props
+
+    Object.keys(events).forEach((eventName) => {
+      this._element?.removeEventListener(eventName, events[eventName])
+    })
+  }
+
+  private readonly _addEvents = () => {
+    const { events = {} } = this.props
+
+    Object.keys(events).forEach((eventName) => {
+      this._element?.addEventListener(eventName, events[eventName])
+    })
   }
 
   public getContent = () => {

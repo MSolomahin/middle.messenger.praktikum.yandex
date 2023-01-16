@@ -2,13 +2,9 @@ import BaseInput from '../../components/baseInput'
 import template from './authorization.tmpl'
 import Component from '../../core/component/component'
 import ButtonPrimary from '../../components/buttonPrimary'
-import Link from '../../components/link/link'
+import Link from '../../components/link'
 
 export default class AuthPage extends Component {
-  constructor() {
-    super({})
-  }
-
   init() {
     const inputLogin = new BaseInput({
       label: 'Login',

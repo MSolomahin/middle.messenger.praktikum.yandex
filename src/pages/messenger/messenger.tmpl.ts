@@ -11,7 +11,7 @@ export default `
       </a>
     </div>
     <div class="chats__search"></div>
-    <div data-element="chatList" class="chats__list">{{ chatList }}</div>
+    <div class="chats__list">{{ chatList }}</div>
   </div>
   <div class="messenger__right chat">
     <p class="text-s chat__placeholder">Select a chat to send a message</p>
