@@ -1,14 +1,20 @@
 import template from './chatItem.tmpl'
 import { ChatItemProps } from './chatItem.types'
-import Component from '../../core/component/component'
+import Component from '../../core/component'
+import Avatar from '../avatar'
 
-export default class ChatItem extends Component {
+export default class ChatItem extends Component<ChatItemProps> {
   constructor (props: ChatItemProps) {
-    super('div', props)
-    this.eventBus?.().emit(ChatItem.EVENTS.INIT)
+    super(props)
   }
 
-  override render: () => DocumentFragment = () => {
+  init() {
+    this.children.avatar = new Avatar({
+      size: 'middle'
+    })
+  }
+
+  override render() {
     return this.compile(template, { ...this.props })
   }
 }

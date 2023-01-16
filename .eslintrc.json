@@ -27,6 +27,9 @@
     ],
     "space-before-function-paren": "off",
     "@typescript-eslint/space-before-function-paren": "off",
-    "@typescript-eslint/no-misused-promises": "off"
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/space-before-blocks": "off",
+    "no-useless-constructor": "off",
+  "@typescript-eslint/no-useless-constructor": ["off"]
   }
 }

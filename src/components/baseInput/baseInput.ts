@@ -1,13 +1,13 @@
-import Templator from '../../utils/templator'
 import template from './baseInput.tmpl'
-import BaseComponent from '../../core/baseComponent'
 import { BaseInputProps } from './baseInput.types'
+import Component from '../../core/component'
 
-export default class BaseInput extends BaseComponent {
+export default class BaseInput extends Component {
   constructor (props: BaseInputProps) {
-    super()
-    this.template = new Templator(template).compile({ ...props })
+    super(props)
+  }
 
-    this.render()
+  render() {
+    return this.compile(template, { ...this.props })
   }
 }

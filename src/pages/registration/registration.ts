@@ -1,10 +1,15 @@
 import BaseInput from '../../components/baseInput'
-import BaseComponent from '../../core/baseComponent'
-import AuthLayout from '../../layout/authLayout/authLayout'
-import createSubElements from '../../utils/createSubElements'
+import ButtonInline from '../../components/buttonInline'
+import ButtonPrimary from '../../components/buttonPrimary'
+import Component from '../../core/component/component'
+import template from './registration.tmpl'
 
-export default class RegistrationPage extends BaseComponent {
-  initComponents = () => {
+export default class RegistrationPage extends Component {
+  constructor() {
+    super({})
+  }
+
+  init() {
     const inputFirstName = new BaseInput({
       label: 'First Name',
       name: 'first_name'
@@ -37,26 +42,31 @@ export default class RegistrationPage extends BaseComponent {
       name: 'phone'
     })
 
-    this.components = {
+    const buttonPrimary = new ButtonPrimary({
+      label: 'Create account'
+    })
+
+    const buttonInline = new ButtonInline({
+      label: 'Log in',
+      linkTo: '/authorization',
+      isSmall: true
+    })
+
+    this.children = {
+      ...this.children,
       inputFirstName,
       inputSecondName,
       inputLogin,
       inputEmail,
       inputPhone,
       inputPassword,
-      inputPasswordRepeat
+      inputPasswordRepeat,
+      buttonPrimary,
+      buttonInline
     }
   }
 
-  initLayout = () => {
-    const subComponents = createSubElements(this.components)
-
-    this.layout = new AuthLayout({
-      title: 'Create account',
-      subComponents,
-      primaryText: 'Create account',
-      inlineText: 'Log in',
-      inlineLink: '/authorization'
-    })
+  render() {
+    return this.compile(template, { ...this.props })
   }
 }

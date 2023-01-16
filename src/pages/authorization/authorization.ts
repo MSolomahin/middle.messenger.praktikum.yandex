@@ -1,10 +1,15 @@
 import BaseInput from '../../components/baseInput'
-import AuthLayout from '../../layout/authLayout/authLayout'
-import BaseComponent from '../../core/baseComponent'
-import createSubElements from '../../utils/createSubElements'
+import template from './authorization.tmpl'
+import Component from '../../core/component/component'
+import ButtonPrimary from '../../components/buttonPrimary'
+import ButtonInline from '../../components/buttonInline'
 
-export default class AuthPage extends BaseComponent {
-  initComponents = async () => {
+export default class AuthPage extends Component {
+  constructor() {
+    super({})
+  }
+
+  init() {
     const inputLogin = new BaseInput({
       label: 'Login',
       name: 'login'
@@ -15,22 +20,26 @@ export default class AuthPage extends BaseComponent {
       name: 'password'
     })
 
-    this.components = {
+    const buttonPrimary = new ButtonPrimary({
+      label: 'Sign in'
+    })
+
+    const buttonInline = new ButtonInline({
+      label: 'Create account',
+      linkTo: '/registration',
+      isSmall: true
+    })
+
+    this.children = {
+      ...this.children,
       inputLogin,
-      inputPassword
+      inputPassword,
+      buttonPrimary,
+      buttonInline
     }
   }
 
-  initLayout = () => {
-    const subComponents = createSubElements(this.components)
-
-    const authLayout = new AuthLayout({
-      title: 'Log in',
-      subComponents,
-      primaryText: 'Sign in',
-      inlineText: 'Create account',
-      inlineLink: '/registration'
-    })
-    this.layout = authLayout
+  render() {
+    return this.compile(template, { ...this.props })
   }
 }

@@ -2,33 +2,25 @@ import template from './messenger.tmpl'
 import Avatar from '../../components/avatar'
 import { IMessage, messages } from '../../assets/mocks/messages'
 import ChatItem from '../../components/chatItem'
-import Component from '../../core/component/component'
+import Component from '../../core/component'
 
 export default class MessengerPage extends Component {
   messages: IMessage[]
 
   constructor () {
-    super('div', {})
-    this.eventBus().emit(Component.EVENTS.INIT)
+    super({})
   }
 
-  init = () => {
-    const avatar = new Avatar({
-      size: 'middle'
-    })
-    const avatarTiny = new Avatar({
+  init() {
+    this.children.avatar = new Avatar({
       size: 'tiny'
     })
-    const chatList = new ChatItem({
-      ...messages[0],
-      avatar
+    this.children.chatList = new ChatItem({
+      ...messages[0]
     })
-
-    this.children.chatList = chatList
-    this.children.avatar = avatarTiny
   }
 
-  override render: () => DocumentFragment = () => {
+  render() {
     return this.compile(template, { ...this.props })
   }
 }

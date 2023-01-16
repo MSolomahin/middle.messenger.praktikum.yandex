@@ -1,23 +1,17 @@
-import Templator from '../../utils/templator'
 import template from './buttonInline.tmpl'
-import BaseComponent from '../../core/baseComponent'
 import { ButtonInlineProps } from './buttonInline.types'
+import Component from '../../core/component'
 
-export default class ButtonInline extends BaseComponent {
+export default class ButtonInline extends Component {
   constructor (props: ButtonInlineProps) {
-    super()
-    const { label, linkTo = '', isSmall = false, isRed = false } = props
-
-    const className = `button-inline${isSmall ? ' button-inline_small' : ''}${isRed ? ' button-inline_red' : ''}`
-    const tag = linkTo ? 'a' : 'button'
-
-    this.template = new Templator(template).compile({
-      label,
-      linkTo,
-      className,
-      tag
+    super({
+      ...props,
+      className: `button-inline${props.isSmall ? ' button-inline_small' : ''}${props.isRed ? ' button-inline_red' : ''}`,
+      tag: props.linkTo ? 'a' : 'button'
     })
+  }
 
-    this.render()
+  render() {
+    return this.compile(template, { ...this.props })
   }
 }

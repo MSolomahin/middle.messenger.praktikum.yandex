@@ -51,7 +51,8 @@ This project has specific file associations. To display correctly, you need to a
 
 ```
 "files.associations": {
-    "*.tmpl.js": "html"
+    "*.tmpl.ts": "html"
 }
 ```
 
+π

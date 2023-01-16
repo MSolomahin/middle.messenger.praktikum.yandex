@@ -1,28 +1,31 @@
 import template from './errorLayout.tmpl'
 import ButtonInline from '../../components/buttonInline'
-import Templator from '../../utils/templator'
-import BaseComponent from '../../core/baseComponent'
+import Component from '../../core/component'
 
-export default class ErrorLayout extends BaseComponent {
-  constructor ({ title, description }) {
-    super()
-    this.template = new Templator(template).compile({
-      title,
-      description
-    })
+export interface ErrorLayoutProps {
+  title: string
+  description: string
+}
 
-    this.render()
+export default class ErrorLayout extends Component<ErrorLayoutProps> {
+  constructor(props: ErrorLayoutProps) {
+    super(props)
   }
 
-  initComponents = () => {
+  init() {
     const buttonInline = new ButtonInline({
       label: 'Back to chats',
       linkTo: '/',
       isSmall: true
     })
 
-    this.components = {
+    this.children = {
+      ...this.children,
       buttonInline
     }
+  }
+
+  render() {
+    return this.compile(template, { ...this.props })
   }
 }

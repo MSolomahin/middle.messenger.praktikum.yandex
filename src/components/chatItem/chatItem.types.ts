@@ -1,5 +1,4 @@
-import { IComponentPropsAndChildren } from '../../core/component/component.types'
-export interface ChatItemProps extends IComponentPropsAndChildren {
+export interface ChatItemProps {
   image?: string
   name: string
   lastMessage: string

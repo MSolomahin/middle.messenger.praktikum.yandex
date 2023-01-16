@@ -1,43 +1,42 @@
 import template from './userSettings.tmpl'
 import ButtonInline from '../../components/buttonInline'
-import BaseComponent from '../../core/baseComponent'
 import SecondInput from '../../components/secondInput'
 import ButtonPrimary from '../../components/buttonPrimary'
 import Avatar from '../../components/avatar'
+import Component from '../../core/component'
 
-export default class UserSettingsPage extends BaseComponent {
+export default class UserSettingsPage extends Component {
   constructor () {
-    super()
-    this.template = template
+    super({})
   }
 
-  initEventListeners = () => {
-    this.components.buttonChangeInfo.element?.addEventListener('click', this.handleChangeInfo)
-    this.components.buttonSave.element?.addEventListener('click', this.handleChangeInfo)
-  }
+  // initEventListeners = () => {
+  //   this.components.buttonChangeInfo.element?.addEventListener('click', this.handleChangeInfo)
+  //   this.components.buttonSave.element?.addEventListener('click', this.handleChangeInfo)
+  // }
 
-  removeEventListeners = () => {
-    this.components.buttonChangeInfo.element?.removeEventListener('click', this.handleChangeInfo)
-    this.components.buttonSave.element?.removeEventListener('click', this.handleChangeInfo)
-  }
+  // removeEventListeners = () => {
+  //   this.components.buttonChangeInfo.element?.removeEventListener('click', this.handleChangeInfo)
+  //   this.components.buttonSave.element?.removeEventListener('click', this.handleChangeInfo)
+  // }
 
-  handleChangeInfo = (e: MouseEvent) => {
-    e.preventDefault()
-    const footer = this.element?.querySelectorAll('.js-userSettings')
-    const inputs = this.element?.querySelectorAll('.js-field')
-    if (!inputs || (footer == null)) return
+  // handleChangeInfo = (e: MouseEvent) => {
+  //   e.preventDefault()
+  //   const footer = this.element?.querySelectorAll('.js-userSettings')
+  //   const inputs = this.element?.querySelectorAll('.js-field')
+  //   if (!inputs || (footer == null)) return
 
-    Array.from(inputs).forEach((input) => {
-      input.disabled = !input.disabled
-      input.classList.toggle('second-input__input_active')
-    })
+  //   Array.from(inputs).forEach((input) => {
+  //     input.disabled = !input.disabled
+  //     input.classList.toggle('second-input__input_active')
+  //   })
 
-    Array.from(footer).forEach((item) => {
-      item.classList.toggle('hidden')
-    })
-  }
+  //   Array.from(footer).forEach((item) => {
+  //     item.classList.toggle('hidden')
+  //   })
+  // }
 
-  initComponents = () => {
+  init() {
     const inputEmail = new SecondInput({
       label: 'Email',
       value: 'm.solomahin@mail.ru',
@@ -90,7 +89,8 @@ export default class UserSettingsPage extends BaseComponent {
       isEditable: true
     })
 
-    this.components = {
+    this.children = {
+      ...this.children,
       inputFirstName,
       inputSecondName,
       inputLogin,
@@ -103,5 +103,9 @@ export default class UserSettingsPage extends BaseComponent {
       buttonSave,
       avatar
     }
+  }
+
+  render() {
+    return this.compile(template, { ...this.props })
   }
 }

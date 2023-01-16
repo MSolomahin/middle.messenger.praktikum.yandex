@@ -1,18 +1,13 @@
-import Templator from '../../utils/templator'
 import template from './secondInput.tmpl'
-import BaseComponent from '../../core/baseComponent'
 import { SecondInputProps } from './secondInput.types'
+import Component from '../../core/component'
 
-export default class SecondInput extends BaseComponent {
+export default class SecondInput extends Component {
   constructor (props: SecondInputProps) {
-    super()
-    const { label, value, name } = props
-    this.template = new Templator(template).compile({
-      label,
-      value,
-      name
-    })
+    super(props)
+  }
 
-    this.render()
+  render() {
+    return this.compile(template, { ...this.props })
   }
 }

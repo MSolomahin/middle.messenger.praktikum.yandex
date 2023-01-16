@@ -1,14 +1,13 @@
 import template from './avatar.tmpl'
 import { AvatarProps } from './avatar.types'
-import Component from '../../core/component/component'
+import Component from '../../core/component'
 
 export default class Avatar extends Component {
   fileInput: HTMLInputElement | null
 
   constructor (props: AvatarProps) {
-    super('div', props)
+    super(props)
     this.fileInput = null
-    this.eventBus().emit(Avatar.EVENTS.INIT)
   }
 
   // initEventListeners = () => {
@@ -16,7 +15,7 @@ export default class Avatar extends Component {
   //   this.fileInput?.addEventListener('change', this.uploadAvatar)
   // }
 
-  override render = (): DocumentFragment => {
+  override render() {
     return this.compile(template, { ...this.props })
   }
 

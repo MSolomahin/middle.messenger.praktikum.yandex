@@ -1,15 +1,13 @@
-import Templator from '../../utils/templator'
 import template from './buttonPrimary.tmpl'
-import BaseComponent from '../../core/baseComponent'
-import { ButtonPrimaryProps } from './buttonPromary.types'
+import { ButtonPrimaryProps } from './buttonPrimary.types'
+import component from '../../core/component'
 
-export default class ButtonPrimary extends BaseComponent {
-  constructor ({ label }: ButtonPrimaryProps) {
-    super()
-    this.template = new Templator(template).compile({
-      label
-    })
+export default class ButtonPrimary extends component {
+  constructor (props: ButtonPrimaryProps) {
+    super(props)
+  }
 
-    this.render()
+  render() {
+    return this.compile(template, { ...this.props })
   }
 }

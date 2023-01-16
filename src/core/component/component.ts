@@ -4,7 +4,7 @@ import { v4 as makeUUID } from 'uuid'
 import {
   IMeta,
   IComponentChildren,
-  IComponentPropsAndChildren
+  IComponentProps
 } from './component.types'
 
 class Component<P extends Record<string, any> = any> {
@@ -21,16 +21,13 @@ class Component<P extends Record<string, any> = any> {
   public id: string = makeUUID()
   public children: IComponentChildren
   protected readonly eventBus: () => EventBus
-  // _initLayout: (() => void) | null = null
-  // _layout: Component | null = null;
 
-  constructor(tagName = 'div', propsAndChildren: P) {
+  constructor(propsAndChildren: P) {
     const { children, props } = this._getChildren(propsAndChildren)
     const eventBus = new EventBus()
 
     this.children = children
     this._meta = {
-      tagName,
       props
     }
 
@@ -40,10 +37,6 @@ class Component<P extends Record<string, any> = any> {
 
     this._registerEvents(eventBus)
     eventBus.emit(Component.EVENTS.INIT)
-  }
-
-  public initComponent = () => {
-    this.eventBus?.().emit(Component.EVENTS.INIT)
   }
 
   private readonly _registerEvents = (eventBus: EventBus) => {
@@ -59,12 +52,11 @@ class Component<P extends Record<string, any> = any> {
     this.eventBus().emit(Component.EVENTS.FLOW_RENDER)
   }
 
-  protected init = () => {
+  protected init() {
   }
 
-  protected compile = (template: string, props: IComponentPropsAndChildren) => {
+  protected compile = (template: string, props: IComponentProps | IComponentChildren) => {
     const propsAndStubs = { ...props }
-    console.log(template, propsAndStubs)
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
@@ -101,9 +93,9 @@ class Component<P extends Record<string, any> = any> {
     return fragment.content
   }
 
-  private readonly _getChildren = (propsAndChildren: P): { props: P, children: Record<string, Component | Component[]> } => {
-    const children: Record<string, Component | Component[]> = {}
-    const props: Record<string, unknown> = {}
+  private readonly _getChildren = (propsAndChildren: P): { props: P, children: IComponentChildren } => {
+    const children: IComponentChildren = {}
+    const props: IComponentProps = {}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Component) {
@@ -116,8 +108,7 @@ class Component<P extends Record<string, any> = any> {
   }
 
   private readonly _createResources = () => {
-    const { tagName } = this._meta
-    this._element = this._createDocumentElement(tagName)
+    this._element = this._createDocumentElement('div')
   }
 
   private readonly _componentDidMount = () => {
@@ -166,14 +157,19 @@ class Component<P extends Record<string, any> = any> {
     if (!this._element) return
 
     const block = this.render()
-    console.log(block)
 
     this._element.innerHTML = ''
 
     this._element.appendChild(block)
+
+    const elementFistElement = this._element?.firstElementChild as HTMLElement | null
+    if (this.id) {
+      elementFistElement?.setAttribute('data-id', this.id)
+    }
+    this._element = elementFistElement
   }
 
-  protected render = (): DocumentFragment => {
+  render() {
     return document.createElement('template').content
   }
 
