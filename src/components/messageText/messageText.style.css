@@ -1,0 +1,18 @@
+.message-text {
+    max-width: 400px;
+    position: relative;
+    background: $color-grey-4;
+    border-radius: 10px;
+    padding: 11px;
+    & P{
+        color: $color-text-primary;
+    }
+    &__time {
+        position: absolute;
+        bottom: 11px;
+        right: 11px;
+        & p {
+          color: $color-text-secondary;
+        }
+    }
+}

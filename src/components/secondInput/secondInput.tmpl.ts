@@ -2,9 +2,9 @@ export default `
 <div class="second-input">
   <label>{{ label }}</label>
   <input
-    type="text"
+    type="{{ type }}"
     value="{{ value }}"
-    disabled
+    {{ disabled }}
     class="js-field second-input__input"
     name="{{ name }}"
   />

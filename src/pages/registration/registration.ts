@@ -1,11 +1,24 @@
 import BaseInput from '../../components/baseInput'
-import ButtonInline from '../../components/buttonInline'
-import ButtonPrimary from '../../components/buttonPrimary'
-import Link from '../../components/link'
 import Component from '../../core/component/component'
+import AuthLayout from '../../layout/authLayout'
 import template from './registration.tmpl'
 
 export default class RegistrationPage extends Component {
+  protected componentDidMount() {
+    const form = this.element?.querySelector('form')
+    form?.addEventListener('submit', this._handleSubmit)
+  }
+
+  private readonly _handleSubmit = (e: SubmitEvent) => {
+    e.preventDefault()
+    const target = e.target as HTMLFormElement
+
+    const formData = new FormData(target)
+    for (const [name, value] of formData) {
+      console.log(`${name} = ${value as string}`)
+    }
+  }
+
   init() {
     const inputFirstName = new BaseInput({
       label: 'First Name',
@@ -39,31 +52,15 @@ export default class RegistrationPage extends Component {
       name: 'phone'
     })
 
-    const buttonPrimary = new ButtonPrimary({
-      label: 'Create account'
+    const subComponents = [inputFirstName, inputSecondName, inputLogin, inputEmail, inputPassword, inputPasswordRepeat, inputPhone]
+
+    this.children.authLayout = new AuthLayout({
+      title: 'Create account',
+      primaryText: 'Create account',
+      inlineLink: '/authorization',
+      inlineText: 'Log in',
+      subComponents
     })
-
-    const buttonInline = new ButtonInline({
-      label: 'Log in',
-      linkTo: '/authorization',
-      isSmall: true
-    })
-
-    const link = new Link({ label: 'Log in', linkTo: '/authorization', isSmall: true })
-
-    this.children = {
-      ...this.children,
-      inputFirstName,
-      inputSecondName,
-      inputLogin,
-      inputEmail,
-      inputPhone,
-      inputPassword,
-      inputPasswordRepeat,
-      buttonPrimary,
-      buttonInline,
-      link
-    }
   }
 
   render() {

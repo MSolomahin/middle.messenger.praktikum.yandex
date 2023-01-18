@@ -1,0 +1,23 @@
+.message-image {
+  position: relative;
+  max-width: 400px;
+  &__image {
+    width: 100%;
+    border: 2px solid $color-grey-4;
+    border-radius: 10px;
+  }
+
+  &__time {
+    position: absolute;
+    background: rgba(82, 82, 82, 0.5);
+    border-radius: 30px;
+    width: 37px;
+    height: 13px;
+    padding: 1.5px 7px 2.5px;
+    bottom: 11px;
+    right: 11px;
+    & p {
+      color: $color-white;
+    }
+  }
+}

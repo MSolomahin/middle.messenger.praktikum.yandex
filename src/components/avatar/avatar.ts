@@ -1,14 +1,16 @@
 import template from './avatar.tmpl'
-import { AvatarProps } from './avatar.types'
+import { AvatarEditable, AvatarProps } from './avatar.types'
 import Component from '../../core/component'
 
 export default class Avatar extends Component<AvatarProps> {
   fileInput: HTMLInputElement | null
 
   constructor(props: AvatarProps) {
+    const { isEditable = AvatarEditable.false, size, src = '' } = props
     super({
-      ...props,
-      isEditable: props.isEditable ? 'avatar__container_editable' : ''
+      isEditable,
+      size,
+      src
     })
     this.fileInput = null
   }

@@ -13,7 +13,7 @@ class Component<P extends Record<string, any> = any> {
 
   private _element: HTMLElement | null = null
   private readonly _meta: IMeta
-  protected props: P
+  public props: P
   public id: string = makeUUID()
   public children: IComponentChildren
   protected readonly eventBus: () => EventBus
@@ -72,13 +72,10 @@ class Component<P extends Record<string, any> = any> {
     ) as HTMLTemplateElement
 
     fragment.innerHTML = new Templator(template).compile(propsAndStubs)
-
     const replaceStub = (component: Component) => {
       const stub = fragment.content.querySelector(`[data-id="${component.id}"]`)
       if (!stub) return
-
       component.getContent()?.append(...Array.from(stub.childNodes))
-
       const element = component.getContent()
       if (element) stub.replaceWith(element)
     }

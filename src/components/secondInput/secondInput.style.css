@@ -4,16 +4,16 @@
   padding: 10px 0;
   border-bottom: 1px solid $color-grey;
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 110px 1fr;
 
   &__input {
     border: 0;
     width: 100%;
     font-family: $font-base;
     font-size: 13px;
-    color: $color-text-secondary;
     justify-self: end;
     text-align-last: end;
+    color: $color-text-primary;
 
     &:focus {
       outline: none;
@@ -21,10 +21,7 @@
 
     &:disabled {
       background: none;
-    }
-
-    &_active {
-      color: $color-text-primary;
+      color: $color-text-secondary;
     }
   }
 

@@ -3,6 +3,7 @@ import Avatar from '../../components/avatar'
 import { IMessage, messages } from '../../assets/mocks/messages'
 import ChatItem from '../../components/chatItem'
 import Component from '../../core/component'
+import Chat from '../../components/chat'
 
 export default class MessengerPage extends Component {
   messages: IMessage[]
@@ -10,6 +11,10 @@ export default class MessengerPage extends Component {
   init() {
     this.children.avatar = new Avatar({
       size: 'tiny'
+    })
+
+    this.children.chat = new Chat({
+      name: 'max'
     })
 
     this.children.chatList = this.createChats(messages)

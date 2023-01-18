@@ -1,4 +1,10 @@
 .user-settings {
+
+  &__userInfo {
+    &_hidden {
+      display: none
+    }
+  }
   &__container {
     height: 100vh;
     display: flex;
@@ -38,9 +44,6 @@
   &__content {
     width: min(100%, 510px);
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
   }
 
   &__avatar {
@@ -49,6 +52,17 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 60px;
+  }
+
+  &__buttons {
+    margin-top: 60px;
+  }
+
+  &__body {
+    &_hidden {
+      display: none;
+    }
   }
 }
 
@@ -61,24 +75,12 @@
   }
 }
 
-.comeback {
-  &__icon {
-    width: 28px;
-    height: 28px;
-    display: flex;
-    border-radius: 50%;
-    background: url("../../assets/icons/arrowRight.svg") 50% 50% no-repeat;
-    background-color: $color-main;
-  }
-}
-
 .separatop {
   width: 100%;
   height: 1px;
   background: $color-grey;
   margin: 10px 0 !important;
 }
-
 .hidden {
   display: none;
 }
