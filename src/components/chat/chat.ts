@@ -10,7 +10,12 @@ import MessageFile from '../messageFile/messageFile'
 
 export default class Chat extends Component<ChatProps> {
   constructor(props: ChatProps) {
-    super(props)
+    super({
+      ...props,
+      attrs: {
+        class: 'chat'
+      }
+    })
   }
 
   protected componentDidMount() {
@@ -42,13 +47,11 @@ export default class Chat extends Component<ChatProps> {
         'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'
     })
     this.children.text = new MessageText({
-      text:
-        'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg sdc sdcsd csdc  sdc sdcsd cdsckjjsdnckjsjncladjnvcldf sadcuhdc sch sadocsdocu sadcsadcush '
+      text: 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg sdc sdcsd csdc  sdc sdcsd cdsckjjsdnckjsjncladjnvcldf sadcuhdc sch sadocsdocu sadcsadcush '
     })
     this.children.file = new MessageFile({
-      file:
-        'http://localhost:1234/clip.a5692064.svg',
-        name: 'Pictures.png'
+      file: 'http://localhost:1234/clip.a5692064.svg',
+      name: 'Pictures.png'
     })
   }
 

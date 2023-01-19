@@ -3,8 +3,13 @@ import { MessageTextProps } from './messageText.types'
 import Component from '../../core/component'
 
 export default class MessageText extends Component<MessageTextProps> {
-  constructor (props: MessageTextProps) {
-    super(props)
+  constructor(props: MessageTextProps) {
+    super({
+      ...props,
+      attrs: {
+        class: 'message-text'
+      }
+    })
   }
 
   override render() {

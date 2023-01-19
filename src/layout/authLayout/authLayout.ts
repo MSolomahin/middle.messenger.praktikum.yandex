@@ -2,19 +2,16 @@ import template from './authLayout.tmpl'
 import Component from '../../core/component'
 import ButtonPrimary from '../../components/buttonPrimary'
 import Link from '../../components/link/link'
-
-export interface AuthLayoutProps {
-  title: string
-  primaryText: string
-  inlineText: string
-  inlineLink: string
-  subComponents: Component[]
-}
+import { AuthLayoutProps } from './authLayout.types'
 
 export default class AuthLayout extends Component<AuthLayoutProps> {
   constructor(props: AuthLayoutProps) {
-    const { title, primaryText, inlineText, inlineLink, subComponents } = props
-    super({ title, primaryText, inlineText, inlineLink, subComponents })
+    super({
+      ...props,
+      attrs: {
+        class: 'auth-layout__container'
+      }
+    })
   }
 
   init() {

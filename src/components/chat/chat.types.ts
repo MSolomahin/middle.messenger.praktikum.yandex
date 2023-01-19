@@ -1,3 +1,5 @@
-export interface ChatProps {
-    name: string
+import { ComponentBaseProps } from '../../core/component/component.types'
+
+export interface ChatProps extends ComponentBaseProps {
+  name: string
 }

@@ -4,9 +4,9 @@ import SecondInput from '../../components/secondInput'
 import ButtonPrimary from '../../components/buttonPrimary'
 import Avatar from '../../components/avatar'
 import Component from '../../core/component'
-import { AvatarEditable } from '../../components/avatar/avatar.types'
 import { InputDisabled } from '../../components/secondInput/secondInput.types'
 import ArrowButton from '../../components/arrowButton/arrowButton'
+import Link from '../../components/link/link'
 
 export default class UserSettingsPage extends Component {
   override componentDidMount() {
@@ -67,17 +67,14 @@ export default class UserSettingsPage extends Component {
     const avatar = this.children.avatar
     if (avatar instanceof Component) {
       avatar.setProps({
-        isEditable:
-          avatar.props.isEditable === AvatarEditable.true
-            ? AvatarEditable.false
-            : AvatarEditable.true
+        isEditable: !avatar.props.isEditable
       })
     }
 
     const footer = this.element?.querySelectorAll('.js-userSettings')
-    const inputs = this.element?.querySelectorAll(
+    const inputs: NodeListOf<HTMLInputElement> = this.element?.querySelectorAll(
       '.js-field'
-    ) as NodeListOf<HTMLInputElement>
+    )
 
     if (!inputs || footer == null) return
 
@@ -156,7 +153,7 @@ export default class UserSettingsPage extends Component {
         click: this._toggleChangePassword.bind(this)
       }
     })
-    const buttonLogOut = new ButtonInline({
+    const buttonLogOut = new Link({
       label: 'Log out',
       linkTo: '/authorization',
       isRed: true

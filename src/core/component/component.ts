@@ -1,7 +1,7 @@
 import Templator from '../../utils/templator'
 import EventBus from '../eventBus'
 import { v4 as makeUUID } from 'uuid'
-import { IMeta, IComponentChildren, IComponentProps } from './component.types'
+import { IComponentChildren, IComponentProps } from './component.types'
 
 class Component<P extends Record<string, any> = any> {
   static EVENTS = {
@@ -11,28 +11,24 @@ class Component<P extends Record<string, any> = any> {
     FLOW_RENDER: 'flow:render'
   } as const
 
-  private _element: HTMLElement | null = null
-  private readonly _meta: IMeta
+  private _element: HTMLElement
   public props: P
+  private readonly _tag: string
   public id: string = makeUUID()
   public children: IComponentChildren
-  protected readonly eventBus: () => EventBus
+  protected readonly eventBus: EventBus
 
-  constructor(propsAndChildren?: P) {
+  constructor(propsAndChildren?: P, tag = 'div') {
     const { children, props } = this._getChildren(propsAndChildren)
-    const eventBus = new EventBus()
+    this.eventBus = new EventBus()
 
     this.children = children
-    this._meta = {
-      props
-    }
+    this._tag = tag
 
     this.props = this._makePropsProxy({ ...props, __id: this.id })
 
-    this.eventBus = () => eventBus
-
-    this._registerEvents(eventBus)
-    eventBus.emit(Component.EVENTS.INIT)
+    this._registerEvents(this.eventBus)
+    this.eventBus.emit(Component.EVENTS.INIT)
   }
 
   private readonly _registerEvents = (eventBus: EventBus) => {
@@ -45,7 +41,7 @@ class Component<P extends Record<string, any> = any> {
   private readonly _init = () => {
     this.init()
     this._createResources()
-    this.eventBus().emit(Component.EVENTS.FLOW_RENDER)
+    this.eventBus.emit(Component.EVENTS.FLOW_RENDER)
   }
 
   protected init() {}
@@ -108,10 +104,6 @@ class Component<P extends Record<string, any> = any> {
     return { props: props as P, children }
   }
 
-  private readonly _createResources = () => {
-    this._element = this._createDocumentElement('div')
-  }
-
   private readonly _componentDidMount = () => {
     this.componentDidMount()
   }
@@ -119,7 +111,7 @@ class Component<P extends Record<string, any> = any> {
   protected componentDidMount(oldProps?: P) {}
 
   public dispatchComponentDidMount = () => {
-    this.eventBus().emit(Component.EVENTS.FLOW_CDM)
+    this.eventBus.emit(Component.EVENTS.FLOW_CDM)
 
     Object.values(this.children).forEach((child) => {
       if (Array.isArray(child)) {
@@ -132,11 +124,16 @@ class Component<P extends Record<string, any> = any> {
     })
   }
 
+  private readonly _createResources = () => {
+    const tag = this._tag
+    this._element = this._createDocumentElement(tag)
+  }
+
   private readonly _componentDidUpdate = (oldProps: P, newProps: P) => {
     const response = this.componentDidUpdate(oldProps, newProps)
 
     if (response) {
-      this.eventBus().emit(Component.EVENTS.FLOW_RENDER)
+      this.eventBus.emit(Component.EVENTS.FLOW_RENDER)
     }
   }
 
@@ -157,8 +154,6 @@ class Component<P extends Record<string, any> = any> {
   }
 
   private readonly _render = () => {
-    if (!this._element) return
-
     const block = this.render()
 
     this._element.innerHTML = ''
@@ -166,17 +161,20 @@ class Component<P extends Record<string, any> = any> {
 
     this._element.appendChild(block)
 
-    const elementFistElement = this._element
-      ?.firstElementChild as HTMLElement | null
-    if (this.id) {
-      elementFistElement?.setAttribute('data-id', this.id)
-    }
-    this._element = elementFistElement
     this._addEvents()
+    this._addAttributes()
   }
 
   render() {
     return document.createElement('template').content
+  }
+
+  private _addAttributes() {
+    const { attrs = {} } = this.props
+
+    Object.keys(attrs).forEach((attr) => {
+      this._element?.setAttribute(attr, attrs[attr])
+    })
   }
 
   private readonly _removeEvents = () => {
@@ -208,7 +206,7 @@ class Component<P extends Record<string, any> = any> {
       set: (target, prop: string, value) => {
         const oldProps = { ...target }
         target[prop as keyof P] = value
-        this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, target)
+        this.eventBus.emit(Component.EVENTS.FLOW_CDU, oldProps, target)
         return true
       },
       deleteProperty: () => {
@@ -220,7 +218,7 @@ class Component<P extends Record<string, any> = any> {
   private readonly _createDocumentElement = (tagName: string) => {
     const element = document.createElement(tagName)
     if (this.id) {
-      element.setAttribute('data-id', this.id)
+      element?.setAttribute('data-id', this.id)
     }
     return element
   }

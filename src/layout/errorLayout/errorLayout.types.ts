@@ -1,6 +1,6 @@
 import { ComponentBaseProps } from '../../core/component/component.types'
 
-export interface ModalProps extends ComponentBaseProps {
+export interface ErrorLayoutProps extends ComponentBaseProps {
   title: string
-  buttonTitle: string
+  description: string
 }

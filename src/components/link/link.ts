@@ -3,14 +3,14 @@ import Component from '../../core/component'
 import ButtonInline from '../buttonInline/buttonInline'
 import { LinkProps } from './link.types'
 
-export default class Link extends Component<LinkProps & { className: string }> {
+export default class Link extends Component<LinkProps> {
   constructor(props: LinkProps) {
     super({
       ...props,
-      className: `button-inline${props.isSmall ? ' button-inline_small' : ''}${
-        props.isRed ? ' button-inline_red' : ''
-      }`
-    })
+      attrs: {
+        href: props.linkTo
+      }
+    }, 'a')
   }
 
   init() {

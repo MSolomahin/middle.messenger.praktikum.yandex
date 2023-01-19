@@ -4,8 +4,13 @@ import Component from '../../core/component'
 import Avatar from '../avatar'
 
 export default class ChatItem extends Component<ChatItemProps> {
-  constructor (props: ChatItemProps) {
-    super(props)
+  constructor(props: ChatItemProps) {
+    super({
+      ...props,
+      attrs: {
+        class: 'chat-item'
+      }
+    })
   }
 
   init() {

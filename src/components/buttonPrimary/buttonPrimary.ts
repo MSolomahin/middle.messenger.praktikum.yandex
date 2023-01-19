@@ -5,7 +5,13 @@ import Component from '../../core/component'
 export default class ButtonPrimary extends Component<ButtonPrimaryProps> {
   constructor(props: ButtonPrimaryProps) {
     const { type = 'button' } = props
-    super({ ...props, type })
+    super({
+      ...props,
+      attrs: {
+        class: 'button-primary',
+        type
+      }
+    })
   }
 
   render() {

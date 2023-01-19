@@ -1,19 +1,20 @@
 import template from './errorLayout.tmpl'
-import ButtonInline from '../../components/buttonInline'
 import Component from '../../core/component'
-
-export interface ErrorLayoutProps {
-  title: string
-  description: string
-}
+import Link from '../../components/link'
+import { ErrorLayoutProps } from './errorLayout.types'
 
 export default class ErrorLayout extends Component<ErrorLayoutProps> {
   constructor(props: ErrorLayoutProps) {
-    super(props)
+    super({
+      ...props,
+      attrs: {
+        class: 'error-layout__container'
+      }
+    })
   }
 
   init() {
-    const buttonInline = new ButtonInline({
+    const link = new Link({
       label: 'Back to chats',
       linkTo: '/',
       isSmall: true
@@ -21,7 +22,7 @@ export default class ErrorLayout extends Component<ErrorLayoutProps> {
 
     this.children = {
       ...this.children,
-      buttonInline
+      link
     }
   }
 

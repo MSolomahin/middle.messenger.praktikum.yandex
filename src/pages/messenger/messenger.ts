@@ -18,6 +18,13 @@ export default class MessengerPage extends Component {
     })
 
     this.children.chatList = this.createChats(messages)
+    if (Array.isArray(this.children.chatList)) {
+      setTimeout(() => {
+        this.children.chatList[0].setProps({
+          name: 'rbhbj'
+        })
+      }, 4000)
+    }
   }
 
   private createChats(props: IMessage[]) {

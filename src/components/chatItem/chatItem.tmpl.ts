@@ -1,6 +1,5 @@
 export default `
-<div class="chat-item">
-  <div class="chat-item__avatar">{{ avatar }}</div>
+  {{ avatar }}
   <div class="chat-item__content">
     <p class="chat-item__name text-m">{{ name }}</p>
     <p class="chat-item__message text-s">{{ lastMessage }}</p>
@@ -13,5 +12,4 @@ export default `
       </div>
     </div>
   </div>
-</div>
 `
