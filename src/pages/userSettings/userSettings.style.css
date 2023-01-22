@@ -1,10 +1,10 @@
 .user-settings {
-
   &__userInfo {
     &_hidden {
-      display: none
+      display: none;
     }
   }
+
   &__container {
     height: 100vh;
     display: flex;
@@ -81,6 +81,7 @@
   background: $color-grey;
   margin: 10px 0 !important;
 }
+
 .hidden {
   display: none;
 }

@@ -7,17 +7,19 @@ import Component from '../../core/component'
 import { InputDisabled } from '../../components/secondInput/secondInput.types'
 import ArrowButton from '../../components/arrowButton/arrowButton'
 import Link from '../../components/link/link'
+import { AvatarEditable } from '../../components/avatar/avatar.types'
 
 export default class UserSettingsPage extends Component {
+  footer: NodeListOf<Element> | undefined
+  inputs: NodeListOf<HTMLInputElement> | undefined
+  userInfo: NodeListOf<Element> | undefined
+
   override componentDidMount() {
-    const avatar = this.children.avatar
+    const formInfo = this.element?.querySelector('.js-submit-info')
+    const formPassword = this.element?.querySelector('.js-submit-password')
 
-    const formInfo = this.element?.querySelector('.js-submit-info') as HTMLFormElement
-    const formPassword = this.element?.querySelector('.js-submit-password') as HTMLFormElement
+    if (!formInfo || !formPassword) return
 
-    if (avatar instanceof Component) {
-      avatar.getContent()?.addEventListener('change', this._uploadAvatar)
-    }
     formInfo.addEventListener('submit', this._handleSubmitInfo)
     formPassword.addEventListener('submit', this._handleSubmitPassword)
   }
@@ -45,7 +47,8 @@ export default class UserSettingsPage extends Component {
     this._toggleChangePassword()
   }
 
-  private readonly _uploadAvatar = (e: InputEvent) => {
+  private _uploadAvatar (e: InputEvent) {
+    console.log(e)
     const input = e.target as HTMLInputElement
     const avatar = this.children.avatar as Component
     const file = input?.files?.[0]
@@ -62,38 +65,52 @@ export default class UserSettingsPage extends Component {
     }
   }
 
-  private _toggleChangeInfo(e?: MouseEvent) {
+  private _handleChangeInfo(e: MouseEvent) {
     e?.preventDefault()
+    this._toggleChangeInfo()
+  }
+
+  private _toggleChangeInfo() {
     const avatar = this.children.avatar
     if (avatar instanceof Component) {
       avatar.setProps({
-        isEditable: !avatar.props.isEditable
+        isEditable: avatar.props.isEditable ? AvatarEditable.false : AvatarEditable.true
       })
     }
 
-    const footer = this.element?.querySelectorAll('.js-userSettings')
-    const inputs: NodeListOf<HTMLInputElement> = this.element?.querySelectorAll(
-      '.js-field'
-    )
+    if (!this.footer) {
+      this.footer = this.element?.querySelectorAll('.js-userSettings')
+    }
+    if (!this.inputs) {
+      this.inputs = this.element?.querySelectorAll(
+        '.js-field'
+      )
+    }
 
-    if (!inputs || footer == null) return
+    if (!this.inputs || !this.footer) return
 
-    Array.from(inputs).forEach((input) => {
+    Array.from(this.inputs).forEach((input) => {
       input.disabled = !input.disabled
       input.classList.toggle('second-input__input_active')
     })
 
-    Array.from(footer).forEach((item) => {
+    Array.from(this.footer).forEach((item) => {
       item.classList.toggle('hidden')
     })
   }
 
-  private _toggleChangePassword(e?: MouseEvent) {
+  private _handleChangePassword(e: MouseEvent) {
     e?.preventDefault()
-    const userInfo = this.element?.querySelectorAll('.user-settings__body')
-    if (!userInfo) return
+    this._toggleChangePassword()
+  }
 
-    Array.from(userInfo).forEach((item) => {
+  private _toggleChangePassword() {
+    if (!this.userInfo) {
+      this.userInfo = this.element?.querySelectorAll('.user-settings__body')
+    }
+    if (!this.userInfo) return
+
+    Array.from(this.userInfo).forEach((item) => {
       item.classList.toggle('user-settings__body_hidden')
     })
   }
@@ -144,13 +161,13 @@ export default class UserSettingsPage extends Component {
     const buttonChangeInfo = new ButtonInline({
       label: 'Change personal info',
       events: {
-        click: this._toggleChangeInfo.bind(this)
+        click: this._handleChangeInfo.bind(this)
       }
     })
     const buttonChangePassword = new ButtonInline({
       label: 'Change password',
       events: {
-        click: this._toggleChangePassword.bind(this)
+        click: this._handleChangePassword.bind(this)
       }
     })
     const buttonLogOut = new Link({
@@ -169,7 +186,11 @@ export default class UserSettingsPage extends Component {
     })
 
     const avatar = new Avatar({
-      size: 'large'
+      size: 'large',
+      isEditable: AvatarEditable.false,
+      events: {
+        change: this._uploadAvatar.bind(this)
+      }
     })
 
     const inputOldPassword = new SecondInput({

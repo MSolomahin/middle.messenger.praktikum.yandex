@@ -1,0 +1,10 @@
+.attachment-button {
+  position: relative;
+
+  &__icon {
+    width: 32px;
+    cursor: pointer;
+    height: 32px;
+    background: url("../../assets/icons/clip.svg") no-repeat;
+  }
+}

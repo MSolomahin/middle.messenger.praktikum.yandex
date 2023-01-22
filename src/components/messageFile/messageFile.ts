@@ -7,7 +7,7 @@ export default class MessageFile extends Component<MessageFileProps> {
     super({
       ...props,
       attrs: {
-        class: 'message-file'
+        class: `message-file ${props.isMy ? 'message-file_is-my' : ''}`
       }
     })
   }

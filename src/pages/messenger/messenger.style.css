@@ -62,6 +62,11 @@
       bottom: -15px;
     }
   }
+
+  &__list {
+    overflow-y: scroll;
+    height: calc(100% - 96px);
+  }
 }
 
 .chat {

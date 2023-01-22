@@ -7,9 +7,10 @@ $color-bg: #fbfbfb;
 $color-grey: #eaeaea;
 $color-grey-2: #efefef;
 $color-grey-3: #f5f5f5;
-$color-grey-4: #F8F8F8;
+$color-grey-4: #f8f8f8;
 $color-red: #f00;
 $color-main-hover: #e4edfd;
+$color-light-blue: #e4edfd;
 
 $shadow: 0 0 6px rgb(0 0 0 / 14%);
 $font-base: "Inter", sans-serif;

@@ -6,25 +6,16 @@ import Component from '../../core/component'
 import Chat from '../../components/chat'
 
 export default class MessengerPage extends Component {
-  messages: IMessage[]
+  messages: IMessage[] = []
 
   init() {
     this.children.avatar = new Avatar({
       size: 'tiny'
     })
 
-    this.children.chat = new Chat({
-      name: 'max'
-    })
+    this.children.chat = new Chat()
 
     this.children.chatList = this.createChats(messages)
-    if (Array.isArray(this.children.chatList)) {
-      setTimeout(() => {
-        this.children.chatList[0].setProps({
-          name: 'rbhbj'
-        })
-      }, 4000)
-    }
   }
 
   private createChats(props: IMessage[]) {

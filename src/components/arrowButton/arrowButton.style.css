@@ -1,8 +1,8 @@
-
 .arrow-button {
   &_right {
-    transform: rotate(180deg)
+    transform: rotate(180deg);
   }
+
   &__icon {
     width: 28px;
     height: 28px;

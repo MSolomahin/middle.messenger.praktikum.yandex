@@ -7,7 +7,7 @@ export default class MessageText extends Component<MessageTextProps> {
     super({
       ...props,
       attrs: {
-        class: 'message-text'
+        class: `message-text ${props.isMy ? 'message-text_is-my' : ''}`
       }
     })
   }

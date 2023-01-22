@@ -11,7 +11,7 @@ class Component<P extends Record<string, any> = any> {
     FLOW_RENDER: 'flow:render'
   } as const
 
-  private _element: HTMLElement
+  private _element: HTMLElement | undefined
   public props: P
   private readonly _tag: string
   public id: string = makeUUID()
@@ -154,6 +154,8 @@ class Component<P extends Record<string, any> = any> {
   }
 
   private readonly _render = () => {
+    if (!this._element) return
+
     const block = this.render()
 
     this._element.innerHTML = ''

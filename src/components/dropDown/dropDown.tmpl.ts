@@ -1,0 +1,5 @@
+export default `
+<div class="drop-down__container drop-down_{{ position }} drop-down_{{ align }}">
+  {{ itemsList }}
+</div>
+`

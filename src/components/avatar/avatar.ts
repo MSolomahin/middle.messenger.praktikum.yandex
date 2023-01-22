@@ -9,7 +9,7 @@ export default class Avatar extends Component<AvatarProps> {
     super({
       ...props,
       attrs: {
-        class: `avatar__container avatar__container_${props.size} ${props.isEditable ? 'avatar__container_editable' : ''}`
+        class: `avatar__container avatar__container_${props.size}`
       }
     })
     this.fileInput = null

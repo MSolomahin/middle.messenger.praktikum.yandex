@@ -11,7 +11,7 @@ export default class ButtonPrimary extends Component<ButtonPrimaryProps> {
         class: 'button-primary',
         type
       }
-    })
+    }, 'button')
   }
 
   render() {

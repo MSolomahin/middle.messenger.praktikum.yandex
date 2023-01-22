@@ -1,7 +1,12 @@
 import { ComponentBaseProps } from '../../core/component/component.types'
 
-export interface AvatarProps extends ComponentBaseProps {
+export interface AvatarProps extends ComponentBaseProps{
   size: string
-  isEditable?: true
+  isEditable?: AvatarEditable
   src?: string
+}
+
+export enum AvatarEditable {
+  true = 'avatar_editable',
+  false = ''
 }

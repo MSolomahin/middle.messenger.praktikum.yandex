@@ -7,7 +7,7 @@ export default class MessageImage extends Component<MessageImageProps> {
     super({
       ...props,
       attrs: {
-        class: 'message-image'
+        class: `message-image ${props.isMy ? 'message-image_is-my' : ''}`
       }
     })
   }

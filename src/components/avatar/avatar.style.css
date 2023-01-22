@@ -1,4 +1,15 @@
 .avatar {
+  &_editable {
+    width: 100%;
+    height: 100%;
+
+    &:hover > label {
+      opacity: 1;
+      transition: all 0.3s ease;
+      pointer-events: all;
+    }
+  }
+
   &__container {
     border-radius: 50%;
     background: $color-grey-2 no-repeat center;
@@ -24,12 +35,6 @@
     &_large {
       width: 130px;
       height: 130px;
-    }
-
-    &_editable:hover > label {
-      opacity: 1;
-      transition: all 0.3s ease;
-      pointer-events: all;
     }
   }
 
