@@ -1,7 +1,7 @@
+import { getUniqKey } from '../../utils/getUniqKey'
 import Templator from '../../utils/templator'
 import EventBus from '../eventBus'
 import { IComponentChildren, IComponentProps } from './component.types'
-import { nanoid } from 'nanoid'
 
 class Component<P extends Record<string, any> = any> {
   static EVENTS = {
@@ -14,7 +14,7 @@ class Component<P extends Record<string, any> = any> {
   private _element: HTMLElement | undefined
   public props: P
   private readonly _tag: string
-  public id: string = nanoid()
+  public id: string = getUniqKey()
   public children: IComponentChildren
   protected readonly eventBus: EventBus
 
