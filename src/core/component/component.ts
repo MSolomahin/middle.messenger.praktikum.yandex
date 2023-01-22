@@ -1,6 +1,5 @@
 import Templator from '../../utils/templator'
 import EventBus from '../eventBus'
-import { v4 as makeUUID } from 'uuid'
 import { IComponentChildren, IComponentProps } from './component.types'
 
 class Component<P extends Record<string, any> = any> {
@@ -14,7 +13,7 @@ class Component<P extends Record<string, any> = any> {
   private _element: HTMLElement | undefined
   public props: P
   private readonly _tag: string
-  public id: string = makeUUID()
+  public id: string = nanoId()
   public children: IComponentChildren
   protected readonly eventBus: EventBus
 
@@ -239,3 +238,6 @@ class Component<P extends Record<string, any> = any> {
 }
 
 export default Component
+function nanoId(): string {
+  throw new Error('Function not implemented.')
+}
