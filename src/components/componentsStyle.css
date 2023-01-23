@@ -1,16 +1,3 @@
-@import url("./baseInput/baseInput.style.css");
-@import url("./secondInput/secondInput.style.css");
-@import url("./buttonPrimary/buttonPrimary.style.css");
-@import url("./buttonInline/buttonInline.style.css");
-@import url("./avatar/avatar.style.css");
-@import url("./chatItem/chatItem.style.css");
-@import url("./modal/modal.style.css");
 @import url("./chat/chat.style.css");
-@import url("./moreButton/moreButton.style.css");
-@import url("./arrowButton/arrowButton.style.css");
-@import url("./messageImage/messageImage.style.css");
-@import url("./messageText/messageText.style.css");
-@import url("./messageFile/messageFile.style.css");
-@import url("./attachmentButton/attachmentButton.style.css");
-@import url("./dropDown/dropDown.style.css");
-@import url("./dropDownItem/dropDownItem.style.css");
+@import url("./form/form.style.css");
+

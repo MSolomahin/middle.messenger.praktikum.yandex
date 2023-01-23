@@ -1,7 +1,7 @@
 import template from './messenger.tmpl'
-import Avatar from '../../components/avatar'
+import Avatar from '../../ui/avatar'
 import { IMessage, messages } from '../../assets/mocks/messages'
-import ChatItem from '../../components/chatItem'
+import ChatItem from '../../ui/chatItem'
 import Component from '../../core/component'
 import Chat from '../../components/chat'
 

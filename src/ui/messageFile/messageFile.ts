@@ -12,8 +12,6 @@ export default class MessageFile extends Component<MessageFileProps> {
     })
   }
 
-  init() {}
-
   override render() {
     return this.compile(template, { ...this.props })
   }

@@ -1,13 +1,13 @@
 import template from './userSettings.tmpl'
-import ButtonInline from '../../components/buttonInline'
-import SecondInput from '../../components/secondInput'
-import ButtonPrimary from '../../components/buttonPrimary'
-import Avatar from '../../components/avatar'
+import ButtonInline from '../../ui/buttonInline'
+import SecondInput from '../../ui/secondInput'
+import ButtonPrimary from '../../ui/buttonPrimary'
+import Avatar from '../../ui/avatar'
 import Component from '../../core/component'
-import { InputDisabled } from '../../components/secondInput/secondInput.types'
-import ArrowButton from '../../components/arrowButton/arrowButton'
-import Link from '../../components/link/link'
-import { AvatarEditable } from '../../components/avatar/avatar.types'
+import { InputDisabled } from '../../ui/secondInput/secondInput.types'
+import ArrowButton from '../../ui/arrowButton/arrowButton'
+import Link from '../../ui/link/link'
+import { AvatarEditable } from '../../ui/avatar/avatar.types'
 
 export default class UserSettingsPage extends Component {
   footer: NodeListOf<Element> | undefined

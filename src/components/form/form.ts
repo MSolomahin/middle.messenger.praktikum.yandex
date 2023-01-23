@@ -1,28 +1,28 @@
-import template from './authLayout.tmpl'
+import template from './form.tmpl'
 import Component from '../../core/component'
+import { FromProps } from './form.types'
+import Link from '../../ui/link'
 import ButtonPrimary from '../../ui/buttonPrimary'
-import Link from '../../ui/link/link'
-import { AuthLayoutProps } from './authLayout.types'
 
-export default class AuthLayout extends Component<AuthLayoutProps> {
-  constructor(props: AuthLayoutProps) {
+export default class Form extends Component<FromProps> {
+  constructor(props: FromProps) {
     super({
       ...props,
       attrs: {
-        class: 'auth-layout__container'
+        class: 'form'
       }
     })
   }
 
   init() {
     const link = new Link({
-      label: this.props.inlineText,
-      linkTo: this.props.inlineLink,
+      label: this.props.linkText,
+      linkTo: this.props.linkPath,
       isSmall: true
     })
 
     const buttonPrimary = new ButtonPrimary({
-      label: this.props.primaryText,
+      label: this.props.buttonText,
       type: 'submit'
     })
 

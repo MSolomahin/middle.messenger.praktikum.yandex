@@ -17,6 +17,7 @@ class Component<P extends Record<string, any> = any> {
   public id: string = getUniqKey()
   public children: IComponentChildren
   protected readonly eventBus: EventBus
+  public isShow: boolean = true
 
   constructor(propsAndChildren?: P, tag = 'div') {
     const { children, props } = this._getChildren(propsAndChildren)
@@ -68,6 +69,7 @@ class Component<P extends Record<string, any> = any> {
     ) as HTMLTemplateElement
 
     fragment.innerHTML = new Templator(template).compile(propsAndStubs)
+
     const replaceStub = (component: Component) => {
       const stub = fragment.content.querySelector(`[data-id="${component.id}"]`)
       if (!stub) return
@@ -229,12 +231,14 @@ class Component<P extends Record<string, any> = any> {
     const element = this.getContent()
     if (!element) return
     element.style.display = 'block'
+    this.isShow = true
   }
 
   hide = () => {
     const element = this.getContent()
     if (!element) return
     element.style.display = 'none'
+    this.isShow = false
   }
 }
 

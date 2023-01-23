@@ -1,4 +1,4 @@
-import BaseInput from '../../components/baseInput'
+import BaseInput from '../../ui/baseInput'
 import template from './authorization.tmpl'
 import Component from '../../core/component/component'
 import AuthLayout from '../../layout/authLayout/authLayout'

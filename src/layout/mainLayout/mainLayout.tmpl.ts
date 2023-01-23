@@ -1,3 +1,3 @@
 export default `
-{{mainLayout}}
+  {{ content }}
 `

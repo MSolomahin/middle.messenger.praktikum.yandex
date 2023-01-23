@@ -1,13 +1,19 @@
 import template from './chat.tmpl'
 import Component from '../../core/component'
-import MoreButton from '../moreButton/moreButton'
-import Avatar from '../avatar/avatar'
-import ArrowButton from '../arrowButton/arrowButton'
-import MessageImage from '../messageImage'
-import MessageText from '../messageText/messageText'
-import MessageFile from '../messageFile/messageFile'
-import AttachmentButton from '../attachmentButton/attachmentButton'
+import MoreButton from '../../ui/moreButton/moreButton'
+import Avatar from '../../ui/avatar/avatar'
+import ArrowButton from '../../ui/arrowButton/arrowButton'
+import MessageFile from '../../ui/messageFile/messageFile'
+import AttachmentButton from '../../ui/attachmentButton/attachmentButton'
 import { messagesMock } from '../../assets/mocks/messages'
+import MessageImage from '../../ui/messageImage'
+import MessageText from '../../ui/messageText'
+import DropDown from '../../ui/dropDown/dropDown'
+import DocumentIcon from '../../assets/icons/document.svg'
+import LocationIcon from '../../assets/icons/location.svg'
+import PhotoIcon from '../../assets/icons/photo.svg'
+import DeleteIcon from '../../assets/icons/delete.svg'
+import PlusIcon from '../../assets/icons/plus.svg'
 
 export default class Chat extends Component {
   constructor() {
@@ -19,14 +25,18 @@ export default class Chat extends Component {
   }
 
   protected componentDidMount() {
-    const form = this.element?.querySelector('.js-message-input')
-    form?.addEventListener('submit', this._handleSubmit)
+    this.setProps({
+      events: {
+        click: this._handleSubmit
+      }
+    })
   }
 
   private readonly _handleSubmit = (e: SubmitEvent) => {
     e.preventDefault()
 
-    const target = e.target as HTMLFormElement
+    const target = (e.target as HTMLElement).closest('form')
+    if (!target) return
 
     const formData = new FormData(target)
     for (const [name, value] of formData) {
@@ -34,19 +44,62 @@ export default class Chat extends Component {
     }
   }
 
+  private _onItemClick (e: MouseEvent) {
+    e.stopPropagation()
+    console.log(1)
+  }
+
   init() {
-    this.children.moreButton = new MoreButton()
     this.children.avatar = new Avatar({
       size: 'tiny'
     })
     this.children.arrowButton = new ArrowButton({
       side: 'right'
     })
-    this.children.attachmentButton = new AttachmentButton({})
+
+    this.children.moreButton = new DropDown({
+      position: 'bottom',
+      align: 'left',
+      items: [
+        {
+          image: PlusIcon,
+          title: 'Add user',
+          onClick: this._onItemClick.bind(this)
+        },
+        {
+          image: DeleteIcon,
+          title: 'Delete user',
+          onClick: this._onItemClick.bind(this)
+        }
+      ],
+      button: new MoreButton()
+    })
+
+    this.children.attachmentButton = new DropDown({
+      position: 'top',
+      align: 'right',
+      items: [
+        {
+          image: PhotoIcon,
+          title: 'Photo and video',
+          onClick: this._onItemClick.bind(this)
+        },
+        {
+          image: DocumentIcon,
+          title: 'File',
+          onClick: this._onItemClick.bind(this)
+        },
+        {
+          image: LocationIcon,
+          title: 'Location',
+          onClick: this._onItemClick.bind(this)
+        }
+      ],
+      button: new AttachmentButton()
+    })
 
     this.children.image = new MessageImage({
-      image:
-      messagesMock.image1,
+      image: messagesMock.image1,
       isMy: true
     })
     this.children.text = new MessageText({
@@ -58,8 +111,7 @@ export default class Chat extends Component {
       isMy: true
     })
     this.children.image1 = new MessageImage({
-      image:
-      messagesMock.image2
+      image: messagesMock.image2
     })
     this.children.image2 = new MessageImage({
       image: messagesMock.image3

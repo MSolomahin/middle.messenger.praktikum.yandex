@@ -1,6 +1,6 @@
 import template from './errorLayout.tmpl'
 import Component from '../../core/component'
-import Link from '../../components/link'
+import Link from '../../ui/link'
 import { ErrorLayoutProps } from './errorLayout.types'
 
 export default class ErrorLayout extends Component<ErrorLayoutProps> {
