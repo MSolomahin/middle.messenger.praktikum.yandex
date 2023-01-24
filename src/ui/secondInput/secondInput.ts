@@ -1,6 +1,7 @@
 import template from './secondInput.tmpl'
 import { InputDisabled, SecondInputProps } from './secondInput.types'
 import Component from '../../core/component'
+import './secondInput.style.css'
 
 export default class SecondInput extends Component<SecondInputProps> {
   constructor(props: SecondInputProps) {
@@ -13,6 +14,6 @@ export default class SecondInput extends Component<SecondInputProps> {
   }
 
   render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

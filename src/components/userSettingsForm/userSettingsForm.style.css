@@ -1,0 +1,53 @@
+@import url("../../assets/style/uikit");
+
+.user-settings {
+  &__userInfo {
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__content {
+    width: min(100%, 510px);
+    margin: 0 auto;
+  }
+
+  &__avatar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+  }
+
+  &__buttons {
+    margin-top: 60px;
+  }
+
+  &__body {
+    &_hidden {
+      display: none;
+    }
+  }
+}
+
+.avatar {
+  &__img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: $color-grey;
+  }
+}
+
+.separatop {
+  width: 100%;
+  height: 1px;
+  background: $color-grey;
+  margin: 10px 0 !important;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,7 +1,20 @@
+@import url("../../assets/style/uikit");
+
 .input-base {
   position: relative;
   flex: 1 1 auto;
 
+  &__error {
+    color: red;
+    display: none;
+    text-align: left;
+    font-weight: 400;
+    margin-top: 5px;
+
+    &_active {
+      display: block;
+    }
+  }
   & label {
     position: absolute;
     font-size: 13px;

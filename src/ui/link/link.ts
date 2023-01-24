@@ -20,6 +20,6 @@ export default class Link extends Component<LinkProps> {
   }
 
   render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

@@ -2,6 +2,7 @@ import template from './dropDown.tmpl'
 import { DropDownProps } from './dropDown.types'
 import Component from '../../core/component'
 import DropDownItem from '../dropDownItem/dropDownItem'
+import './dropDown.style.css'
 
 export default class DropDown extends Component<DropDownProps> {
   constructor(props: DropDownProps) {
@@ -48,6 +49,6 @@ export default class DropDown extends Component<DropDownProps> {
   }
 
   override render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

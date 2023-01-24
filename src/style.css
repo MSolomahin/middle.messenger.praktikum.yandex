@@ -4,14 +4,3 @@
 @import url("./assets/fonts/fonts.css");
 @import url("./assets/style/navBar.css");
 
-/* Pages */
-@import url("./pages/pagesStyle.css");
-
-/* Components */
-@import url("./components/componentsStyle.css");
-
-/* Layout */
-@import url("./layout/layoutStyle.css");
-
-/* UI */
-@import url("./ui/uiStyle.css");

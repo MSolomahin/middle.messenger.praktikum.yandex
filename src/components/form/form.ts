@@ -3,6 +3,7 @@ import Component from '../../core/component'
 import { FromProps } from './form.types'
 import Link from '../../ui/link'
 import ButtonPrimary from '../../ui/buttonPrimary'
+import './form.style.css'
 
 export default class Form extends Component<FromProps> {
   constructor(props: FromProps) {
@@ -35,6 +36,6 @@ export default class Form extends Component<FromProps> {
   }
 
   render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

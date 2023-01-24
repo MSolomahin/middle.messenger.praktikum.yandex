@@ -1,3 +1,5 @@
+@import url("../../assets/style/uikit");
+
 .button-primary {
   background: $color-main;
   border-radius: 8px;

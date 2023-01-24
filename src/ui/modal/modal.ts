@@ -2,6 +2,7 @@ import template from './modal.tmpl'
 import { ModalProps } from './modal.types'
 import Component from '../../core/component'
 import ButtonPrimary from '../buttonPrimary/buttonPrimary'
+import './modal.style.css'
 
 export default class Modal extends Component<ModalProps> {
   constructor(props: ModalProps) {
@@ -22,6 +23,6 @@ export default class Modal extends Component<ModalProps> {
   }
 
   override render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

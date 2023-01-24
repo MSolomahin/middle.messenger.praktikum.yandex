@@ -1,18 +1,18 @@
 import Component from '../core/component'
-import AuthPage from '../pages/authorization'
-import MessengerPage from '../pages/messenger'
-import NotFoundPage from '../pages/notFound'
-import RegistrationPage from '../pages/registration'
-import ServerErrorPage from '../pages/serverError'
-import UserSettings from '../pages/userSettings'
+import AuthorizationPage from '../pages/authorizationPage'
+import MessengerPage from '../pages/messengerPage'
+import NotFoundPage from '../pages/notFoundPage'
+import RegistrationPage from '../pages/registrationPage'
+import ServerErrorPage from '../pages/serverErrorPage'
+import UserSettingsPage from '../pages/userSettingsPage'
 
-const pages = {
-  authorization: AuthPage,
-  registration: RegistrationPage,
-  messenger: MessengerPage,
-  notFound: NotFoundPage,
-  serverError: ServerErrorPage,
-  userSettings: UserSettings
+const pages: Record<string, Component> = {
+  authorization: new AuthorizationPage(),
+  registration: new RegistrationPage(),
+  messenger: new MessengerPage(),
+  notFound: new NotFoundPage(),
+  serverError: new ServerErrorPage(),
+  userSettings: new UserSettingsPage()
 }
 export default async function (path: string, match?: RegExpMatchArray | null) {
   const main = document.querySelector('main')
@@ -21,9 +21,9 @@ export default async function (path: string, match?: RegExpMatchArray | null) {
 
   // const { default: Page } = await import(`../pages/${path}`);
 
-  const Page: Component = pages[path] || NotFoundPage
+  const Page = pages[path] || NotFoundPage
 
-  const page: Component = new Page()
+  const page: Component = Page
   const element = page.getContent()
   page.dispatchComponentDidMount()
 

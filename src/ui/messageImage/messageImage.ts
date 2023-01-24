@@ -1,6 +1,7 @@
 import template from './messageImage.tmpl'
 import { MessageImageProps } from './messageImage.types'
 import Component from '../../core/component'
+import './messageImage.style.css'
 
 export default class MessageImage extends Component<MessageImageProps> {
   constructor(props: MessageImageProps) {
@@ -13,6 +14,6 @@ export default class MessageImage extends Component<MessageImageProps> {
   }
 
   override render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

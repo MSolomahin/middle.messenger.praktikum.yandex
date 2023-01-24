@@ -1,3 +1,5 @@
+@import url("../../assets/style/uikit");
+
 .message-image {
   position: relative;
   max-width: 400px;

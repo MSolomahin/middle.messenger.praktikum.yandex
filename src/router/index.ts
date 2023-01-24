@@ -3,7 +3,7 @@ import renderPage from './render-page'
 // performs routing on all links
 export default class Router {
   routes: Array<{ pattern: RegExp, path: string }>
-  notFoundPagePath: string
+  notFoundPagePath: string = ''
   page: any
   static _instance: Router
 

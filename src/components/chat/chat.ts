@@ -14,6 +14,7 @@ import LocationIcon from '../../assets/icons/location.svg'
 import PhotoIcon from '../../assets/icons/photo.svg'
 import DeleteIcon from '../../assets/icons/delete.svg'
 import PlusIcon from '../../assets/icons/plus.svg'
+import './chat.style.css'
 
 export default class Chat extends Component {
   constructor() {
@@ -119,6 +120,6 @@ export default class Chat extends Component {
   }
 
   render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

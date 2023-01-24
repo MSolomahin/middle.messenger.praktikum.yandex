@@ -1,6 +1,7 @@
 import template from './moreButton.tmpl'
 import Component from '../../core/component'
 import { MoreButtonProps } from './moreButton.types'
+import './moreButton.style.css'
 
 export default class MoreButton extends Component<MoreButtonProps> {
   constructor() {
@@ -12,6 +13,6 @@ export default class MoreButton extends Component<MoreButtonProps> {
   }
 
   render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

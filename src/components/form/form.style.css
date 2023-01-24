@@ -1,3 +1,6 @@
+@import url("../../assets/style/uikit");
+
+
 .form {
   width: 100%;
   &__content {

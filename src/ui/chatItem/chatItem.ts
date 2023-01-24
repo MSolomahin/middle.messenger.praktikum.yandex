@@ -2,6 +2,7 @@ import template from './chatItem.tmpl'
 import { ChatItemProps } from './chatItem.types'
 import Component from '../../core/component'
 import Avatar from '../avatar'
+import './chatItem.style.css'
 
 export default class ChatItem extends Component<ChatItemProps> {
   constructor(props: ChatItemProps) {
@@ -20,6 +21,6 @@ export default class ChatItem extends Component<ChatItemProps> {
   }
 
   override render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

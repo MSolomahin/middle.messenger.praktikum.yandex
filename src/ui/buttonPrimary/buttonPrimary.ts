@@ -1,6 +1,7 @@
 import template from './buttonPrimary.tmpl'
 import { ButtonPrimaryProps } from './buttonPrimary.types'
 import Component from '../../core/component'
+import './buttonPrimary.style.css'
 
 export default class ButtonPrimary extends Component<ButtonPrimaryProps> {
   constructor(props: ButtonPrimaryProps) {
@@ -8,6 +9,7 @@ export default class ButtonPrimary extends Component<ButtonPrimaryProps> {
     super({
       ...props,
       attrs: {
+        ...props.attrs,
         class: 'button-primary',
         type
       }
@@ -15,6 +17,6 @@ export default class ButtonPrimary extends Component<ButtonPrimaryProps> {
   }
 
   render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

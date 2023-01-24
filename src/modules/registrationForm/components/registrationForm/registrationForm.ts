@@ -4,6 +4,8 @@ import BaseInput from '../../../../ui/baseInput'
 import template from './registrationForm.tmpl'
 
 export class RegistrationFrom extends Component {
+  subComponents: Component[] = []
+
   init() {
     const inputFirstName = new BaseInput({
       label: 'First Name',
@@ -29,7 +31,8 @@ export class RegistrationFrom extends Component {
     })
     const inputPasswordRepeat = new BaseInput({
       label: 'Password (repeat)',
-      type: 'password'
+      type: 'password',
+      name: 'password_repeat'
     })
     const inputPhone = new BaseInput({
       label: 'Phone',
@@ -37,7 +40,7 @@ export class RegistrationFrom extends Component {
       name: 'phone'
     })
 
-    const subComponents = [
+    this.subComponents = [
       inputFirstName,
       inputSecondName,
       inputLogin,
@@ -50,7 +53,7 @@ export class RegistrationFrom extends Component {
       title: 'Sign up',
       linkPath: '/authorization',
       linkText: 'Log in',
-      subComponents,
+      subComponents: this.subComponents,
       buttonText: 'Sign up',
       events: {
         submit: this._handleSubmit.bind(this)
@@ -58,7 +61,7 @@ export class RegistrationFrom extends Component {
     })
   }
 
-  private _handleSubmit (e: SubmitEvent) {
+  private _handleSubmit(e: SubmitEvent) {
     e.preventDefault()
     const target = e.target as HTMLFormElement
 
@@ -69,6 +72,6 @@ export class RegistrationFrom extends Component {
   }
 
   render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

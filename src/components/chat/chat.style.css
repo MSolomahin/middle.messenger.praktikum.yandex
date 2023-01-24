@@ -10,6 +10,8 @@
   }
 } */
 
+@import url("../../assets/style/uikit.css");
+
 .chat {
   width: 75vw;
   height: 100vh;

@@ -3,6 +3,7 @@ import {
   ArrowButtonProps
 } from './arrowButton.types'
 import Component from '../../core/component'
+import './arrowButton.style.css'
 
 export default class ArrowButton extends Component<ArrowButtonProps> {
   constructor(props: ArrowButtonProps) {
@@ -17,6 +18,6 @@ export default class ArrowButton extends Component<ArrowButtonProps> {
   }
 
   override render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

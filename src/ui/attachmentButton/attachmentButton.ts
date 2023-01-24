@@ -1,6 +1,7 @@
 import template from './attachmentButton.tmpl'
 import { AttachmentButtonProps } from './attachmentButton.types'
 import Component from '../../core/component'
+import './attachmentButton.style.css'
 
 export default class AttachmentButton extends Component<AttachmentButtonProps> {
   constructor() {
@@ -12,6 +13,6 @@ export default class AttachmentButton extends Component<AttachmentButtonProps> {
   }
 
   override render() {
-    return this.compile(template, { ...this.props })
+    return this.compile({ ...this.props }, template)
   }
 }

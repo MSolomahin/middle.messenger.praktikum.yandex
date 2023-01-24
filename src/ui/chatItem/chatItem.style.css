@@ -1,3 +1,5 @@
+@import url("../../assets/style/uikit");
+
 .chat-item {
   display: flex;
   align-items: flex-start;

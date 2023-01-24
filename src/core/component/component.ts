@@ -48,10 +48,11 @@ class Component<P extends Record<string, any> = any> {
   protected init() {}
 
   protected compile = (
-    template: string,
-    props: IComponentProps | IComponentChildren
+    props: IComponentProps | IComponentChildren,
+    template?: string
   ) => {
     const propsAndStubs = { ...props }
+    const curTemplate = template ?? '{{ layout }}'
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
@@ -68,7 +69,7 @@ class Component<P extends Record<string, any> = any> {
       'template'
     ) as HTMLTemplateElement
 
-    fragment.innerHTML = new Templator(template).compile(propsAndStubs)
+    fragment.innerHTML = new Templator(curTemplate).compile(propsAndStubs)
 
     const replaceStub = (component: Component) => {
       const stub = fragment.content.querySelector(`[data-id="${component.id}"]`)
