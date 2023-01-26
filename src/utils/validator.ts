@@ -1,12 +1,12 @@
 /* eslint-disable no-useless-escape */
 export const RegExps: Record<string, RegExp> = {
-  name: /^([A-Z]{1}[-a-z]{1,14})|([А-Я]{1}[-а-я]{1,14})$/gm,
-  login: /^([A-Z]{1}[-a-z]{1,14})|([А-Я]{1}[-а-я]{1,14})$/gm,
+  name: /^([A-Z]{1}[-a-z]{1,14})|([А-Я]{1}[-а-я]{1,14})$/m,
+  login: /^(?=.*[A-Za-z])([A-Za-z_\-\d]{3,20})$/m,
   email:
-    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/gm,
-  password: /^(?=.*[a-z])(?=.*\d)[\S]{8,40}$/gm,
-  phone: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,9}$/gm,
-  message: /^(?!\s*$).+/gm
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/m,
+  password: /^(?=.*[A-Z])(?=.*\d)[\S]{8,40}$/m,
+  phone: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,9}$/m,
+  message: /^(?!\s*$).+/m
 }
 
 export const inputFields: Record<string, string> = {
@@ -19,22 +19,34 @@ export const inputFields: Record<string, string> = {
   phone: 'phone'
 }
 
-export default class Validator {
-  errors: Record<string, string> = {}
-  public isValidAll: boolean = false
+const DEFAULT_ERROR = 'The field is filled incorrectly'
 
-  checkField(type: string, value: string) {
-    return RegExps[type].test(value)
+export default class Validator {
+  public errors: Record<string, string> = {}
+  private _password: string = ''
+
+  public checkForm(formData: FormData) {
+    formData.forEach((value, name) => {
+      const validMessage = this.checkField(name, value as string)
+      this.errors[name] = validMessage || ''
+    })
+
+    const allIsValid = Object.values(this.errors).find(item => item !== '')
+    return !allIsValid
   }
 
-  checkName(name: string, value: string) {
-    const result = RegExps.name.test(value)
-    if (result) {
-      this.errors[name] = ''
-      return true
-    } else {
-      this.errors[name] = 'Error'
-      return false
+  public checkField(name: string, value: string) {
+    const type = inputFields[name]
+    const isValid = RegExps[type].test(value)
+    let error = !isValid ? DEFAULT_ERROR : ''
+
+    if (name === 'password') {
+      this._password = value
     }
-}
+    if (name === 'password_repeat' && value !== this._password) {
+      error = 'Password are not same'
+    }
+
+    return error
+  }
 }

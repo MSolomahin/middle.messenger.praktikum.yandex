@@ -1,10 +1,11 @@
+import Component from '../core/component'
 import renderPage from './render-page'
 
 // performs routing on all links
 export default class Router {
   routes: Array<{ pattern: RegExp, path: string }>
   notFoundPagePath: string = ''
-  page: any
+  page: Component | null = null
   static _instance: Router
 
   constructor() {
@@ -34,7 +35,7 @@ export default class Router {
     return this._instance
   }
 
-  route = async () => {
+  async route() {
     const strippedPath = decodeURI(window.location.pathname)
       .replace(/^\/|\/$/, '')
 
@@ -60,10 +61,11 @@ export default class Router {
     }))
   }
 
-  async changePage (path: string, match?: RegExpMatchArray | null) {
-    if (this.page?.destroy) {
-      this.page.destroy()
-    }
+  public async changePage (path: string, match?: RegExpMatchArray | null) {
+    console.log(path)
+    // if (this.page?.destroy) {
+    //   this.page.destroy()
+    // }
 
     return await renderPage(path, match)
   }

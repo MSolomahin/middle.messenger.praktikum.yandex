@@ -5,9 +5,10 @@ import './buttonPrimary.style.css'
 
 export default class ButtonPrimary extends Component<ButtonPrimaryProps> {
   constructor(props: ButtonPrimaryProps) {
-    const { type = 'button' } = props
+    const { type = 'button', disable = false } = props
     super({
       ...props,
+      disable,
       attrs: {
         ...props.attrs,
         class: 'button-primary',

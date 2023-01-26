@@ -7,8 +7,10 @@ import './form.style.css'
 
 export default class Form extends Component<FromProps> {
   constructor(props: FromProps) {
+    const { disable = false } = props
     super({
       ...props,
+      disable,
       attrs: {
         class: 'form'
       }

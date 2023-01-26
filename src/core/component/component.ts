@@ -160,8 +160,8 @@ class Component<P extends Record<string, any> = any> {
     if (!this._element) return
 
     const block = this.render()
-
     this._element.innerHTML = ''
+
     this._removeEvents()
 
     this._element.appendChild(block)

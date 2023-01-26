@@ -1,4 +1,4 @@
-const last = (list: any[]) => {
+const last = <T>(list: T[]) => {
   if (Array.isArray(list)) {
     return list.at(-1)
   }

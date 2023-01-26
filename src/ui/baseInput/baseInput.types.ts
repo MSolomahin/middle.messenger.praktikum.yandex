@@ -2,10 +2,17 @@ import { ComponentBaseProps } from '../../core/component/component.types'
 
 export interface BaseInputProps extends ComponentBaseProps {
   label: string
+  name: string
   type?: string
-  name?: string
+  value?: string
   required?: boolean
-  error?: string
-  isError?: string
-  validateScheme?: (name: string, value: string) => boolean
+  errorMessage?: string
+  isError?: InputError
+  pattern?: RegExp
+  validate?: (type: string, name: string) => string
+}
+
+export enum InputError {
+  true = 'input-base__error_active',
+  false = ''
 }

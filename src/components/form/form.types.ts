@@ -7,5 +7,5 @@ export interface FromProps extends ComponentBaseProps {
     linkPath: string
     linkText: string
     buttonText: string
-    // onSubmit: (event: Event) => void
+    disable?: boolean
 }

@@ -1,4 +1,4 @@
-const isEmpty = (value: any) => {
+const isEmpty = (value: unknown) => {
   if (typeof value === 'number' && value !== 0) {
     return !!value
   }
@@ -17,7 +17,7 @@ const isEmpty = (value: any) => {
   if (Array.isArray(value)) {
     return value.length === 0
   }
-  if (value.size) {
+  if ((value instanceof Map || value instanceof Set) && value.size) {
     return value.size === 0
   }
   if (Object.keys(value).length === 0) {
