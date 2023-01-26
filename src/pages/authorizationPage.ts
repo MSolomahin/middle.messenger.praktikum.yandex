@@ -4,7 +4,7 @@ import { AuthorizationForm } from '../modules/authorizationForm'
 
 export default class AuthorizationPage extends Component {
   init() {
-    this.children.layout = new MainLayout({
+    this.children.content = new MainLayout({
       content: new AuthorizationForm()
     })
   }

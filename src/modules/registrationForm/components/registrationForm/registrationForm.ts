@@ -2,7 +2,6 @@ import Form from '../../../../components/form'
 import Component from '../../../../core/component'
 import BaseInput from '../../../../ui/baseInput'
 import Validator from '../../../../utils/validator'
-import template from './registrationForm.tmpl'
 
 export class RegistrationFrom extends Component<{ validator: Validator }> {
   subComponents: Component[] = []
@@ -63,7 +62,7 @@ export class RegistrationFrom extends Component<{ validator: Validator }> {
       inputPasswordRepeat,
       inputPhone
     ]
-    this.children.registrationForm = new Form({
+    this.children.content = new Form({
       title: 'Sign up',
       linkPath: '/authorization',
       linkText: 'Log in',
@@ -89,6 +88,6 @@ export class RegistrationFrom extends Component<{ validator: Validator }> {
   }
 
   render() {
-    return this.compile({ ...this.props }, template)
+    return this.compile({ ...this.props })
   }
 }

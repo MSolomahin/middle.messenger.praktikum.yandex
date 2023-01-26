@@ -4,7 +4,7 @@ import { ServerError } from '../modules/serverError'
 
 export default class ServerErrorPage extends Component {
   init() {
-    this.children.layout = new MainLayout({
+    this.children.content = new MainLayout({
       content: new ServerError()
     })
   }

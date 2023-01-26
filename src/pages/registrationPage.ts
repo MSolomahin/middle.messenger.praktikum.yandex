@@ -4,7 +4,7 @@ import MainLayout from '../layout/mainLayout'
 
 export default class RegistrationPage extends Component {
   init() {
-    this.children.layout = new MainLayout({
+    this.children.content = new MainLayout({
       content: new RegistrationFrom()
     })
   }

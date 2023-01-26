@@ -1,16 +1,48 @@
 import template from './secondInput.tmpl'
-import { InputDisabled, SecondInputProps } from './secondInput.types'
+import { SecondDisabledEnum, SecondInputError, SecondInputProps } from './secondInput.types'
 import Component from '../../core/component'
 import './secondInput.style.css'
 
 export default class SecondInput extends Component<SecondInputProps> {
   constructor(props: SecondInputProps) {
-    const { type = 'text', disabled = InputDisabled.false } = props
+    const { type = 'text', disabled = SecondDisabledEnum.false } = props
     super({
       ...props,
       type,
-      disabled
+      disabled,
+      attrs: {
+        class: 'second-input'
+      }
     })
+  }
+
+  protected componentDidMount() {
+    this.setProps({
+      events: {
+        focusout: this._validateField.bind(this)
+      }
+    })
+  }
+
+  private _validateField(e: FocusEvent) {
+    console.log(1)
+  const value = (e.target as HTMLInputElement).value
+    if (!value || !this.props?.validate) return
+    const validMessage = this.props.validate(this.props.name, value)
+
+    if (validMessage) {
+      this.setProps({
+        errorMessage: validMessage,
+        isError: SecondInputError.true,
+        value
+      })
+    } else {
+      this.setProps({
+        errorMessage: '',
+        isError: SecondInputError.false,
+        value
+      })
+    }
   }
 
   render() {

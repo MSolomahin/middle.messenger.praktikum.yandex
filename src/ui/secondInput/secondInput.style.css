@@ -8,6 +8,19 @@
   display: grid;
   grid-template-columns: 110px 1fr;
 
+  &__error {
+    color: red;
+    display: none;
+    text-align: left;
+    font-weight: 400;
+    margin-top: 5px;
+    grid-column: span 2;
+
+    &_active {
+      display: block;
+    }
+  }
+
   &__input {
     border: 0;
     width: 100%;

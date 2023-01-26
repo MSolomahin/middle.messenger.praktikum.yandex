@@ -1,12 +1,12 @@
 import Component from '../core/component'
 import BackButtonLayout from '../layout/backButtonLayout/backButtonLayout'
-import { UserSettings } from '../modules/userSettingsForm'
+import { UserSettingsForm } from '../modules/userSettingsForm'
 
 export default class UserSettingsPage extends Component {
   init() {
-    this.children.layout = new BackButtonLayout({
+    this.children.content = new BackButtonLayout({
       linkPath: '/',
-      content: new UserSettings()
+      content: new UserSettingsForm()
     })
   }
 

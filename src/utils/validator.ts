@@ -16,23 +16,32 @@ export const inputFields: Record<string, string> = {
   email: 'email',
   password: 'password',
   password_repeat: 'password',
-  phone: 'phone'
+  phone: 'phone',
+  display_name: 'name',
+  old_password: 'password',
+  new_password: 'password',
+  new_password_repeat: 'password'
 }
 
 const DEFAULT_ERROR = 'The field is filled incorrectly'
 
 export default class Validator {
   public errors: Record<string, string> = {}
+  public allIsValid: boolean = true
   private _password: string = ''
 
   public checkForm(formData: FormData) {
     formData.forEach((value, name) => {
-      const validMessage = this.checkField(name, value as string)
-      this.errors[name] = validMessage || ''
+      if (name !== 'avatar') {
+        const validMessage = this.checkField(name, value as string)
+        this.errors[name] = validMessage || ''
+      }
     })
 
-    const allIsValid = Object.values(this.errors).find(item => item !== '')
-    return !allIsValid
+    const allIsValid = Object.values(this.errors).find((item) => item !== '')
+    this.allIsValid = !allIsValid
+
+    return this.allIsValid
   }
 
   public checkField(name: string, value: string) {
@@ -40,10 +49,13 @@ export default class Validator {
     const isValid = RegExps[type].test(value)
     let error = !isValid ? DEFAULT_ERROR : ''
 
-    if (name === 'password') {
+    if (name === 'password' || name === 'new_password') {
       this._password = value
     }
     if (name === 'password_repeat' && value !== this._password) {
+      error = 'Password are not same'
+    }
+    if (name === 'new_password_repeat' && value !== this._password) {
       error = 'Password are not same'
     }
 

@@ -15,33 +15,6 @@ export default class BaseInput extends Component<BaseInputProps> {
     })
   }
 
-  // protected componentDidMount() {
-  //   this.setProps({
-  //     events: {
-  //       focusout: this.checkValid.bind(this),
-  //       focusin: this.checkValid.bind(this)
-  //     }
-  //   })
-  // }
-
-  // checkValid(e: FocusEvent) {
-  //   const value = (e.target as HTMLInputElement).value
-
-  //   if (!this.props.pattern?.test(value)) {
-  //     this.setProps({
-  //       errorMessage: 'Error',
-  //       isError: InputError.true,
-  //       value
-  //     })
-  //   } else {
-  //     this.setProps({
-  //       errorMessage: '',
-  //       isError: InputError.false,
-  //       value
-  //     })
-  //   }
-  // }
-
   protected componentDidMount() {
     this.setProps({
       events: {

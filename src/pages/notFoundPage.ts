@@ -4,7 +4,7 @@ import { NotFound } from '../modules/notFound'
 
 export default class NotFoundPage extends Component {
   init() {
-    this.children.layout = new MainLayout({
+    this.children.content = new MainLayout({
       content: new NotFound()
     })
   }

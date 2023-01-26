@@ -1,1 +1,1 @@
-export { UserSettings } from './components/userSettingsForm/userSettingsForm'
+export { UserSettingsForm } from './components/userSettingsForm/userSettingsForm'

@@ -52,7 +52,7 @@ class Component<P extends Record<string, any> = any> {
     template?: string
   ) => {
     const propsAndStubs = { ...props }
-    const curTemplate = template ?? '{{ layout }}'
+    const curTemplate = template ?? '{{ content }}'
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
@@ -140,7 +140,7 @@ class Component<P extends Record<string, any> = any> {
     }
   }
 
-  protected componentDidUpdate = (oldProps: P, newProps: P) => {
+  protected componentDidUpdate (oldProps: P, newProps: P) {
     const needUpdate = Object.entries(newProps).some(([key, value]) => {
       return oldProps[key] !== value
     })
@@ -240,6 +240,13 @@ class Component<P extends Record<string, any> = any> {
     if (!element) return
     element.style.display = 'none'
     this.isShow = false
+  }
+
+  toggle = () => {
+    const element = this.getContent()
+    if (!element) return
+
+    element.style.display = element.style.display === 'none' ? 'block' : 'none'
   }
 }
 

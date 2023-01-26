@@ -9,5 +9,5 @@ export default `
     />
     <p class="text-m text-white hover-block__text">Change avatar</p>
   </label>
-</div>
-`
+</div>`
+

@@ -62,7 +62,6 @@ export default class Router {
   }
 
   public async changePage (path: string, match?: RegExpMatchArray | null) {
-    console.log(path)
     // if (this.page?.destroy) {
     //   this.page.destroy()
     // }
