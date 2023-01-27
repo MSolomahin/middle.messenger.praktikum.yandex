@@ -22,6 +22,8 @@ export default class SettingMainForm extends Component<SettingMainFormProps> {
           value.setProps({
             disabled: newProps.disabled
           })
+          console.log(name, value)
+          value.render()
         }
       })
     }

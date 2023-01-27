@@ -1,15 +1,13 @@
-
 .not-found {
-    &__content {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      text-align: center;
-      height: 160px;
-    }
-  
-    &__button {
-      margin-top: auto;
-    }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    height: 160px;
   }
-  
+
+  &__button {
+    margin-top: auto;
+  }
+}

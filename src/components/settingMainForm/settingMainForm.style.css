@@ -17,10 +17,9 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+
     & > button:nth-child(1) {
-        margin-top: 60px;
+      margin-top: 60px;
     }
-    
-   
   }
 }

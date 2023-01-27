@@ -15,6 +15,7 @@ import PhotoIcon from '../../assets/icons/photo.svg'
 import DeleteIcon from '../../assets/icons/delete.svg'
 import PlusIcon from '../../assets/icons/plus.svg'
 import './chat.style.css'
+import MessageInput from '../../ui/messageInput/messageInput'
 
 export default class Chat extends Component {
   constructor() {
@@ -28,14 +29,13 @@ export default class Chat extends Component {
   protected componentDidMount() {
     this.setProps({
       events: {
-        click: this._handleSubmit
+        submit: this._handleSubmit
       }
     })
   }
 
   private readonly _handleSubmit = (e: SubmitEvent) => {
     e.preventDefault()
-
     const target = (e.target as HTMLElement).closest('form')
     if (!target) return
 
@@ -43,11 +43,17 @@ export default class Chat extends Component {
     for (const [name, value] of formData) {
       console.log(`${name} = ${value as string}`)
     }
+
+    if (this.children.messageInput instanceof Component) {
+      this.children.messageInput.setProps({
+        value: ''
+      })
+    }
   }
 
-  private _onItemClick (e: MouseEvent) {
+  private _onItemClick(e: MouseEvent) {
     e.stopPropagation()
-    console.log(1)
+    console.log('item click')
   }
 
   init() {
@@ -56,6 +62,11 @@ export default class Chat extends Component {
     })
     this.children.arrowButton = new ArrowButton({
       side: 'right'
+    })
+
+    this.children.messageInput = new MessageInput({
+      placeholder: 'Write a message',
+      name: 'message'
     })
 
     this.children.moreButton = new DropDown({

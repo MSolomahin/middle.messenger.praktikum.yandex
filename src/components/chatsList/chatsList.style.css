@@ -1,4 +1,4 @@
-@import url('../../assets/style/uikit');
+@import url("../../assets/style/uikit");
 
 .chats {
   width: 25vw;
@@ -9,6 +9,7 @@
   @media (max-width: $mediaTablet) {
     width: 100vw;
   }
+
   &__header {
     margin-bottom: 15px;
     display: flex;
@@ -31,7 +32,7 @@
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       width: calc(100% + 20px);
       left: -10px;

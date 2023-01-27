@@ -14,7 +14,7 @@ const pages: Record<string, Component> = {
   serverError: new ServerErrorPage(),
   userSettings: new UserSettingsPage()
 }
-export default async function (path: string, match?: RegExpMatchArray | null) {
+export default async function (path: string) {
   const main = document.querySelector('main')
 
   main?.classList.add('is-loading')

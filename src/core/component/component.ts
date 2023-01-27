@@ -104,7 +104,6 @@ class Component<P extends Record<string, any> = any> {
         }
       })
     }
-    console.log(props, children)
     return { props: props as P, children }
   }
 

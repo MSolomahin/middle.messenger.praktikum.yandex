@@ -1,5 +1,5 @@
 import Component from '../../core/component'
-import template from './chatsList.tmpl.ts'
+import template from './chatsList.tmpl'
 import { ChatsListProps } from './chatsList.types'
 import './chatsList.style.css'
 import { IChat, chats } from '../../assets/mocks/messages'
