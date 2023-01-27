@@ -44,11 +44,7 @@ export default class Chat extends Component {
       console.log(`${name} = ${value as string}`)
     }
 
-    if (this.children.messageInput instanceof Component) {
-      this.children.messageInput.setProps({
-        value: ''
-      })
-    }
+    target.reset()
   }
 
   private _onItemClick(e: MouseEvent) {
