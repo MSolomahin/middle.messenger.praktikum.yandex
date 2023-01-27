@@ -1,4 +1,4 @@
-export interface IMessage {
+export interface IChat {
   name: string
   lastMessage: string
   time: string
@@ -6,7 +6,7 @@ export interface IMessage {
   image: string
 }
 
-export const messages = [
+export const chats = [
   {
     name: 'Maxim',
     lastMessage: 'Hi!',

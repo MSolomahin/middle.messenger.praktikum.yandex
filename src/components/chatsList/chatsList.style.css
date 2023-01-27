@@ -1,39 +1,14 @@
-@import url("../../assets/style/uikit");
-
-
-.messenger {
-  &__container {
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-  }
-
-  &__left {
-    width: 25vw;
-    height: 100vh;
-    background: $color-bg;
-    border-right: 2px solid $color-grey;
-
-    @media (max-width: $mediaTablet) {
-      width: 100vw;
-    }
-  }
-
-  &__right {
-    width: 75vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @media (max-width: $mediaTablet) {
-      display: none;
-    }
-  }
-}
+@import url('../../assets/style/uikit');
 
 .chats {
+  width: 25vw;
+  height: 100vh;
+  background: $color-bg;
+  border-right: 2px solid $color-grey;
+
+  @media (max-width: $mediaTablet) {
+    width: 100vw;
+  }
   &__header {
     margin-bottom: 15px;
     display: flex;
@@ -56,7 +31,7 @@
     position: relative;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       width: calc(100% + 20px);
       left: -10px;
@@ -69,11 +44,5 @@
   &__list {
     overflow-y: scroll;
     height: calc(100% - 96px);
-  }
-}
-
-.chat {
-  &__placeholder {
-    color: $color-text-secondary;
   }
 }
