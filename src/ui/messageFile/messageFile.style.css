@@ -1,0 +1,41 @@
+@import url("../../assets/style/uikit");
+
+.message-file {
+  max-width: 400px;
+  position: relative;
+  background: $color-grey-4;
+  border-radius: 0 10px 10px;
+  padding: 11px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 250px;
+
+  &_is-my {
+    align-self: flex-end;
+    background-color: $color-light-blue;
+    border-radius: 10px 10px 0;
+  }
+
+  &__img {
+    width: 40px;
+    border-radius: 50%;
+    height: 40px;
+    background: url("../../assets/icons/document.svg") no-repeat 50% 50%;
+    background-color: $color-light-blue;
+  }
+
+  & p {
+    color: $color-text-primary;
+  }
+
+  &__time {
+    position: absolute;
+    bottom: 11px;
+    right: 11px;
+
+    & p {
+      color: $color-text-secondary;
+    }
+  }
+}

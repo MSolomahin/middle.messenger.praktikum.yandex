@@ -1,0 +1,48 @@
+@import url("../../assets/style/uikit");
+
+.second-input {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 10px 0;
+  border-bottom: 1px solid $color-grey;
+  display: grid;
+  grid-template-columns: 110px 1fr;
+
+  &__error {
+    color: red;
+    display: none;
+    text-align: left;
+    font-weight: 400;
+    margin-top: 5px;
+    grid-column: span 2;
+
+    &_active {
+      display: block;
+    }
+  }
+
+  &__input {
+    border: 0;
+    width: 100%;
+    font-family: $font-base;
+    font-size: 13px;
+    justify-self: end;
+    text-align-last: end;
+    color: $color-text-primary;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:disabled {
+      background: none;
+      color: $color-text-secondary;
+    }
+  }
+
+  & label {
+    flex: 1 1 auto;
+    font-size: 13px;
+    color: $color-text-primary;
+  }
+}
