@@ -25,10 +25,9 @@ export default class SecondInput extends Component<SecondInputProps> {
   }
 
   private _validateField(e: FocusEvent) {
-    console.log(1)
   const value = (e.target as HTMLInputElement).value
     if (!value || !this.props?.validate) return
-    const validMessage = this.props.validate(this.props.name, value)
+    const validMessage = this.props.validate(value)
 
     if (validMessage) {
       this.setProps({

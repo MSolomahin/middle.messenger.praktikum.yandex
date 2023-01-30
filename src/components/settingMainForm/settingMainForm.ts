@@ -22,7 +22,6 @@ export default class SettingMainForm extends Component<SettingMainFormProps> {
           value.setProps({
             disabled: newProps.disabled
           })
-          console.log(name, value)
           value.render()
         }
       })
@@ -47,42 +46,42 @@ export default class SettingMainForm extends Component<SettingMainFormProps> {
       value: 'm.solomahin@mail.ru',
       name: 'email',
       disabled: this.props.disabled,
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkEmail.bind(this)
     })
     const inputLogin = new SecondInput({
       label: 'Login',
       value: 'solomahin',
       name: 'login',
       disabled: this.props.disabled,
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkLogin.bind(this)
     })
     const inputFirstName = new SecondInput({
       label: 'First Name',
       value: 'Maxim',
       name: 'first_name',
       disabled: this.props.disabled,
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkName.bind(this)
     })
     const inputSecondName = new SecondInput({
       label: 'Second Name',
       value: 'Solomakhin',
       name: 'second_name',
       disabled: this.props.disabled,
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkName.bind(this)
     })
     const inputDisplayName = new SecondInput({
       label: 'Login',
       value: 'Max',
       name: 'display_name',
       disabled: this.props.disabled,
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkLogin.bind(this)
     })
     const inputPhone = new SecondInput({
       label: 'Phone',
       value: '89066789382',
       name: 'phone',
       disabled: this.props.disabled,
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkPhone.bind(this)
     })
 
     const buttonChangeInfo = new ButtonInline({

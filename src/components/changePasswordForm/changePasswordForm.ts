@@ -16,7 +16,7 @@ export default class ChangePasswordForm extends Component<ChangePasswordFormProp
       value: 'Max',
       name: 'old_password',
       type: 'password',
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkPassword.bind(this)
     })
 
     const inputNewPassword = new SecondInput({
@@ -24,7 +24,7 @@ export default class ChangePasswordForm extends Component<ChangePasswordFormProp
       value: 'Max',
       name: 'new_password',
       type: 'password',
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkPassword.bind(this)
     })
 
     const inputNewPasswordRepeat = new SecondInput({
@@ -32,7 +32,7 @@ export default class ChangePasswordForm extends Component<ChangePasswordFormProp
       value: 'Max',
       name: 'new_password_repeat',
       type: 'password',
-      validate: this.props.validator.checkField.bind(this)
+      validate: this.props.validator.checkPassword.bind(this)
     })
 
     const buttonSavePassword = new ButtonPrimary({

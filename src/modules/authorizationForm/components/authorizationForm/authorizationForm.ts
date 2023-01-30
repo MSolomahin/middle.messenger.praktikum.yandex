@@ -14,13 +14,13 @@ export class AuthorizationForm extends Component<{ validator: Validator }> {
     const inputLogin = new BaseInput({
       label: 'Login',
       name: 'login',
-      validate: this.props.validator.checkField
+      validate: this.props.validator.checkLogin
     })
     const inputPassword = new BaseInput({
       label: 'Password',
       type: 'password',
       name: 'password',
-      validate: this.props.validator.checkField
+      validate: this.props.validator.checkPassword
     })
 
     const subComponents = [inputLogin, inputPassword]

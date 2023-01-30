@@ -25,8 +25,8 @@ export default class BaseInput extends Component<BaseInputProps> {
 
   private _validateField(e: FocusEvent) {
     const value = (e.target as HTMLInputElement).value
-    if (!value || !this.props?.validate) return
-    const validMessage = this.props.validate(this.props.name, value)
+    if (!this.props?.validate) return
+    const validMessage = this.props.validate(value)
 
     if (validMessage) {
       this.setProps({

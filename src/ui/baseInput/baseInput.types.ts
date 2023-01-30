@@ -9,7 +9,7 @@ export interface BaseInputProps extends ComponentBaseProps {
   errorMessage?: string
   isError?: InputError
   pattern?: RegExp
-  validate?: (type: string, name: string) => string
+  validate?: (name: string) => string
 }
 
 export enum InputError {

@@ -8,6 +8,7 @@
     flex-direction: column;
     gap: 40px;
     min-width: 340px;
+    max-width: 340px;
     text-align: center;
     min-height: 450px;
     padding: 50px 30px 30px;

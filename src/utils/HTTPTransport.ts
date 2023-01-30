@@ -14,6 +14,7 @@ interface IOptions {
 }
 
 type IData = Record<string, string>
+type HTTPMethod = (url: string, options?: IOptions) => Promise<unknown>
 
 function queryStringify(data: IData) {
   if (typeof data !== 'object') {
@@ -27,7 +28,7 @@ function queryStringify(data: IData) {
 }
 
 export default class HTTPTransport {
-  get = async (url: string, options: IOptions = {}) => {
+  get: HTTPMethod = async (url, options = {}) => {
     return await this.request(
       url,
       { ...options, method: METHODS.GET },
@@ -35,7 +36,7 @@ export default class HTTPTransport {
     )
   }
 
-  post = async (url: string, options: IOptions = {}) => {
+  post: HTTPMethod = async (url, options = {}) => {
     return await this.request(
       url,
       { ...options, method: METHODS.POST },
@@ -43,7 +44,7 @@ export default class HTTPTransport {
     )
   }
 
-  put = async (url: string, options: IOptions = {}) => {
+  put: HTTPMethod = async (url, options = {}) => {
     return await this.request(
       url,
       { ...options, method: METHODS.PUT },
@@ -51,7 +52,7 @@ export default class HTTPTransport {
     )
   }
 
-  delete = async (url: string, options: IOptions = {}) => {
+  delete: HTTPMethod = async (url, options = {}) => {
     return await this.request(
       url,
       { ...options, method: METHODS.DELETE },
