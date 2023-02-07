@@ -225,6 +225,7 @@ class Component<P extends Record<string, any> = any> {
     if (this.id) {
       element?.setAttribute('data-id', this.id)
     }
+
     return element
   }
 
