@@ -1,23 +1,27 @@
 import Component from '../core/component'
-import renderPage from './render-page'
+import Route from './route'
 
-// performs routing on all links
 export default class Router {
-  routes: Array<{ pattern: RegExp, path: string }>
-  notFoundPagePath: string = ''
+  routes: Route[] = []
   page: Component | null = null
   static _instance: Router
+  private _notFoundRoute: Route | null = null
 
   constructor() {
-    this.routes = []
+    if (Router._instance) {
+      return Router._instance
+    }
 
+    this.routes = []
+    this._notFoundRoute = null
     this.initEventListeners()
+    Router._instance = this
   }
 
   initEventListeners = () => {
     document.addEventListener('click', (event) => {
       const link = (event.target as HTMLElement).closest('a')
-      if (!link) { return }
+      if (!link) return
 
       const href = link.getAttribute('href')
 
@@ -28,64 +32,65 @@ export default class Router {
     })
   }
 
-  static instance = () => {
-    if (!this._instance) {
-      this._instance = new Router()
+  route() {
+    const strippedPath = decodeURI(window.location.pathname).replace(
+      /^\/|\/$/,
+      ''
+    )
+
+    const route = this.getRoute('/' + strippedPath)
+
+    if (route) {
+      route.render()
+    } else {
+      this._notFoundRoute?.render()
     }
-    return this._instance
   }
 
-  async route() {
-    const strippedPath = decodeURI(window.location.pathname)
-      .replace(/^\/|\/$/, '')
+  getRoute(pathname: string) {
+    return this.routes.find(route => route.match(pathname))
+}
 
-    let match: RegExpMatchArray | null = null
-
-    for (const route of this.routes) {
-      match = strippedPath.match(route.pattern)
-
-      if (match) {
-        this.page = await this.changePage(route.path, match)
-        break
-      }
-    }
-
-    if (!match) {
-      this.page = await this.changePage(this.notFoundPagePath)
-    }
-
-    document.dispatchEvent(new CustomEvent('route', {
-      detail: {
-        page: this.page
-      }
-    }))
+  back() {
+    window.history.back()
   }
 
-  public async changePage (path: string, match?: RegExpMatchArray | null) {
-    // if (this.page?.destroy) {
-    //   this.page.destroy()
-    // }
-
-    return await renderPage(path, match)
+  forward() {
+    window.history.forward()
   }
 
-  navigate (path: string) {
+  public changePage(pathname: string) {
+    const route = this.getRoute(pathname)
+    if (!route) {
+      return
+    }
+
+    route.render()
+  }
+
+  navigate(path: string) {
     history.pushState(null, '', path)
-    void this.route()
+    this.route()
   }
 
-  addRoute (pattern: RegExp, path: string) {
-    this.routes.push({ pattern, path })
+  addRoute(pathname: string, component: any) {
+    const route = new Route(pathname, component)
+    this.routes.push(route)
+
     return this
   }
 
-  setNotFoundPagePath (path: string) {
-    this.notFoundPagePath = path
+  setNotFoundPagePath(pathname: string, component: any) {
+    const route = new Route(pathname, component)
+    this._notFoundRoute = route
     return this
   }
 
-  listen () {
-    window.addEventListener('popstate', async () => { await this.route() })
-    void this.route()
+  listen() {
+    window.addEventListener('popstate', () => {
+      this.route()
+    })
+
+    this.route()
   }
 }

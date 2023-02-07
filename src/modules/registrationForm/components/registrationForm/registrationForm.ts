@@ -1,3 +1,4 @@
+import routes from '../../../../assets/const/routing'
 import Form from '../../../../components/form'
 import Component from '../../../../core/component'
 import BaseInput from '../../../../ui/baseInput'
@@ -64,7 +65,7 @@ export class RegistrationFrom extends Component<{ validator: Validator }> {
     ]
     this.children.content = new Form({
       title: 'Sign up',
-      linkPath: '/authorization',
+      linkPath: routes.auth,
       linkText: 'Log in',
       subComponents: this.subComponents,
       buttonText: 'Sign up',

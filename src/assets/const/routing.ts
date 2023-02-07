@@ -1,6 +1,14 @@
-const routes: Record<string, string> = {
-  main: '/',
-  auth: '/authorization',
+interface IRoutes {
+  auth: string
+  registration: string
+  messenger: string
+  notFound: string
+  serverError: string
+  userSettings: string
+}
+
+const routes: IRoutes = {
+  auth: '/',
   registration: '/registration',
   messenger: '/messenger',
   notFound: '/404',

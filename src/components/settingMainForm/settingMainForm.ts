@@ -98,7 +98,7 @@ export default class SettingMainForm extends Component<SettingMainFormProps> {
     })
     const buttonLogOut = new Link({
       label: 'Log out',
-      linkTo: '/authorization',
+      linkTo: '/',
       isRed: true
     })
 
