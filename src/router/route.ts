@@ -1,9 +1,10 @@
+import Component from '../core/component'
 import { render } from '../utils/renderDOM'
 
 export default class Route {
   _pathname: string = ''
   component: any
-  constructor(pathname: string, component: any) {
+  constructor(pathname: string, component: typeof Component) {
     this.component = component
     this._pathname = pathname
   }

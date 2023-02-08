@@ -7,6 +7,7 @@ import { SecondDisabledEnum } from '../../../../ui/secondInput/secondInput.types
 import Validator from '../../../../utils/validator'
 import template from './userSettingsForm.tmpl'
 import './userSettingsForm.style.css'
+import SettingsController from '../../controllers/settingsController'
 
 export class UserSettingsForm extends Component< { validator: Validator }> {
   constructor() {
@@ -30,9 +31,7 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
 
     const formData = new FormData(target)
     const allIsValid = this.props.validator.checkForm(formData)
-    for (const [name, value] of formData) {
-      console.log(`${name} = ${value as string}`)
-    }
+
     const button = e.submitter
 
     if (!allIsValid) return
@@ -75,6 +74,11 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
     }
   }
 
+  private _handleLogOut(e: MouseEvent) {
+    e.preventDefault()
+    SettingsController.logOut()
+  }
+
   init() {
     this.children.avatar = new Avatar({
       size: 'large',
@@ -84,6 +88,7 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
     this.children.settingMainForm = new SettingMainForm({
       onChangeInfo: this._toggleChangeInfo.bind(this),
       onChangePassword: this._toggleChangePassword.bind(this),
+      handleLogOut: this._handleLogOut.bind(this),
       validator: this.props.validator,
       disabled: SecondDisabledEnum.true
     })

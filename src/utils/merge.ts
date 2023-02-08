@@ -22,6 +22,4 @@ function merge(lhs: Indexed, rhs: Indexed): Indexed {
   return lhs
 }
 
-console.log(merge({ a: { b: { a: 2 } }, d: 5 }, { a: { b: { c: 1 } } }))
-
 export default merge

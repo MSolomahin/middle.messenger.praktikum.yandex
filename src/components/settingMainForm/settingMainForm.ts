@@ -5,7 +5,6 @@ import './settingMainForm.style.css'
 import { SettingMainFormProps } from './settingMainForm.types'
 import SecondInput from '../../ui/secondInput'
 import ButtonInline from '../../ui/buttonInline'
-import Link from '../../ui/link'
 
 export default class SettingMainForm extends Component<SettingMainFormProps> {
   constructor(props: SettingMainFormProps) {
@@ -96,10 +95,12 @@ export default class SettingMainForm extends Component<SettingMainFormProps> {
         click: this.props.onChangePassword
       }
     })
-    const buttonLogOut = new Link({
+    const buttonLogOut = new ButtonInline({
       label: 'Log out',
-      linkTo: '/',
-      isRed: true
+      isRed: true,
+      events: {
+        click: this.props.handleLogOut.bind(this)
+      }
     })
 
     const buttonSaveInfo = new ButtonPrimary({

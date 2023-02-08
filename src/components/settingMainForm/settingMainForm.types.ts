@@ -8,4 +8,5 @@ export interface SettingMainFormProps extends ComponentBaseProps {
     editable?: boolean
     onChangeInfo: () => void
     onChangePassword: () => void
+    handleLogOut: (e: Event) => void
 }

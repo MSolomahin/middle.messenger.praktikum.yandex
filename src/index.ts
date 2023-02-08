@@ -8,9 +8,7 @@ import ServerErrorPage from '../src/pages/serverErrorPage'
 import UserSettingsPage from '../src/pages/userSettingsPage'
 import routes from './assets/const/routing'
 
-const router = new Router()
-
-router
+Router
   .addRoute(routes.auth, AuthorizationPage)
   .addRoute(routes.registration, RegistrationPage)
   .addRoute(routes.messenger, MessengerPage)

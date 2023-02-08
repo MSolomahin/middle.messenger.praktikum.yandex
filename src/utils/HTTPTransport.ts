@@ -6,7 +6,8 @@ enum METHODS {
 }
 
 interface IOptions {
-  data?: any
+  data?: Record<string, string>
+  body?: string
   timeout?: number
   headers?: Record<string, string>
   method?: METHODS
@@ -14,7 +15,6 @@ interface IOptions {
 }
 
 type IData = Record<string, string>
-type HTTPMethod = (url: string, options?: IOptions) => Promise<unknown>
 
 function queryStringify(data: IData) {
   if (typeof data !== 'object') {
@@ -27,8 +27,8 @@ function queryStringify(data: IData) {
   }, '?')
 }
 
-export default class HTTPTransport {
-  get: HTTPMethod = async (url, options = {}) => {
+class HTTPTransport {
+  get = async <T>(url: string, options: IOptions = {}): Promise<T> => {
     return await this.request(
       url,
       { ...options, method: METHODS.GET },
@@ -36,7 +36,7 @@ export default class HTTPTransport {
     )
   }
 
-  post: HTTPMethod = async (url, options = {}) => {
+  post = async <T>(url: string, options: IOptions = {}): Promise<T> => {
     return await this.request(
       url,
       { ...options, method: METHODS.POST },
@@ -44,7 +44,7 @@ export default class HTTPTransport {
     )
   }
 
-  put: HTTPMethod = async (url, options = {}) => {
+  put = async <T>(url: string, options: IOptions = {}): Promise<T> => {
     return await this.request(
       url,
       { ...options, method: METHODS.PUT },
@@ -52,7 +52,7 @@ export default class HTTPTransport {
     )
   }
 
-  delete: HTTPMethod = async (url, options = {}) => {
+  delete = async <T>(url: string, options: IOptions = {}): Promise<T> => {
     return await this.request(
       url,
       { ...options, method: METHODS.DELETE },
@@ -60,12 +60,12 @@ export default class HTTPTransport {
     )
   }
 
-  request = async (
+  request = async <T>(
     url: string,
     options: IOptions = {},
     timeout: number = 5000
-  ) => {
-    const { headers = {}, method, data } = options
+  ): Promise<T> => {
+    const { headers = {}, method, data, body } = options
 
     return await new Promise(function (resolve, reject) {
       if (!method) {
@@ -81,9 +81,10 @@ export default class HTTPTransport {
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key])
       })
+      xhr.withCredentials = true
 
       xhr.onload = function () {
-        resolve(xhr)
+        resolve(xhr as T)
       }
 
       xhr.onabort = reject
@@ -92,11 +93,13 @@ export default class HTTPTransport {
       xhr.timeout = timeout
       xhr.ontimeout = reject
 
-      if (isGet || !data) {
+      if (isGet || !body) {
         xhr.send()
       } else {
-        xhr.send(data)
+        xhr.send(body)
       }
     })
   }
 }
+
+export default new HTTPTransport()

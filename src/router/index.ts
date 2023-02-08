@@ -1,21 +1,16 @@
 import Component from '../core/component'
 import Route from './route'
 
-export default class Router {
+class Router {
   routes: Route[] = []
   page: Component | null = null
   static _instance: Router
   private _notFoundRoute: Route | null = null
 
   constructor() {
-    if (Router._instance) {
-      return Router._instance
-    }
-
     this.routes = []
     this._notFoundRoute = null
     this.initEventListeners()
-    Router._instance = this
   }
 
   initEventListeners = () => {
@@ -73,14 +68,14 @@ export default class Router {
     this.route()
   }
 
-  addRoute(pathname: string, component: any) {
+  addRoute(pathname: string, component: typeof Component) {
     const route = new Route(pathname, component)
     this.routes.push(route)
 
     return this
   }
 
-  setNotFoundPagePath(pathname: string, component: any) {
+  setNotFoundPagePath(pathname: string, component: typeof Component) {
     const route = new Route(pathname, component)
     this._notFoundRoute = route
     return this
@@ -94,3 +89,5 @@ export default class Router {
     this.route()
   }
 }
+
+export default new Router()

@@ -1,13 +1,23 @@
 import routes from '../../../../assets/const/routing'
 import Form from '../../../../components/form'
 import Component from '../../../../core/component'
+import store, { StoreEvents } from '../../../../core/connectStore/store'
+import Router from '../../../../router'
 import BaseInput from '../../../../ui/baseInput'
 import Validator from '../../../../utils/validator'
+import SignInController from '../../controllers/signInController'
 
-export class AuthorizationForm extends Component<{ validator: Validator }> {
+export class AuthorizationForm extends Component {
   constructor() {
     super({
       validator: new Validator()
+    })
+
+    store.on(StoreEvents.Updated, () => {
+      const id = store.getState().user
+      if (id) {
+        Router.navigate(routes.messenger)
+      }
     })
   }
 
@@ -15,12 +25,14 @@ export class AuthorizationForm extends Component<{ validator: Validator }> {
     const inputLogin = new BaseInput({
       label: 'Login',
       name: 'login',
+      value: 'MaximSol',
       validate: this.props.validator.checkLogin
     })
     const inputPassword = new BaseInput({
       label: 'Password',
       type: 'password',
       name: 'password',
+      value: 'qwe123QWE',
       validate: this.props.validator.checkPassword
     })
 
@@ -46,7 +58,10 @@ export class AuthorizationForm extends Component<{ validator: Validator }> {
     for (const [name, value] of formData) {
       console.log(`${name} = ${value as string}`)
     }
-    console.log('Data are correctly:', allIsValid)
+    if (allIsValid) {
+      const data = Object.fromEntries(formData.entries())
+      SignInController.logIn(data)
+    }
   }
 
   render() {
