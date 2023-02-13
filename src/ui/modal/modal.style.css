@@ -6,16 +6,11 @@
   bottom: 0;
   left: 0;
   right: 0;
-  justify-content: center;
-  align-items: center;
   display: none;
   background: rgb(0 0 0 / 50%);
 
-  &_active {
-    display: flex;
-  }
-
-  &__container {
+  &__body {
+    max-width: 340px;
     padding: 40px 30px 30px;
     background: $color-white;
     box-shadow: 0 0 6px rgb(0 0 0 / 14%);
@@ -25,5 +20,11 @@
     gap: 45px;
     align-items: center;
     min-width: 340px;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
 }

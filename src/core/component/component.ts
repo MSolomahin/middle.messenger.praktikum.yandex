@@ -1,9 +1,10 @@
 import { getUniqKey } from '../../utils/getUniqKey'
 import Templator from '../../utils/templator'
 import EventBus from '../eventBus'
+import { IStore } from '../store'
 import { IComponentChildren, IComponentProps } from './component.types'
 
-class Component<P extends Record<string, any> = any> {
+class Component<P extends Record<string, any> = any | IStore> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',

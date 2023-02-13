@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit.css");
+@import url('../../assets/style/uikit.css');
 
 .chat {
   width: 75vw;
@@ -7,6 +7,19 @@
 
   @media (max-width: $mediaTablet) {
     display: none;
+  }
+
+  &__empty-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__empty-container {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
   }
 
   &__header {

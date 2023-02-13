@@ -7,6 +7,7 @@ export interface DropDownProps extends ComponentBaseProps {
   items: Array<{
     image: string
     title: string
+    id: string
     onClick: (e: Event) => void
   }>
   button: Component

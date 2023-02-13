@@ -8,11 +8,14 @@ import Validator from '../../../../utils/validator'
 import template from './userSettingsForm.tmpl'
 import './userSettingsForm.style.css'
 import SettingsController from '../../controllers/settingsController'
+import { withStore } from '../../../../core/store/connect'
+import store, { StoreEvents } from '../../../../core/store'
 
-export class UserSettingsForm extends Component< { validator: Validator }> {
-  constructor() {
+class UserSettingsFormModule extends Component {
+  constructor(props: any) {
     super({
-      validator: new Validator()
+      validator: new Validator(),
+      ...props
     })
   }
 
@@ -31,15 +34,40 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
 
     const formData = new FormData(target)
     const allIsValid = this.props.validator.checkForm(formData)
-
     const button = e.submitter
+    const data = this._getObjectFromFormData(formData) as Record<string, string>
 
     if (!allIsValid) return
+
     if (button?.id === 'button-settings') {
-      this._toggleChangeInfo()
+      this._handleSubmitSettings(data)
     } else {
-      this._toggleChangePassword()
+      this._handleSubmitPassword(data)
     }
+  }
+
+  _handleSubmitPassword(data: Record<string, string>) {
+    SettingsController.updatePassword({
+      oldPassword: data.old_password,
+      newPassword: data.new_password
+    })
+    this._toggleChangePassword()
+  }
+
+  _handleSubmitSettings(data: Record<string, string>) {
+    SettingsController.updateSettings({
+      first_name: data.first_name,
+      second_name: data.second_name,
+      display_name: data.display_name,
+      login: data.login,
+      email: data.email,
+      phone: data.phone
+    })
+    this._toggleChangeInfo()
+  }
+
+  _getObjectFromFormData(data: FormData) {
+    return Object.fromEntries(data.entries())
   }
 
   private _toggleChangeInfo(e?: MouseEvent) {
@@ -79,10 +107,24 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
     SettingsController.logOut()
   }
 
+  private _handleUploadAvatar(formData: FormData) {
+    SettingsController.uploadAvatar(formData)
+
+    store.on(StoreEvents.Updated, () => {
+      const state = store.getState()
+      if (this.children.avatar instanceof Component && process.env.BASE_URL) {
+          const src = state.user.avatar
+          this.children.avatar.setProps({ src })
+      }
+    })
+  }
+
   init() {
     this.children.avatar = new Avatar({
       size: 'large',
-      isEditable: AvatarEditable.false
+      isEditable: AvatarEditable.false,
+      handleUpload: this._handleUploadAvatar.bind(this),
+      src: this.props.user?.avatar
     })
 
     this.children.settingMainForm = new SettingMainForm({
@@ -90,7 +132,10 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
       onChangePassword: this._toggleChangePassword.bind(this),
       handleLogOut: this._handleLogOut.bind(this),
       validator: this.props.validator,
-      disabled: SecondDisabledEnum.true
+      disabled: SecondDisabledEnum.true,
+      data: {
+        ...this.props.user
+      }
     })
 
     this.children.changePasswordForm = new ChangePasswordForm({
@@ -103,3 +148,5 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
     return this.compile({ ...this.props }, template)
   }
 }
+
+export const UserSettingsForm = withStore(UserSettingsFormModule)

@@ -2,8 +2,8 @@ import { ComponentBaseProps } from '../../core/component/component.types'
 
 export interface SecondInputProps extends ComponentBaseProps {
   label: string
-  value: string
   name: string
+  value?: string
   type?: string
   errorMessage?: string
   isError?: SecondInputError

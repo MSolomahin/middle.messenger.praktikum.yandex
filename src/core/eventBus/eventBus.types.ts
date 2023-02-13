@@ -1,7 +1,7 @@
 import { IComponentProps } from '../component/component.types'
 
-export type ICallback = (...args: IComponentProps[]) => void
-export type IListeners = Record<string, ICallback[]>
+export type ICallback = (...args: any[]) => void
+export type IListeners = Record<string, any>
 
 export interface IEventProps {
   event: string

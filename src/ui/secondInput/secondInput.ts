@@ -5,11 +5,12 @@ import './secondInput.style.css'
 
 export default class SecondInput extends Component<SecondInputProps> {
   constructor(props: SecondInputProps) {
-    const { type = 'text', disabled = SecondDisabledEnum.false } = props
+    const { type = 'text', disabled = SecondDisabledEnum.false, value = '' } = props
     super({
       ...props,
       type,
       disabled,
+      value,
       attrs: {
         class: 'second-input'
       }

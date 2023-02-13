@@ -42,42 +42,42 @@ export default class SettingMainForm extends Component<SettingMainFormProps> {
   init() {
     const inputEmail = new SecondInput({
       label: 'Email',
-      value: 'm.solomahin@mail.ru',
+      value: this.props.data?.email ?? '',
       name: 'email',
       disabled: this.props.disabled,
       validate: this.props.validator.checkEmail.bind(this)
     })
     const inputLogin = new SecondInput({
       label: 'Login',
-      value: 'solomahin',
+      value: this.props.data?.login ?? '',
       name: 'login',
       disabled: this.props.disabled,
       validate: this.props.validator.checkLogin.bind(this)
     })
     const inputFirstName = new SecondInput({
       label: 'First Name',
-      value: 'Maxim',
+      value: this.props.data?.first_name ?? '',
       name: 'first_name',
       disabled: this.props.disabled,
       validate: this.props.validator.checkName.bind(this)
     })
     const inputSecondName = new SecondInput({
       label: 'Second Name',
-      value: 'Solomakhin',
+      value: this.props.data?.second_name ?? '',
       name: 'second_name',
       disabled: this.props.disabled,
       validate: this.props.validator.checkName.bind(this)
     })
     const inputDisplayName = new SecondInput({
-      label: 'Login',
-      value: 'Max',
+      label: 'Display name',
+      value: this.props.data?.display_name ?? '',
       name: 'display_name',
       disabled: this.props.disabled,
       validate: this.props.validator.checkLogin.bind(this)
     })
     const inputPhone = new SecondInput({
       label: 'Phone',
-      value: '89066789382',
+      value: this.props.data?.phone ?? '',
       name: 'phone',
       disabled: this.props.disabled,
       validate: this.props.validator.checkPhone.bind(this)

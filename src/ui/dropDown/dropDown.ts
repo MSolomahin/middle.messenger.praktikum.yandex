@@ -20,15 +20,21 @@ export default class DropDown extends Component<DropDownProps> {
 
   private _getItemList(items: DropDownProps['items']) {
     return items.map((item) => {
-      const { image, title, onClick } = item
+      const { image, title, onClick, id } = item
       return new DropDownItem({
         title,
         image,
+        id,
         events: {
-          click: onClick
+          click: (e: MouseEvent) => { this._handleToggleDropDown(e, onClick) }
         }
       })
     })
+  }
+
+  _handleToggleDropDown(e: MouseEvent, onClick: (e: MouseEvent) => void) {
+    onClick(e)
+    this._toggleDropDown()
   }
 
   protected componentDidMount() {
@@ -39,13 +45,17 @@ export default class DropDown extends Component<DropDownProps> {
     })
   }
 
-  private readonly _handleItemClick = (e: MouseEvent) => {
-    e.stopPropagation()
+  _toggleDropDown() {
     const dropDown = this.getContent()?.children[1] as HTMLElement
     if (!dropDown) return
 
     dropDown.style.display =
       dropDown?.style.display === 'block' ? 'none' : 'block'
+  }
+
+  private readonly _handleItemClick = (e: MouseEvent) => {
+    e.stopPropagation()
+    this._toggleDropDown()
   }
 
   override render() {

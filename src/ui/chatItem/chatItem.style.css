@@ -55,5 +55,10 @@
     height: 20px;
     border-radius: 50%;
     background: $color-main;
+    display: none;
+
+    &_show {
+      display: block
+    }
   }
 }

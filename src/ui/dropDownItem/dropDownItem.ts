@@ -8,7 +8,8 @@ export default class DropDownItem extends Component<DropDownItemProps> {
     super({
       ...props,
       attrs: {
-        class: 'drop-down-item'
+        class: 'drop-down-item',
+        id: props.id
       }
     })
   }

@@ -1,11 +1,13 @@
 <div class="chats__header">
   <div class="chats__userInfo">
     {{ avatar }}
-    <p class="text-s">Maxim</p>
+    <p class="text-s">{{ name }}</p>
   </div>
   <a href="/userSettings">
     <p class="text-s">Profile ></p>
   </a>
 </div>
-<div class="chats__search"></div>
+<div class="chats__search">
+  {{ search }}
+</div>
 <div class="chats__list">{{ chatList }}</div>

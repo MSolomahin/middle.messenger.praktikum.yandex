@@ -25,12 +25,8 @@
   }
 
   &__search {
-    background: $color-grey-2;
-    border-radius: 5px;
-    height: 32px;
-    margin: 0 10px 14px;
     position: relative;
-
+    margin-bottom: 15px;
     &::after {
       content: "";
       position: absolute;

@@ -7,6 +7,7 @@ import RegistrationPage from '../src/pages/registrationPage'
 import ServerErrorPage from '../src/pages/serverErrorPage'
 import UserSettingsPage from '../src/pages/userSettingsPage'
 import routes from './assets/const/routing'
+import './utils/redirect'
 
 Router
   .addRoute(routes.auth, AuthorizationPage)

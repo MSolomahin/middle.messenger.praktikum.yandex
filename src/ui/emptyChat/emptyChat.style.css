@@ -1,0 +1,13 @@
+@import url("../../assets/style/uikit");
+
+.empty-chat {
+  width: 75vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: $mediaTablet) {
+    display: none;
+  }
+}

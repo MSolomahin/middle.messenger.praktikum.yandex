@@ -7,7 +7,7 @@ enum METHODS {
 
 interface IOptions {
   data?: Record<string, string>
-  body?: string
+  body?: string | FormData
   timeout?: number
   headers?: Record<string, string>
   method?: METHODS
@@ -36,8 +36,8 @@ class HTTPTransport {
     )
   }
 
-  post = async <T>(url: string, options: IOptions = {}): Promise<T> => {
-    return await this.request(
+  post = <T>(url: string, options: IOptions = {}): Promise<T> => {
+    return this.request(
       url,
       { ...options, method: METHODS.POST },
       options.timeout
@@ -60,38 +60,49 @@ class HTTPTransport {
     )
   }
 
-  request = async <T>(
+  request = <T>(
     url: string,
     options: IOptions = {},
     timeout: number = 5000
   ): Promise<T> => {
     const { headers = {}, method, data, body } = options
 
-    return await new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
       if (!method) {
         reject(new Error('No method'))
         return
       }
-
+      const curURL = process.env.BASE_URL! + url
       const xhr = new XMLHttpRequest()
       const isGet = method === METHODS.GET
 
-      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url)
+      xhr.open(
+        method,
+        isGet && !!data ? `${curURL}${queryStringify(data)}` : curURL
+      )
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key])
       })
       xhr.withCredentials = true
 
-      xhr.onload = function () {
-        resolve(xhr as T)
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status < 400) {
+            resolve(xhr.response)
+          } else {
+            reject(xhr.response)
+          }
+        }
       }
 
+      xhr.setRequestHeader('Content-Type', 'application/json')
       xhr.onabort = reject
       xhr.onerror = reject
 
       xhr.timeout = timeout
       xhr.ontimeout = reject
+      xhr.responseType = 'json'
 
       if (isGet || !body) {
         xhr.send()

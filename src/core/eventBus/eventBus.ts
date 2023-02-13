@@ -21,7 +21,7 @@ export default class EventBus {
     }
 
     this.listeners[event] = this.listeners[event].filter(
-      (listener) => listener !== callback
+      (listener: any) => listener !== callback
     )
   }
 
@@ -30,7 +30,7 @@ export default class EventBus {
       throw new Error(`Don't have event: ${event}`)
     }
 
-    this.listeners[event].forEach((listener) => {
+    this.listeners[event].forEach((listener: any) => {
       listener(...args)
     })
   }
