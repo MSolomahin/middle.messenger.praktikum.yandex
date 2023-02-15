@@ -93,7 +93,7 @@ export class RegistrationFrom extends Component {
 
     if (allIsValid) {
       const data = Object.fromEntries(formData.entries())
-      SignUpController.signUp(data)
+      void SignUpController.signUp(data)
     }
   }
 

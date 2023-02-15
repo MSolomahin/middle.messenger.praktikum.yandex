@@ -27,6 +27,7 @@
   &__search {
     position: relative;
     margin-bottom: 15px;
+
     &::after {
       content: "";
       position: absolute;

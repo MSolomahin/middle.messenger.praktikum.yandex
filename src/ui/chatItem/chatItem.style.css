@@ -1,4 +1,4 @@
-@import url('../../assets/style/uikit');
+@import url("../../assets/style/uikit");
 
 .chat-item {
   &__container {
@@ -54,7 +54,6 @@
   }
 
   &__label {
-    display: flex;
     align-items: center;
     justify-content: center;
     width: 20px;
