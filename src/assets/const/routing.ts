@@ -9,11 +9,11 @@ interface IRoutes {
 
 const routes: IRoutes = {
   auth: '/',
-  registration: '/registration',
+  registration: '/sign-up',
   messenger: '/messenger',
   notFound: '/404',
   serverError: '/500',
-  userSettings: '/userSettings'
+  userSettings: '/settings'
 }
 
 export default routes

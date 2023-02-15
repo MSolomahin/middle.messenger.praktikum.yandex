@@ -11,7 +11,6 @@ export const initialState = {
     status: null
   },
   chats: [],
-  chatToken: '',
   messages: {},
   selectedChat: null,
   selectedUser: {

@@ -8,26 +8,51 @@ import Validator from '../../../../utils/validator'
 import template from './userSettingsForm.tmpl'
 import './userSettingsForm.style.css'
 import SettingsController from '../../controllers/settingsController'
-import { withStore } from '../../../../core/store/connect'
-import store, { StoreEvents } from '../../../../core/store'
+import connect from '../../../../core/store/connect'
+import { IStore } from '../../../../core/store'
+import { isComponent } from '../../../../utils/isComponent'
+import { getFilePath } from '../../../../utils/getFilePath'
 
-class UserSettingsFormModule extends Component {
-  constructor(props: any) {
+class UserSettingsFormModule extends Component<
+  IStore & { validator: Validator }
+> {
+  constructor(props: IStore) {
     super({
-      validator: new Validator(),
-      ...props
+      ...props,
+      validator: new Validator()
     })
   }
 
   override componentDidMount() {
+    if (!this.props.user.id) {
+      void SettingsController.getMyUser()
+    }
+
     this.setProps({
       events: {
-        submit: this._handleSubmit.bind(this)
+        submit: this.handleSubmit.bind(this)
       }
     })
   }
 
-  private _handleSubmit(e: SubmitEvent) {
+  protected componentDidUpdate(
+    oldProps: IStore & { validator: Validator },
+    newProps: IStore & { validator: Validator }
+  ): boolean {
+    if (isComponent(this.children.avatar)) {
+      this.children.avatar.setProps({
+        src: getFilePath(newProps.user.avatar)
+      })
+    }
+    if (isComponent(this.children.settingMainForm)) {
+      this.children.settingMainForm.setProps({
+        user: newProps.user
+      })
+    }
+    return super.componentDidUpdate(oldProps, newProps)
+  }
+
+  private handleSubmit(e: SubmitEvent) {
     e.preventDefault()
     const target = e.target as HTMLFormElement | null
     if (!target) return
@@ -35,27 +60,24 @@ class UserSettingsFormModule extends Component {
     const formData = new FormData(target)
     const allIsValid = this.props.validator.checkForm(formData)
     const button = e.submitter
-    const data = this._getObjectFromFormData(formData) as Record<string, string>
+    const data = this.getObjectFromFormData(formData) as Record<string, string>
 
     if (!allIsValid) return
 
     if (button?.id === 'button-settings') {
-      this._handleSubmitSettings(data)
+      this.handleSubmitSettings(data)
     } else {
-      this._handleSubmitPassword(data)
+      this.handleSubmitPassword(data)
     }
   }
 
-  _handleSubmitPassword(data: Record<string, string>) {
-    SettingsController.updatePassword({
-      oldPassword: data.old_password,
-      newPassword: data.new_password
-    })
-    this._toggleChangePassword()
+  private handleSubmitPassword(data: Record<string, string>) {
+    void SettingsController.updatePassword(data.old_password, data.new_password)
+    this.toggleChangePassword()
   }
 
-  _handleSubmitSettings(data: Record<string, string>) {
-    SettingsController.updateSettings({
+  private handleSubmitSettings(data: Record<string, string>) {
+    void SettingsController.updateSettings({
       first_name: data.first_name,
       second_name: data.second_name,
       display_name: data.display_name,
@@ -63,14 +85,14 @@ class UserSettingsFormModule extends Component {
       email: data.email,
       phone: data.phone
     })
-    this._toggleChangeInfo()
+    this.toggleChangeInfo()
   }
 
-  _getObjectFromFormData(data: FormData) {
+  private getObjectFromFormData(data: FormData) {
     return Object.fromEntries(data.entries())
   }
 
-  private _toggleChangeInfo(e?: MouseEvent) {
+  private toggleChangeInfo(e?: MouseEvent) {
     e?.preventDefault()
     const avatar = this.children.avatar
     if (avatar instanceof Component) {
@@ -91,7 +113,7 @@ class UserSettingsFormModule extends Component {
     }
   }
 
-  private _toggleChangePassword(e?: MouseEvent) {
+  private toggleChangePassword(e?: MouseEvent) {
     e?.preventDefault()
     if (
       this.children.settingMainForm instanceof Component &&
@@ -102,38 +124,30 @@ class UserSettingsFormModule extends Component {
     }
   }
 
-  private _handleLogOut(e: MouseEvent) {
+  private handleLogOut(e: MouseEvent) {
     e.preventDefault()
-    SettingsController.logOut()
+    void SettingsController.logOut()
   }
 
-  private _handleUploadAvatar(formData: FormData) {
-    SettingsController.uploadAvatar(formData)
-
-    store.on(StoreEvents.Updated, () => {
-      const state = store.getState()
-      if (this.children.avatar instanceof Component && process.env.BASE_URL) {
-          const src = state.user.avatar
-          this.children.avatar.setProps({ src })
-      }
-    })
+  private handleUploadAvatar(formData: FormData) {
+    void SettingsController.uploadAvatar(formData)
   }
 
   init() {
     this.children.avatar = new Avatar({
       size: 'large',
       isEditable: AvatarEditable.false,
-      handleUpload: this._handleUploadAvatar.bind(this),
+      handleUpload: this.handleUploadAvatar.bind(this),
       src: this.props.user?.avatar
     })
 
     this.children.settingMainForm = new SettingMainForm({
-      onChangeInfo: this._toggleChangeInfo.bind(this),
-      onChangePassword: this._toggleChangePassword.bind(this),
-      handleLogOut: this._handleLogOut.bind(this),
+      onChangeInfo: this.toggleChangeInfo.bind(this),
+      onChangePassword: this.toggleChangePassword.bind(this),
+      handleLogOut: this.handleLogOut.bind(this),
       validator: this.props.validator,
       disabled: SecondDisabledEnum.true,
-      data: {
+      user: {
         ...this.props.user
       }
     })
@@ -149,4 +163,5 @@ class UserSettingsFormModule extends Component {
   }
 }
 
-export const UserSettingsForm = withStore(UserSettingsFormModule)
+const mapStateToProps = (state: IStore) => ({ user: { ...state.user } })
+export const UserSettingsForm = connect(mapStateToProps)(UserSettingsFormModule)

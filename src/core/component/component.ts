@@ -2,7 +2,7 @@ import { getUniqKey } from '../../utils/getUniqKey'
 import Templator from '../../utils/templator'
 import EventBus from '../eventBus'
 import { IStore } from '../store'
-import { IComponentChildren, IComponentProps } from './component.types'
+import { ComponentBaseProps, IComponentChildren, IComponentProps } from './component.types'
 
 class Component<P extends Record<string, any> = any | IStore> {
   static EVENTS = {
@@ -149,7 +149,7 @@ class Component<P extends Record<string, any> = any | IStore> {
     return needUpdate
   }
 
-  public setProps = (nextProps: Record<string, unknown>) => {
+  public setProps = (nextProps: Partial<P & ComponentBaseProps>) => {
     Object.assign(this.props, nextProps)
   }
 

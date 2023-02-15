@@ -1,13 +1,15 @@
-{{ avatar }}
-<div class="chat-item__content">
-  <p class="chat-item__name text-m">{{ chat.title }}</p>
-  <p class="chat-item__message text-s">{{ chat.last_message.content }}</p>
-</div>
-<div class="chat-item__right">
-  <p class="chat-item__time text-xxs">{{ chat.last_message.time }}</p>
-  <div class="chat-item__label {{ withLabel }}">
-    <div class="chat-item__label-text text-xs text-white">
-      {{ chat.unread_count }}
+<div class="chat-item__container {{ isSelected }}">
+  {{ avatar }}
+  <div class="chat-item__content">
+    <p class="chat-item__name text-m">{{ chat.title }}</p>
+    <p class="chat-item__message text-s">{{ chat.last_message.content }}</p>
+  </div>
+  <div class="chat-item__right">
+    <p class="chat-item__time text-xxs">{{ chat.last_message.time }}</p>
+    <div class="chat-item__label {{ withLabel }}">
+      <div class="chat-item__label-text text-xs text-white">
+        {{ chat.unread_count }}
+      </div>
     </div>
   </div>
 </div>

@@ -1,15 +1,10 @@
-import HTTPTransport from '../../../utils/HTTPTransport'
+import http from '../../../utils/HTTPTransport'
 
-class SignUpAPI {
-  async create(data: Record<string, FormDataEntryValue>) {
-    return await HTTPTransport.post<XMLHttpRequest>(
-      '/auth/signup',
-      {
-        body: JSON.stringify(data)
-      }
-    )
-      .then((data) => data)
-      .catch((error) => error)
+export class SignUpAPI {
+  signUp(data: Record<string, FormDataEntryValue>) {
+    return http.post<{ id: number }>('/auth/signup', {
+      body: JSON.stringify(data)
+    })
   }
 }
 

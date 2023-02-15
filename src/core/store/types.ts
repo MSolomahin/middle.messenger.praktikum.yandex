@@ -29,6 +29,6 @@ export interface User {
 
 export interface LastMessage {
   user: User
-  time: Date
+  time: Date | string
   content: string
 }

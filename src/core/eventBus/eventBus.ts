@@ -27,7 +27,7 @@ export default class EventBus {
 
   emit = (event: IDispatchProps['event'], ...args: IDispatchProps['args']) => {
     if (!this.listeners[event]) {
-      throw new Error(`Don't have event: ${event}`)
+      return
     }
 
     this.listeners[event].forEach((listener: any) => {

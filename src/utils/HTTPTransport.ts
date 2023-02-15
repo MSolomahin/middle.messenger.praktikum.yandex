@@ -95,8 +95,10 @@ class HTTPTransport {
           }
         }
       }
-
-      xhr.setRequestHeader('Content-Type', 'application/json')
+      if (!(body instanceof FormData)) {
+        xhr.setRequestHeader('Content-Type', 'application/json')
+      }
+      xhr.setRequestHeader('Content-Security-Policy', 'script-src "none" img-src "none"')
       xhr.onabort = reject
       xhr.onerror = reject
 

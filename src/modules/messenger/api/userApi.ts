@@ -1,21 +1,14 @@
-import { IUser } from '../../../core/store/types'
 import http from '../../../utils/HTTPTransport'
 
 export class UserAPI {
-  findUser(login: string): Promise<IUser[]> {
-    return http
-      .post<XMLHttpRequest>('/user/search', {
-        body: JSON.stringify({ login })
-      })
-      .then((data) => data)
-      .catch((error) => error)
+  findUser<T>(login: string) {
+    return http.post<T>('/user/search', {
+      body: JSON.stringify({ login })
+    })
   }
 
-  getUser(id: number) {
-    return http
-      .get<XMLHttpRequest>(`/user/${id}`)
-      .then((data) => data)
-      .catch((error) => error)
+  getUser<T>(id: number) {
+    return http.get<T>(`/user/${id}`)
   }
 }
 

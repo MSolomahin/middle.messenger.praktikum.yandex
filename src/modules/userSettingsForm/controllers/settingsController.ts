@@ -2,48 +2,60 @@ import routes from '../../../assets/const/routing'
 import store from '../../../core/store'
 import Router from '../../../router'
 import { showError } from '../../../ui/toast/toast'
-import SettingsAPI, { UpdatePasswordRequestProps, UpdateSettingsRequestProps } from '../api/settingsApi'
+import API, { SettingsAPI } from '../api/settingsApi'
+import CommonApi from '../../../core/commonApi'
+import { IUser } from '../../authorizationForm'
 
 class SettingsController {
-  logOut() {
-    void SettingsAPI.logOut().then((data) => {
-      if (data && 'reason' in data) {
-        showError(data.reason)
-      } else {
-        localStorage.setItem('authorized', '')
-        Router.navigate(routes.auth)
-        // store.clearStore()
-      }
-    })
+  private readonly api: SettingsAPI
+
+  constructor() {
+    this.api = API
   }
 
-  updateSettings(data: UpdateSettingsRequestProps) {
-    void SettingsAPI.updateSettingsRequest(data)
-    .then((data) => {
-      if ('reason' in data) {
-        showError(data.reason)
-      } else {
-        store.set('user', data)
-      }
-    })
+  async getMyUser() {
+    try {
+      const user = await CommonApi.getMyUser()
+      store.set('user', user)
+    } catch (e: any) {
+      showError(e.reason)
+    }
   }
 
-  updatePassword(data: UpdatePasswordRequestProps) {
-    void SettingsAPI.changePasswordRequest(data)
-      .then((data) => {
-        if ('reason' in data) showError(data.reason)
-      })
+  async logOut() {
+    try {
+      await this.api.logOut()
+      localStorage.setItem('signedIn', '')
+      Router.navigate(routes.auth)
+    } catch (e: any) {
+      showError(e.reason)
+    }
   }
 
-  uploadAvatar(data: FormData) {
-    void SettingsAPI.uploadAvatar(data)
-      .then((data) => {
-        if ('reason' in data) {
-          showError(data.reason)
-        } else {
-          store.set('user', data)
-        }
-      })
+  async updateSettings(data: Omit<IUser, 'avatar' | 'id'>) {
+    try {
+      const user = await this.api.updateSettings<IUser>(data)
+      store.set('user', user)
+    } catch (e: any) {
+      showError(e.reason)
+    }
+  }
+
+  async updatePassword(oldPassword: string, newPassword: string) {
+    try {
+      await this.api.updatePassword(oldPassword, newPassword)
+    } catch (e: any) {
+      showError(e.reason)
+    }
+  }
+
+  async uploadAvatar(data: FormData) {
+    try {
+      const user = await this.api.uploadAvatar(data)
+      store.set('user', user)
+    } catch (e: any) {
+      showError(e.reason)
+    }
   }
 }
 

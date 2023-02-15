@@ -1,9 +1,8 @@
-// import store from '../../../core/store'
 import store from '../../../core/store'
 import { showError } from '../../../ui/toast/toast'
 import API, { UserAPI } from '../api/userApi'
-import ChatsController from './chatsController'
-import CommonAPI from '../../../core/commonApi/userApi'
+import CommonApi from '../../../core/commonApi'
+import { IUser } from '../../authorizationForm'
 
 class UserController {
   private readonly api: UserAPI
@@ -13,32 +12,30 @@ class UserController {
   }
 
   async findUser(login: string) {
-    const user = await this.api.findUser(login)
-    const chatId = store.getState().selectedChat
-
-    if (user?.[0]?.id && chatId) {
-        ChatsController.addUserToChat(user[0].id, chatId)
+    try {
+      const users = await this.api.findUser<IUser[]>(login)
+      return users
+    } catch (e: any) {
+      showError(e.reason)
     }
   }
 
-  getMyUser() {
-    void CommonAPI.getMyUser().then((data) => {
-      if ('reason' in data) {
-        showError(data.response.reason)
-      } else {
-        store.set('user', data)
-      }
-    })
+  async getUser(id: number) {
+    try {
+      const user = await this.api.getUser<IUser>(id)
+      store.set('currentUser', user)
+    } catch (e: any) {
+      showError(e.reason)
+    }
   }
 
-  getUser(id: number) {
-    void this.api.getUser(id).then((data) => {
-      if ('reason' in data) {
-        showError(data.response.reason)
-      } else {
-        store.set('currentUser', data)
-      }
-    })
+  async getMyUser() {
+    try {
+      const user = await CommonApi.getMyUser()
+      store.set('user', user)
+    } catch (e: any) {
+      showError(e.reason)
+    }
   }
 }
 

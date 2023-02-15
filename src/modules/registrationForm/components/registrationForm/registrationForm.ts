@@ -1,12 +1,11 @@
 import routes from '../../../../assets/const/routing'
 import Form from '../../../../components/form'
 import Component from '../../../../core/component'
-import { withStore } from '../../../../core/store/connect'
 import BaseInput from '../../../../ui/baseInput'
 import Validator from '../../../../utils/validator'
 import SignUpController from '../../controllers/signUpController'
 
-class RegistrationFromModule extends Component {
+export class RegistrationFrom extends Component {
   subComponents: Component[] = []
 
   constructor() {
@@ -94,7 +93,7 @@ class RegistrationFromModule extends Component {
 
     if (allIsValid) {
       const data = Object.fromEntries(formData.entries())
-      SignUpController.addUser(data)
+      SignUpController.signUp(data)
     }
   }
 
@@ -102,5 +101,3 @@ class RegistrationFromModule extends Component {
     return this.compile({ ...this.props })
   }
 }
-
-export const RegistrationFrom = withStore(RegistrationFromModule)

@@ -1,59 +1,32 @@
-import HTTPTransport from '../../../utils/HTTPTransport'
+import http from '../../../utils/HTTPTransport'
+import { IUser } from '../../authorizationForm'
 
 export interface UpdatePasswordRequestProps {
   oldPassword: string
   newPassword: string
 }
 
-export interface UpdateSettingsRequestProps {
-  first_name: string
-  second_name: string
-  display_name: string
-  login: string
-  email: string
-  phone: string
-}
-
-class SettingsAPI {
-  async logOut() {
-    return await HTTPTransport.post<XMLHttpRequest>(
-      '/auth/logout'
-    )
-      .then((data) => data)
-      .catch((error) => error)
+export class SettingsAPI {
+  logOut() {
+    return http.post<XMLHttpRequest>('/auth/logout')
   }
 
-  async updateSettingsRequest(data: UpdateSettingsRequestProps) {
-    return await HTTPTransport.put<XMLHttpRequest>(
-      '/user/profile',
-      {
-        body: JSON.stringify(data)
-      }
-    )
-      .then((data) => data)
-      .catch((error) => error)
+  updateSettings<T>(data: Omit<IUser, 'avatar' | 'id'>) {
+    return http.put<T>('/user/profile', {
+      body: JSON.stringify(data)
+    })
   }
 
-  async changePasswordRequest(data: UpdatePasswordRequestProps) {
-    return await HTTPTransport.put<XMLHttpRequest>(
-      '/user/password',
-      {
-        body: JSON.stringify(data)
-      }
-    )
-      .then((data) => data)
-      .catch((error) => error)
+  updatePassword(oldPassword: string, newPassword: string) {
+    return http.put('/user/password', {
+      body: JSON.stringify({ oldPassword, newPassword })
+    })
   }
 
-  async uploadAvatar(data: FormData) {
-    return await HTTPTransport.put<XMLHttpRequest>(
-      '/user/profile/avatar',
-      {
-        body: data
-      }
-    )
-      .then((data) => data)
-      .catch((error) => error)
+  uploadAvatar(data: FormData) {
+    return http.put('/user/profile/avatar', {
+      body: data
+    })
   }
 }
 

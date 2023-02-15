@@ -67,6 +67,11 @@ class MessagesController {
     })
   }
 
+  closeSocket(socketId: number) {
+    const socket = this.sockets.get(socketId)
+    socket?.close()
+  }
+
   private onMessage(id: number, messages: IMessage | IMessage[]) {
     let messagesToAdd: IMessage[] = []
 

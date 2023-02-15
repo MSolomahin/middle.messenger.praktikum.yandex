@@ -20,25 +20,13 @@ export class Store extends EventBus {
   private readonly _state: IStore = initialState
   static STORE_NAME = 'appStore'
 
-  constructor() {
-    super()
+  // constructor() {
+  //   super()
 
-    // const savedState = localStorage.getItem(Store.STORE_NAME)
-    // const storeData = savedState ? JSON.parse(savedState) : {}
-
-    // if ('messages' in storeData) {
-    //   storeData.messages = {}
-    // }
-    // if ('user' in storeData) {
-    //   storeData.user = {}
-    // }
-
-    // this._state = savedState ? storeData ?? {} : {}
-
-    // this.on(StoreEvents.Updated, () => {
-    //   localStorage.setItem(Store.STORE_NAME, JSON.stringify(this._state))
-    // })
-  }
+  //   this.on(StoreEvents.Updated, () => {
+  //     localStorage.setItem(Store.STORE_NAME, JSON.stringify(this._state))
+  //   })
+  // }
 
   public getState() {
     return this._state

@@ -70,6 +70,7 @@ class ChatsList extends Component<ChatsListProps & IStore> {
     return chats.map((chat) => {
       return new ChatItem({
         chat,
+        isSelected: this.props.selectedChat === chat.id,
         events: {
           click: () => {
             this.props.handleChatClick(chat.id)

@@ -1,20 +1,35 @@
 import routes from '../../../assets/const/routing'
+import CommonApi from '../../../core/commonApi'
 import store from '../../../core/store'
 import Router from '../../../router'
 import { showError } from '../../../ui/toast/toast'
-import SignUpAPI from '../api/signUpApi'
+import API, { SignUpAPI } from '../api/signUpApi'
 
 class SignUpController {
-  addUser(data: Record<string, FormDataEntryValue>) {
-    void SignUpAPI.create(data).then((data) => {
-      if ('reason' in data) {
-        showError(data.reason)
-      } else {
-        store.set('user', data)
-        localStorage.setItem('authorized', 'true')
-        Router.navigate(routes.messenger)
-      }
-    })
+  private readonly api: SignUpAPI
+
+  constructor() {
+    this.api = API
+  }
+
+  async signUp(data: Record<string, FormDataEntryValue>) {
+    try {
+      await this.api.signUp(data)
+      await this.getMyUser()
+    } catch (e: any) {
+      showError(e.reason)
+    }
+  }
+
+  async getMyUser() {
+    try {
+      const user = await CommonApi.getMyUser()
+      store.set('user', user)
+      localStorage.setItem('signedIn', 'true')
+      Router.navigate(routes.messenger)
+    } catch (e: any) {
+      showError(e.reason)
+    }
   }
 }
 

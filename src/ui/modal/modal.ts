@@ -21,6 +21,15 @@ export default class Modal extends Component<ModalProps> {
     })
   }
 
+  protected componentDidUpdate(oldProps: ModalProps, newProps: ModalProps): boolean {
+    if (this.children.button instanceof Component) {
+      this.children.button.setProps({
+        label: newProps.buttonTitle
+      })
+    }
+    return super.componentDidUpdate(oldProps, newProps)
+  }
+
   handleOutSideClick(e: MouseEvent) {
     const modal = (e.target as HTMLElement).closest('div[data-value]')
     if (!modal) {

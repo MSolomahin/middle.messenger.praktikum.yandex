@@ -8,6 +8,7 @@ export default class ChatItem extends Component<ChatItemProps> {
   constructor(props: ChatItemProps) {
     super({
       ...props,
+      isSelected: props.isSelected ? 'chat-item__container_selected' : '',
       withLabel: props.chat.unread_count !== 0 ? 'chat-item__label_show' : '',
       attrs: {
         class: 'chat-item'
@@ -18,7 +19,7 @@ export default class ChatItem extends Component<ChatItemProps> {
   init() {
     this.children.avatar = new Avatar({
       size: 'middle',
-      src: this.props.chat.avatar || this.props.chat.last_message.user.avatar
+      src: this.props.chat.avatar
     })
   }
 

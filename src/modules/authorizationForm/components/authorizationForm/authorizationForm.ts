@@ -2,6 +2,7 @@ import routes from '../../../../assets/const/routing'
 import Form from '../../../../components/form'
 import Component from '../../../../core/component'
 import BaseInput from '../../../../ui/baseInput'
+import { getDataFromForm } from '../../../../utils/getDataFromForm'
 import Validator from '../../../../utils/validator'
 import SignInController from '../../controllers/signInController'
 
@@ -40,7 +41,7 @@ export class AuthorizationForm extends Component {
     })
   }
 
-  private _handleSubmit(e: SubmitEvent) {
+  private async _handleSubmit(e: SubmitEvent) {
     e.preventDefault()
     const target = e.target as HTMLFormElement
 
@@ -48,8 +49,8 @@ export class AuthorizationForm extends Component {
     const allIsValid = this.props.validator.checkForm(formData)
 
     if (allIsValid) {
-      const data = Object.fromEntries(formData.entries())
-      SignInController.logIn(data)
+      const data = getDataFromForm(target)
+      void SignInController.logIn(data)
     }
   }
 

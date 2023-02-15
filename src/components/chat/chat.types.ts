@@ -5,7 +5,9 @@ export interface ChatProps extends ComponentBaseProps {
     selectedChat: number | undefined
     messages: IMessage[]
     userId: number
-    handleOpenModal: (title: string, type: 'addChat' | 'addUser') => void
+    name: string
+    avatar: string
+    handleOpenModal: (title: string, type: 'addChat' | 'addUser' | 'deleteUser') => void
     handleSendMessage: (message: string) => void
     handleDeleteChat: (chatId: number) => void
 }

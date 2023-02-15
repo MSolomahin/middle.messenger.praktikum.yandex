@@ -25,6 +25,7 @@ export default class Templator {
       if (match[0].includes('||')) {
         match[0] = match[0].replace(/\|\|/gi, '\\|\\|')
       }
+
       result = result.replace(new RegExp(match[0], 'gi'), String(data))
     }
     return result

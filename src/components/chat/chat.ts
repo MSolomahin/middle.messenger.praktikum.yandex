@@ -17,7 +17,10 @@ import { ChatProps } from './chat.types'
 import emptyTemplate from './emptyChat.tmpl'
 import ButtonPrimary from '../../ui/buttonPrimary/buttonPrimary'
 import connect from '../../core/store/connect'
-import store, { IStore } from '../../core/store'
+import { IStore } from '../../core/store'
+import { getTime } from '../../utils/getTime'
+import { getFilePath } from '../../utils/getFilePath'
+import { getDataFromForm } from '../../utils/getDataFromForm'
 
 class ChatComponent extends Component<ChatProps> {
   constructor(props: ChatProps) {
@@ -30,7 +33,6 @@ class ChatComponent extends Component<ChatProps> {
   }
 
   protected componentDidMount() {
-    store.set('messages', {})
     this.setProps({
       events: {
         submit: this._handleSubmit
@@ -43,10 +45,11 @@ class ChatComponent extends Component<ChatProps> {
     const target = (e.target as HTMLElement).closest('form')
     if (!target) return
 
-    const formData = Object.fromEntries(new FormData(target).entries())
-
-    this.props.handleSendMessage(formData.message as string)
-    target.reset()
+    const formData = getDataFromForm(target)
+    if (formData.message) {
+      this.props.handleSendMessage(formData.message as string)
+      target.reset()
+    }
   }
 
   private _onItemClick(e: MouseEvent) {
@@ -65,16 +68,23 @@ class ChatComponent extends Component<ChatProps> {
         }
         break
       }
+      case 'deleteUser':
+        this.props.handleOpenModal('Delete a user', 'deleteUser')
+        break
     }
   }
 
   protected componentDidUpdate(
-    _: ChatProps & IStore,
+    oldProps: ChatProps & IStore,
     newProps: ChatProps & IStore
   ): boolean {
     this.children.messages = this.createMessages(newProps)
-
-    return true
+    if (this.children.avatar instanceof Component) {
+      this.children.avatar.setProps({
+        src: getFilePath(newProps.avatar)
+      })
+    }
+    return super.componentDidUpdate(oldProps, newProps)
   }
 
   private createMessages(props: ChatProps) {
@@ -82,6 +92,7 @@ class ChatComponent extends Component<ChatProps> {
     return props.messages?.map((data) => {
       return new MessageText({
         text: data.content,
+        time: getTime(data.time),
         isMine: props.userId === data.user_id
       })
     })
@@ -90,7 +101,8 @@ class ChatComponent extends Component<ChatProps> {
   init() {
     this.createMessages(this.props)
     this.children.avatar = new Avatar({
-      size: 'tiny'
+      size: 'tiny',
+      src: this.props.avatar
     })
     this.children.arrowButton = new ArrowButton({
       side: 'right'
@@ -109,6 +121,12 @@ class ChatComponent extends Component<ChatProps> {
           image: PlusIcon,
           id: 'addUser',
           title: 'Add user',
+          onClick: this._onItemClick.bind(this)
+        },
+        {
+          image: DeleteIcon,
+          id: 'deleteUser',
+          title: 'Delete user',
           onClick: this._onItemClick.bind(this)
         },
         {
@@ -167,17 +185,22 @@ class ChatComponent extends Component<ChatProps> {
 
 const mapStateToProps = (state: IStore) => {
   const selectedChatId = state.selectedChat
-  if (!selectedChatId) {
+  const chat = state.chats.find((chat) => chat.id === selectedChatId)
+  if (!selectedChatId || !chat) {
     return {
       messages: [],
       selectedChat: null,
-      userId: state.user?.id
+      userId: state.user?.id,
+      avatar: '',
+      name: ''
     }
   }
   return {
-    selectedChat: state.selectedChat,
+    selectedChat: selectedChatId,
     messages: state.messages[selectedChatId],
-    userId: state.user.id
+    userId: state.user.id,
+    avatar: chat.avatar,
+    name: chat.title
   }
 }
 
