@@ -1,10 +1,8 @@
 import http from '../../../utils/HTTPTransport'
 
 export class SignInAPI {
-  logIn(data: Record<string, unknown>) {
-    return http.post('/auth/signin', {
-      body: data
-    })
+  logIn(body: Record<string, unknown>) {
+    return http.post('/auth/signin', { body })
   }
 }
 

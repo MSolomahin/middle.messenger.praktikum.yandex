@@ -7,21 +7,15 @@ export class SettingsAPI {
   }
 
   updateSettings<T>(body: Omit<IUser, 'avatar' | 'id'>) {
-    return http.put<T>('/user/profile', {
-      body
-    })
+    return http.put<T>('/user/profile', { body })
   }
 
   updatePassword(oldPassword: string, newPassword: string) {
-    return http.put('/user/password', {
-      body: { oldPassword, newPassword }
-    })
+    return http.put('/user/password', { body: { oldPassword, newPassword } })
   }
 
-  uploadAvatar(data: FormData) {
-    return http.put('/user/profile/avatar', {
-      body: data
-    })
+  uploadAvatar(body: FormData) {
+    return http.put('/user/profile/avatar', { body })
   }
 }
 
