@@ -3,7 +3,7 @@ import http from '../../../utils/HTTPTransport'
 export class UserAPI {
   findUser<T>(login: string) {
     return http.post<T>('/user/search', {
-      body: JSON.stringify({ login })
+      body: { login }
     })
   }
 

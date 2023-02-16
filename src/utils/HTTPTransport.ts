@@ -7,7 +7,7 @@ enum METHODS {
 
 interface IOptions {
   data?: Record<string, string>
-  body?: string | FormData
+  body?: string | object | FormData
   timeout?: number
   headers?: Record<string, string>
   method?: METHODS
@@ -65,8 +65,8 @@ class HTTPTransport {
     options: IOptions = {},
     timeout: number = 5000
   ): Promise<T> => {
-    const { headers = {}, method, data, body } = options
-
+    const { headers = {}, method, data } = options
+    let curBody = options.body
     return new Promise(function (resolve, reject) {
       if (!method) {
         reject(new Error('No method'))
@@ -95,9 +95,11 @@ class HTTPTransport {
           }
         }
       }
-      if (!(body instanceof FormData)) {
+      if (!(curBody instanceof FormData)) {
         xhr.setRequestHeader('Content-Type', 'application/json')
+        curBody = JSON.stringify(curBody)
       }
+
       xhr.setRequestHeader('Content-Security-Policy', 'script-src "none" img-src "none"')
       xhr.onabort = reject
       xhr.onerror = reject
@@ -106,10 +108,10 @@ class HTTPTransport {
       xhr.ontimeout = reject
       xhr.responseType = 'json'
 
-      if (isGet || !body) {
+      if (isGet || !curBody) {
         xhr.send()
       } else {
-        xhr.send(body)
+        xhr.send(curBody)
       }
     })
   }

@@ -10,6 +10,7 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "strict": true,
-    "strictFunctionTypes": false
+    "strictFunctionTypes": false,
+    "experimentalDecorators": true
   }
 }

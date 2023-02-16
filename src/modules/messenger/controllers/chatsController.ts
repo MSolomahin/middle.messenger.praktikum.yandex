@@ -1,19 +1,15 @@
 import store from '../../../core/store'
+import { handleError } from '../../../utils/errorDescriptor'
 import { getTime } from '../../../utils/getTime'
 import { IUser } from '../../authorizationForm'
-import API, { ChatsAPI } from '../api/chatsApi'
+import API from '../api/chatsApi'
 import { IChat } from '../store/types'
 import MessagesController from './messagesController'
 
 class ChatsController {
-  private readonly api: ChatsAPI
-
-  constructor() {
-    this.api = API
-  }
-
+  @handleError()
   async getChats(query: Record<string, string> = {}) {
-    const chats = await this.api.getChats<IChat[]>(query)
+    const chats = await API.getChats<IChat[]>(query)
 
     chats.forEach((chat) => {
       if (chat.last_message) {
@@ -48,24 +44,26 @@ class ChatsController {
     return chatsFull
   }
 
+  @handleError()
   async createChat(title: string) {
-    await this.api.createChat(title)
-
+    await API.createChat(title)
     void this.getChats()
   }
 
+  @handleError()
   async addUserToChat(userId: number, chatId: number) {
-    await this.api.addUserToChat([userId], chatId)
+    await API.addUserToChat([userId], chatId)
     void this.getChats()
   }
 
   async getChatToken(id: number) {
-    const response = await this.api.getChatToken<{ token: string }>(id)
+    const response = await API.getChatToken<{ token: string }>(id)
     return response.token
   }
 
+  @handleError()
   async delete(id: number) {
-    await this.api.delete(id)
+    await API.delete(id)
     this.selectChat(null)
     MessagesController.closeSocket(id)
     void this.getChats()
@@ -76,13 +74,14 @@ class ChatsController {
   }
 
   private getUsersOfChat(chatId: number) {
-    return this.api.getUsersOfChat<IUser[]>(chatId)
+    return API.getUsersOfChat<IUser[]>(chatId)
   }
 
+  @handleError()
   async deleteUsersFromChat(usersId: number[]) {
     const chatId = store.getState().selectedChat
     if (!chatId) return
-    await this.api.deleteUsersFromChat(usersId, chatId)
+    await API.deleteUsersFromChat(usersId, chatId)
     void this.getChats()
   }
 }

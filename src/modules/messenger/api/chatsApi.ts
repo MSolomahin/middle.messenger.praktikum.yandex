@@ -9,13 +9,13 @@ export class ChatsAPI {
 
   createChat(title: string) {
     return http.post('/chats', {
-      body: JSON.stringify({ title })
+      body: { title }
     })
   }
 
   addUserToChat(usersId: number[], chatId: number) {
     return http.put('/chats/users', {
-      body: JSON.stringify({ users: usersId, chatId })
+      body: { users: usersId, chatId }
     })
   }
 
@@ -24,7 +24,7 @@ export class ChatsAPI {
   }
 
   delete(id: number): Promise<unknown> {
-    return http.delete('/chats', { body: JSON.stringify({ chatId: id }) })
+    return http.delete('/chats', { body: { chatId: id } })
   }
 
   getUsersOfChat<T>(chatId: number) {
@@ -33,7 +33,7 @@ export class ChatsAPI {
 
   deleteUsersFromChat(usersId: number[], chatId: number) {
     return http.delete('/chats/users', {
-      body: JSON.stringify({ users: usersId, chatId })
+      body: { users: usersId, chatId }
     })
   }
 }

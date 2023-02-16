@@ -62,7 +62,7 @@ class MessengerModule extends Component<IStore & ComponentBaseProps> {
         void ChatsController.createChat(data.modalValue as string)
         break
       case 'deleteUser':
-        this.deleteUserFromChat(data.modalValue as string)
+        void this.deleteUserFromChat(data.modalValue as string)
         break
     }
 
@@ -80,13 +80,13 @@ class MessengerModule extends Component<IStore & ComponentBaseProps> {
     }
   }
 
-  private deleteUserFromChat(userLogin: string) {
+  private async deleteUserFromChat(userLogin: string) {
     const chatId = this.props.selectedChat
-    void UserController.findUser(userLogin).then((user) => {
-      if (user?.[0]?.id && chatId) {
-        void ChatsController.deleteUsersFromChat([user[0].id])
-      }
-    })
+    const user = await UserController.findUser(userLogin)
+console.log(user)
+    if (user?.[0]?.id && chatId) {
+      void ChatsController.deleteUsersFromChat([user[0].id])
+    }
   }
 
   private handleFindChats(searchValue: string = '') {
