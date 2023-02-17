@@ -3,7 +3,7 @@
   required
   name="{{ name }}"
   required="{{ required }}"
-  value='{{ value }}'
+  value="{{ value }}"
 />
 <label>{{ label }}</label>
-{% isError && <p class="input-base__error text-xs">{{ errorMessage }}</p> %}
+{% errorMessage && <p class="input-base__error text-xs">{{ errorMessage }}</p> %}

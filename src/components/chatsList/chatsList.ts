@@ -9,6 +9,7 @@ import { IChat } from '../../modules/messenger'
 import Search from '../../ui/search'
 import { IStore } from '../../store'
 import { getFilePath } from '../../utils/getFilePath'
+import Loader from '../../ui/loader'
 
 class ChatsList extends Component<ChatsListProps & IStore> {
   constructor(props: ChatsListProps & IStore) {
@@ -62,6 +63,8 @@ class ChatsList extends Component<ChatsListProps & IStore> {
         submit: this._handleSearch.bind(this)
       }
     })
+    this.children.loader = new Loader({
+       })
     this.children.chatList = this.createChats(this.props.chats)
   }
 

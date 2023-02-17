@@ -1,5 +1,5 @@
 import store from '../../../store'
-import { sanitizer } from '../../../utils/sanitizer'
+import { sanitizeHTML } from '../../../utils/sanitizer'
 import WSTransport, { WSTransportEvents } from '../helpers/WSTransport'
 import { IMessage } from '../types'
 
@@ -32,7 +32,7 @@ class MessagesController {
     }
     socket.send({
       type: 'message',
-      content: sanitizer(message)
+      content: sanitizeHTML(message)
     })
   }
 

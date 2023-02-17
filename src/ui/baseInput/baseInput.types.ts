@@ -7,7 +7,6 @@ export interface BaseInputProps extends ComponentBaseProps {
   value?: string
   required?: boolean
   errorMessage?: string
-  isError?: boolean
   pattern?: RegExp
   validate?: (name: string) => string
 }
