@@ -1,9 +1,9 @@
-import store from '../../../core/store'
+import store from '../../../store'
+import { IUser } from '../../../store/types'
 import { handleError } from '../../../utils/errorDescriptor'
-import { getTime } from '../../../utils/getTime'
-import { IUser } from '../../authorizationForm'
 import API from '../api/chatsApi'
-import { IChat } from '../store/types'
+import { getTime } from '../../../utils/getTime'
+import { IChat } from '../types'
 import MessagesController from './messagesController'
 
 class ChatsController {
@@ -29,7 +29,7 @@ class ChatsController {
 
   private async getChatsWithUser(chats: IChat[]) {
     const chatsFull = []
-    const myId = store.getState().user.id
+    const myId = store.getState().user?.id
     if (!myId) return
 
     for (const chat of chats) {

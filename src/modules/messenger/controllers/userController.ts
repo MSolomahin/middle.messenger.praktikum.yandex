@@ -1,8 +1,8 @@
-import store from '../../../core/store'
+import store from '../../../store'
 import API from '../api/userApi'
-import CommonApi from '../../../core/commonApi'
-import { IUser } from '../../authorizationForm'
+import CommonApi from '../../../api/commonApi'
 import { handleError } from '../../../utils/errorDescriptor'
+import { IUser } from '../../../store/types'
 
 class UserController {
   @handleError()

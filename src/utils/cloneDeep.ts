@@ -1,4 +1,4 @@
-function cloneDeep<T extends object = object>(obj: T) {
+function cloneDeep<T extends (object | null) = object>(obj: T) {
   if (isArray(obj)) {
     return cloneArray(obj)
   } else if (isObject(obj)) {

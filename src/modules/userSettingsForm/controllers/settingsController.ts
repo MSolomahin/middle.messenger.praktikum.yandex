@@ -1,10 +1,10 @@
 import routes from '../../../assets/const/routing'
-import store from '../../../core/store'
+import store from '../../../store'
 import Router from '../../../router'
 import API from '../api/settingsApi'
-import CommonApi from '../../../core/commonApi'
-import { IUser } from '../../authorizationForm'
+import CommonApi from '../../../api/commonApi'
 import { handleError } from '../../../utils/errorDescriptor'
+import { IUser } from '../../../store/types'
 
 class SettingsController {
   @handleError()

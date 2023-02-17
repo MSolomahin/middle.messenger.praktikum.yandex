@@ -1,8 +1,8 @@
 import routes from '../../../assets/const/routing'
 import API from '../api/signInApi'
 import Router from '../../../router'
-import store from '../../../core/store'
-import CommonApi from '../../../core/commonApi'
+import store from '../../../store'
+import CommonApi from '../../../api/commonApi'
 import { handleError } from '../../../utils/errorDescriptor'
 
 class SignInController {

@@ -3,11 +3,11 @@ import template from './chatsList.tmpl'
 import { ChatsListProps } from './chatsList.types'
 import './chatsList.style.css'
 import Avatar from '../../ui/avatar'
-import connect from '../../core/store/connect'
+import connect from '../../store/connect'
 import ChatItem from '../../ui/chatItem'
 import { IChat } from '../../modules/messenger'
 import Search from '../../ui/search'
-import { IStore } from '../../core/store'
+import { IStore } from '../../store'
 import { getFilePath } from '../../utils/getFilePath'
 
 class ChatsList extends Component<ChatsListProps & IStore> {
@@ -89,8 +89,8 @@ const mapStateToProps = (state: IStore) => {
   return {
     chats: state.chats,
     selectedChat: state.selectedChat,
-    name: state.user.first_name,
-    avatar: state.user.avatar
+    name: state.user?.first_name,
+    avatar: state.user?.avatar
   }
 }
 

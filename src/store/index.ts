@@ -1,8 +1,8 @@
-import { IMessage } from '../../modules/messenger'
-import set from '../../utils/set'
-import EventBus from '../eventBus'
+import { IChat, IMessage } from '../modules/messenger'
+import EventBus from '../core/eventBus'
 import { initialState } from './initValues'
-import { IChat, IUser } from './types'
+import { IUser } from './types'
+import set from './helpers/set'
 
 export enum StoreEvents {
   Updated = 'updated'
@@ -10,23 +10,14 @@ export enum StoreEvents {
 
 export interface IStore {
   chats: IChat[]
-  user: IUser
+  user: IUser | null
   messages: Record<string, IMessage[]>
   selectedChat: number | null
-  selectedUser: IUser
 }
 
 export class Store extends EventBus {
   private readonly _state: IStore = initialState
   static STORE_NAME = 'appStore'
-
-  // constructor() {
-  //   super()
-
-  //   this.on(StoreEvents.Updated, () => {
-  //     localStorage.setItem(Store.STORE_NAME, JSON.stringify(this._state))
-  //   })
-  // }
 
   public getState() {
     return this._state

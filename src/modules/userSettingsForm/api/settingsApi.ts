@@ -1,5 +1,5 @@
+import { IUser } from '../../../store/types'
 import http from '../../../utils/HTTPTransport'
-import { IUser } from '../../authorizationForm'
 
 export class SettingsAPI {
   logOut() {

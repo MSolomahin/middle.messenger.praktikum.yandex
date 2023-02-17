@@ -1,5 +1,5 @@
 import template from './baseInput.tmpl'
-import { BaseInputProps, InputError } from './baseInput.types'
+import { BaseInputProps } from './baseInput.types'
 import Component from '../../core/component'
 import './baseInput.style.css'
 
@@ -31,13 +31,13 @@ export default class BaseInput extends Component<BaseInputProps> {
     if (validMessage) {
       this.setProps({
         errorMessage: validMessage,
-        isError: InputError.true,
+        isError: true,
         value
       })
     } else {
       this.setProps({
         errorMessage: '',
-        isError: InputError.false,
+        isError: false,
         value
       })
     }

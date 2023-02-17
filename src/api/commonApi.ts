@@ -1,4 +1,4 @@
-import http from '../../utils/HTTPTransport'
+import http from '../utils/HTTPTransport'
 
 class CommonApi {
     getMyUser() {

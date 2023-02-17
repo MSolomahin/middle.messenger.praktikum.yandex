@@ -1,4 +1,4 @@
-<div class="{{ isEditable }}">
+<div class="{% isEditable && avatar_editable %}">
   <label class="avatar__hover-block hover-block">
     <input
       class="hover-block__input"
@@ -9,4 +9,4 @@
     <p class="text-m text-white hover-block__text">Change avatar</p>
   </label>
 </div>
-<img src="{{ src }}" class="avatar__img avatar__img_show"/>
+{% src && <img src="{{ src }}" class="avatar__img"/> %}

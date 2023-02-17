@@ -1,6 +1,7 @@
 import store, { IStore, StoreEvents } from './index'
-import isEqual from '../../utils/isEqual'
-import Component from '../component'
+import isEqual from './helpers/isEqual'
+import Component from '../core/component'
+import cloneDeep from '../utils/cloneDeep'
 
 type PlainObject<T = any> = {
   [k in string]: T
@@ -27,8 +28,6 @@ function connect<P extends PlainObject>(mapStateToProps: (state: IStore) => P) {
   }
 }
 
-export const withChats = connect((state) => ({ chats: state?.chats }))
-export const withUser = connect((state) => ({ user: state?.user }))
-export const withMessages = connect((state) => ({ messages: state?.messages }))
+export const withUser = connect((state) => ({ user: cloneDeep(state?.user) }))
 
 export default connect

@@ -2,14 +2,12 @@ import ChangePasswordForm from '../../../../components/changePasswordForm'
 import SettingMainForm from '../../../../components/settingMainForm'
 import Component from '../../../../core/component'
 import Avatar from '../../../../ui/avatar'
-import { AvatarEditable } from '../../../../ui/avatar/avatar.types'
-import { SecondDisabledEnum } from '../../../../ui/secondInput/secondInput.types'
 import Validator from '../../../../utils/validator'
 import template from './userSettingsForm.tmpl'
 import './userSettingsForm.style.css'
 import SettingsController from '../../controllers/settingsController'
-import connect from '../../../../core/store/connect'
-import { IStore } from '../../../../core/store'
+import { withUser } from '../../../../store/connect'
+import { IStore } from '../../../../store'
 import { isComponent } from '../../../../utils/isComponent'
 import { getFilePath } from '../../../../utils/getFilePath'
 
@@ -24,7 +22,7 @@ class UserSettingsFormModule extends Component<
   }
 
   override componentDidMount() {
-    if (!this.props.user.id) {
+    if (!this.props.user?.id) {
       void SettingsController.getMyUser()
     }
 
@@ -39,9 +37,10 @@ class UserSettingsFormModule extends Component<
     oldProps: IStore & { validator: Validator },
     newProps: IStore & { validator: Validator }
   ): boolean {
+    console.log(oldProps.user?.avatar, newProps.user?.avatar)
     if (isComponent(this.children.avatar)) {
       this.children.avatar.setProps({
-        src: getFilePath(newProps.user.avatar)
+        src: getFilePath(newProps.user?.avatar)
       })
     }
     if (isComponent(this.children.settingMainForm)) {
@@ -97,18 +96,14 @@ class UserSettingsFormModule extends Component<
     const avatar = this.children.avatar
     if (avatar instanceof Component) {
       avatar.setProps({
-        isEditable: avatar.props.isEditable
-          ? AvatarEditable.false
-          : AvatarEditable.true
+        isEditable: !avatar.props.isEditable
       })
     }
 
     const settingMainForm = this.children.settingMainForm
     if (settingMainForm instanceof Component) {
       settingMainForm.setProps({
-        disabled: settingMainForm.props.disabled
-          ? SecondDisabledEnum.false
-          : SecondDisabledEnum.true
+        disabled: !settingMainForm.props.disabled
       })
     }
   }
@@ -136,7 +131,7 @@ class UserSettingsFormModule extends Component<
   init() {
     this.children.avatar = new Avatar({
       size: 'large',
-      isEditable: AvatarEditable.false,
+      isEditable: false,
       handleUpload: this.handleUploadAvatar.bind(this),
       src: this.props.user?.avatar
     })
@@ -146,10 +141,8 @@ class UserSettingsFormModule extends Component<
       onChangePassword: this.toggleChangePassword.bind(this),
       handleLogOut: this.handleLogOut.bind(this),
       validator: this.props.validator,
-      disabled: SecondDisabledEnum.true,
-      user: {
-        ...this.props.user
-      }
+      disabled: true,
+      user: this.props.user
     })
 
     this.children.changePasswordForm = new ChangePasswordForm({
@@ -163,5 +156,4 @@ class UserSettingsFormModule extends Component<
   }
 }
 
-const mapStateToProps = (state: IStore) => ({ user: { ...state.user } })
-export const UserSettingsForm = connect(mapStateToProps)(UserSettingsFormModule)
+export const UserSettingsForm = withUser(UserSettingsFormModule)

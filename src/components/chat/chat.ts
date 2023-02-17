@@ -16,8 +16,8 @@ import MessageInput from '../../ui/messageInput/messageInput'
 import { ChatProps } from './chat.types'
 import emptyTemplate from './emptyChat.tmpl'
 import ButtonPrimary from '../../ui/buttonPrimary/buttonPrimary'
-import connect from '../../core/store/connect'
-import { IStore } from '../../core/store'
+import connect from '../../store/connect'
+import { IStore } from '../../store'
 import { getTime } from '../../utils/getTime'
 import { getFilePath } from '../../utils/getFilePath'
 import { getDataFromForm } from '../../utils/getDataFromForm'
@@ -198,7 +198,7 @@ const mapStateToProps = (state: IStore) => {
   return {
     selectedChat: selectedChatId,
     messages: state.messages[selectedChatId],
-    userId: state.user.id,
+    userId: state.user?.id,
     avatar: chat.avatar,
     name: chat.title
   }

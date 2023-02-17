@@ -66,12 +66,8 @@
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
-    display: none;
+    display: block;
     object-fit: cover;
-
-    &_show {
-      display: block;
-    }
   }
 
   &__hover-block {

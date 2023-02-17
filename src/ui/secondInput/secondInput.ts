@@ -1,7 +1,5 @@
 import template from './secondInput.tmpl'
 import {
-  SecondDisabledEnum,
-  SecondInputError,
   SecondInputProps
 } from './secondInput.types'
 import Component from '../../core/component'
@@ -11,7 +9,7 @@ export default class SecondInput extends Component<SecondInputProps> {
   constructor(props: SecondInputProps) {
     const {
       type = 'text',
-      disabled = SecondDisabledEnum.false,
+      disabled = false,
       value = ''
     } = props
     super({
@@ -41,13 +39,11 @@ export default class SecondInput extends Component<SecondInputProps> {
     if (validMessage) {
       this.setProps({
         errorMessage: validMessage,
-        isError: SecondInputError.true,
         value
       })
     } else {
       this.setProps({
         errorMessage: '',
-        isError: SecondInputError.false,
         value
       })
     }

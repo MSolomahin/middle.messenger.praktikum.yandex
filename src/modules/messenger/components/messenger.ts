@@ -1,8 +1,8 @@
 import Chat from '../../../components/chat'
 import ChatsList from '../../../components/chatsList'
 import Component from '../../../core/component'
-import { IStore } from '../../../core/store'
-import connect from '../../../core/store/connect'
+import { IStore } from '../../../store'
+import connect from '../../../store/connect'
 import BaseInput from '../../../ui/baseInput/baseInput'
 import Modal from '../../../ui/modal/modal'
 import ChatsController from '../controllers/chatsController'
@@ -13,6 +13,7 @@ import { ComponentBaseProps } from '../../../core/component/component.types'
 import { getDataFromForm } from '../../../utils/getDataFromForm'
 import UserController from '../controllers/userController'
 import routes from '../../../assets/const/routing'
+import cloneDeep from '../../../utils/cloneDeep'
 
 class MessengerModule extends Component<IStore & ComponentBaseProps> {
   constructor(props: IStore) {
@@ -25,7 +26,7 @@ class MessengerModule extends Component<IStore & ComponentBaseProps> {
   }
 
   protected componentDidMount(): void {
-    if (!this.props.user.id) {
+    if (!this.props.user?.id) {
       void UserController.getMyUser()
     }
     void ChatsController.getChats()
@@ -83,7 +84,7 @@ class MessengerModule extends Component<IStore & ComponentBaseProps> {
   private async deleteUserFromChat(userLogin: string) {
     const chatId = this.props.selectedChat
     const user = await UserController.findUser(userLogin)
-console.log(user)
+
     if (user?.[0]?.id && chatId) {
       void ChatsController.deleteUsersFromChat([user[0].id])
     }
@@ -116,7 +117,7 @@ console.log(user)
     })
     this.children.chatsList = new ChatsList({
       link: routes.userSettings,
-      avatar: this.props.user.avatar,
+      avatar: this.props.user?.avatar,
       onFindChats: this.handleFindChats.bind(this),
       handleChatClick: this.handleChatClick.bind(this)
     })
@@ -144,8 +145,8 @@ console.log(user)
 
 const mapStateToProps = (state: IStore) => ({
   selectedChat: state.selectedChat,
-  user: { ...state.user },
-  chats: { ...state.chats }
+  user: cloneDeep(state.user),
+  chats: cloneDeep(state.chats)
 })
 
 export const Messenger = connect(mapStateToProps)(MessengerModule)

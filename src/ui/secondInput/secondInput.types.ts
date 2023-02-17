@@ -6,17 +6,6 @@ export interface SecondInputProps extends ComponentBaseProps {
   value?: string
   type?: string
   errorMessage?: string
-  isError?: SecondInputError
-  disabled?: SecondDisabledEnum
+  disabled?: boolean
   validate?: (name: string) => string
-}
-
-export enum SecondDisabledEnum {
-  true = 'disabled',
-  false = ''
-}
-
-export enum SecondInputError {
-  true = 'second-input__error_active',
-  false = ''
 }

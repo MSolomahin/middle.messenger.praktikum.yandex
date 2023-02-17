@@ -1,22 +1,6 @@
-import store from '../../../core/store'
-import WSTransport, { WSTransportEvents } from '../../../utils/WSTransport'
-
-export interface IMessage {
-  chat_id: number
-  time: string
-  type: string
-  user_id: number
-  content: string
-  file?: {
-    id: number
-    user_id: number
-    path: string
-    filename: string
-    content_type: string
-    content_size: number
-    upload_date: string
-  }
-}
+import store from '../../../store'
+import WSTransport, { WSTransportEvents } from '../helpers/WSTransport'
+import { IMessage } from '../types'
 
 class MessagesController {
   private readonly sockets: Map<number, WSTransport> = new Map()
@@ -26,7 +10,7 @@ class MessagesController {
       return
     }
 
-    const userId = store.getState().user.id
+    const userId = store.getState().user?.id
 
     const wsTransport = new WSTransport(
       `wss://ya-praktikum.tech/ws/chats/${userId!}/${id}/${token}`

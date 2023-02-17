@@ -1,7 +1,7 @@
-import { getUniqKey } from '../../utils/getUniqKey'
+import { getUniqKey } from './helpers/getUniqKey'
 import Templator from '../../utils/templator'
 import EventBus from '../eventBus'
-import { IStore } from '../store'
+import { IStore } from '../../store'
 import { ComponentBaseProps, IComponentChildren, IComponentProps } from './component.types'
 
 class Component<P extends Record<string, any> = any | IStore> {

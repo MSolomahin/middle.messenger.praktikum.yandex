@@ -1,6 +1,6 @@
 import routes from '../../../assets/const/routing'
-import CommonApi from '../../../core/commonApi'
-import store from '../../../core/store'
+import CommonApi from '../../../api/commonApi'
+import store from '../../../store'
 import Router from '../../../router'
 import { showError } from '../../../ui/toast/toast'
 import API, { SignUpAPI } from '../api/signUpApi'

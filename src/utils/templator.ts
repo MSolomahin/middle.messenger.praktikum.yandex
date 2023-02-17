@@ -9,27 +9,70 @@ export default class Templator {
 
   compile = (ctx: IComponentProps): string => {
     const templateVariableReg = /\{\{(.*?)\}\}/g
-    let match: RegExpExecArray | null = null
+    const templateJSReg = /\{%(.*?)%\}/g
     let result = this.template
 
-    while ((match = templateVariableReg.exec(this.template)) != null) {
-      const variableName = match[1].trim()
-      if (!variableName) {
-        continue
-      }
+    result = findAndReplaceJs(templateJSReg, result, ctx)
+    result = findAndReplaceVariables(templateVariableReg, result, ctx)
 
-      const data = variableName.includes('||')
-        ? handleUnion(ctx, variableName)
-        : getNestedValue(ctx, variableName)
-
-      if (match[0].includes('||')) {
-        match[0] = match[0].replace(/\|\|/gi, '\\|\\|')
-      }
-
-      result = result.replace(new RegExp(match[0], 'gi'), String(data))
-    }
     return result
   }
+}
+
+function findAndReplaceJs(
+  regExp: RegExp,
+  template: string,
+  ctx: IComponentProps
+) {
+  let result = template
+  let match: RegExpExecArray | null = null
+  while ((match = regExp.exec(template)) != null) {
+    const jsName = match[1].trim()
+
+    if (!jsName) {
+      continue
+    }
+
+    if (jsName.includes('&&')) {
+      const condition = jsName.split('&&')[0].trim()
+      const value = jsName.split('&&')[1].trim()
+
+      result = result.replace(
+        new RegExp(match[0], 'gi'),
+        ctx[condition] ? value : ''
+      )
+    }
+  }
+
+  return result
+}
+
+function findAndReplaceVariables(
+  regExp: RegExp,
+  template: string,
+  ctx: IComponentProps
+) {
+  let result = template
+  let match: RegExpExecArray | null = null
+
+  while ((match = regExp.exec(template)) != null) {
+    const variableName = match[1].trim()
+    if (!variableName) {
+      continue
+    }
+
+    const data = variableName.includes('||')
+      ? handleUnion(ctx, variableName)
+      : getNestedValue(ctx, variableName)
+
+    if (match[0].includes('||')) {
+      match[0] = match[0].replace(/\|\|/gi, '\\|\\|')
+    }
+
+    result = result.replace(new RegExp(match[0], 'gi'), String(data))
+  }
+
+  return result
 }
 
 function getNestedValue(obj: Record<string, any>, path: string) {
