@@ -1,4 +1,4 @@
-<div class="chat-item__container {{ isSelected }}">
+<div class="chat-item__container {% isSelected ? chat-item__container_selected : ''%}">
   {{ avatar }}
   <div class="chat-item__content">
     <p class="chat-item__name text-m">{{ chat.title }}</p>
@@ -6,7 +6,7 @@
   </div>
   <div class="chat-item__right">
     <p class="chat-item__time text-xxs">{{ chat.last_message.time }}</p>
-    <div class="chat-item__label {{ withLabel }}">
+    <div class="chat-item__label {% chat.unread_count && chat-item__label_show %}">
       <div class="chat-item__label-text text-xs text-white">
         {{ chat.unread_count }}
       </div>

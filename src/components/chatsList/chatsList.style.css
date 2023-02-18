@@ -18,6 +18,11 @@
     padding: 15px 10px 0;
   }
 
+  &__loader {
+    display: flex;
+    justify-content: center;
+  }
+
   &__userInfo {
     display: flex;
     align-items: center;
@@ -42,7 +47,5 @@
   &__list {
     overflow-y: scroll;
     height: calc(100% - 96px);
-    display: flex;
-    justify-content: center;
   }
 }

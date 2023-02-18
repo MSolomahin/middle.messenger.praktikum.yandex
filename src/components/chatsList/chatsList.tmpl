@@ -10,6 +10,5 @@
 <div class="chats__search">
   {{ search }}
 </div>
-<div class="chats__list">
-  {% chats.length ? {{ chatList }} : {{ loader }} %}
-</div> 
+  {% chats.length ? <div class="chats__list">{{ chatList }}</div>  : <div class="chats__loader">{{ loader }}</div> %}
+

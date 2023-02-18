@@ -10,6 +10,7 @@
     height: 71px;
     cursor: pointer;
     transition: $transition-base;
+    width: 100%;
 
     &_selected {
       background: $color-main-hover;

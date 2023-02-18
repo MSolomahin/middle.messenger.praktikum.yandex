@@ -14,7 +14,7 @@ class MessagesController {
     const userId = store.getState().user?.id
 
     const wsTransport = new WSTransport(
-      `wss://ya-praktikum.tech/ws/chats/${userId!}/${id}/${token}`
+      `${process.env.WSS_URL!}/${userId!}/${id}/${token}`
     )
 
     this.sockets.set(id, wsTransport)
@@ -59,10 +59,14 @@ class MessagesController {
 
   private onMessage(id: number, messages: IMessage | IMessage[]) {
     let messagesToAdd: IMessage[] = []
+    console.log(messages)
 
     if (Array.isArray(messages)) {
       messagesToAdd = messages.reverse()
     } else {
+      if (messages.type === 'user connected') {
+        return
+      }
       messagesToAdd.push(messages)
     }
 

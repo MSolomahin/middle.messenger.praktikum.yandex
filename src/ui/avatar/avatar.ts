@@ -11,7 +11,6 @@ export default class Avatar extends Component<AvatarProps> {
     super({
       ...props,
       src: getFilePath(props.src),
-      showImg: props.src ? 'avatar__img_show' : '',
       attrs: {
         class: `avatar__container avatar__container_${props.size}`
       }
