@@ -14,7 +14,7 @@ class MessagesController {
     const userId = store.getState().user?.id
 
     const wsTransport = new WSTransport(
-      `${process.env.WSS_URL!}/${userId!}/${id}/${token}`
+      `wss://ya-praktikum.tech/ws/chats/${userId!}/${id}/${token}`
     )
 
     this.sockets.set(id, wsTransport)

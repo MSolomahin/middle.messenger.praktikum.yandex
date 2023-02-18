@@ -72,7 +72,7 @@ class HTTPTransport {
         reject(new Error('No method'))
         return
       }
-      const curURL = process.env.BASE_URL! + url
+      const curURL = 'https://ya-praktikum.tech/api/v2' + url
       const xhr = new XMLHttpRequest()
       const isGet = method === METHODS.GET
 

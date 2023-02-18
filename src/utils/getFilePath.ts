@@ -1,4 +1,4 @@
 export const getFilePath = (path?: string) => {
   if (!path) return ''
-  return `${process.env.BASE_URL!}/resources${path}`
+  return `https://ya-praktikum.tech/api/v2/resources${path}`
 }
