@@ -89,7 +89,7 @@ class ChatComponent extends Component<ChatProps> {
 
   private createMessages(props: ChatProps) {
     if (!props.messages) return []
-    console.log(props)
+
     return props.messages?.map((data) => {
       return new MessageText({
         text: data.content,
