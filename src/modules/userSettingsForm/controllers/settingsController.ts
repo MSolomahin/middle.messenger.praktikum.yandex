@@ -5,6 +5,7 @@ import API from '../api/settingsApi'
 import CommonApi from '../../../api/commonApi'
 import { handleError } from '../../../utils/errorDescriptor'
 import { IUser } from '../../../store/types'
+import { MessagesController } from '../../messenger'
 
 class SettingsController {
   @handleError()
@@ -16,7 +17,8 @@ class SettingsController {
   @handleError()
   async logOut() {
       await API.logOut()
-      localStorage.setItem('signedIn', '')
+      localStorage.setItem('user', '')
+      MessagesController.closeAll()
       Router.navigate(routes.auth)
   }
 

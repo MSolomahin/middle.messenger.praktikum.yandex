@@ -91,6 +91,7 @@ class ChatsList extends Component<ChatsListProps & IStore> {
 const mapStateToProps = (state: IStore) => {
   return {
     chats: state.chats,
+    chatsStatus: state.chatsStatus,
     selectedChat: state.selectedChat,
     name: state.user?.first_name,
     avatar: state.user?.avatar

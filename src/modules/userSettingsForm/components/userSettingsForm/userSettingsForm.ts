@@ -37,7 +37,6 @@ class UserSettingsFormModule extends Component<
     oldProps: IStore & { validator: Validator },
     newProps: IStore & { validator: Validator }
   ): boolean {
-    console.log(oldProps.user?.avatar, newProps.user?.avatar)
     if (isComponent(this.children.avatar)) {
       this.children.avatar.setProps({
         src: getFilePath(newProps.user?.avatar)

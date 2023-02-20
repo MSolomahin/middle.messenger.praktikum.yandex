@@ -59,7 +59,6 @@ class MessagesController {
 
   private onMessage(id: number, messages: IMessage | IMessage[]) {
     let messagesToAdd: IMessage[] = []
-    console.log(messages)
 
     if (Array.isArray(messages)) {
       messagesToAdd = messages.reverse()
@@ -73,7 +72,7 @@ class MessagesController {
     const currentMessages = (store.getState().messages || {})[id] || []
 
     messagesToAdd = [...currentMessages, ...messagesToAdd]
-
+    console.log(messagesToAdd)
     store.set(`messages.${id}`, messagesToAdd)
   }
 

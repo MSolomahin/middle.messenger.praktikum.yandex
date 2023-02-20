@@ -16,7 +16,8 @@ class SignInController {
   async getMyUser() {
       const user = await CommonApi.getMyUser()
       store.set('user', user)
-      localStorage.setItem('signedIn', 'true')
+      localStorage.setItem('user', JSON.stringify(user))
+
       Router.navigate(routes.messenger)
   }
 }

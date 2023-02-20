@@ -15,6 +15,5 @@ export const sanitizeHTML = (value: string) => {
 }
 
 export const sanitizeValue = (value: string) => {
-  console.log(value.replace(/["]/g, '\''))
   return value.replace(/["]/g, '\'')
 }

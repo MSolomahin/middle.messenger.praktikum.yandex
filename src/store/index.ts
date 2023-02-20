@@ -10,6 +10,7 @@ export enum StoreEvents {
 
 export interface IStore {
   chats: IChat[]
+  chatsStatus: 'pending' | 'success' | 'error' | 'initial'
   user: IUser | null
   messages: Record<string, IMessage[]>
   selectedChat: number | null

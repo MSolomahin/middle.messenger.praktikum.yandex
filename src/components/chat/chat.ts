@@ -89,6 +89,7 @@ class ChatComponent extends Component<ChatProps> {
 
   private createMessages(props: ChatProps) {
     if (!props.messages) return []
+    console.log(props)
     return props.messages?.map((data) => {
       return new MessageText({
         text: data.content,
@@ -185,7 +186,7 @@ class ChatComponent extends Component<ChatProps> {
 
 const mapStateToProps = (state: IStore) => {
   const selectedChatId = state.selectedChat
-  const chat = state.chats.find((chat) => chat.id === selectedChatId)
+  const chat = state.chats?.find((chat) => chat.id === selectedChatId)
   if (!selectedChatId || !chat) {
     return {
       messages: [],

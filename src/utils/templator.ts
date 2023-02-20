@@ -46,12 +46,25 @@ export default class Templator {
     let result = template
     if (matchString.includes('&&')) {
       const [condition, value] = matchString.split(' && ')
-      const conditionValue = this.getNestedValue(ctx, condition)
+
+      const conditionValue = condition.includes('===')
+        ? this.handleComparison(ctx, condition)
+        : this.getNestedValue(ctx, condition)
 
       result = template.replace(
         new RegExp(match, 'gi'),
         conditionValue ? value : ''
       )
+    }
+
+    return result
+  }
+
+  private handleComparison(ctx: IComponentProps, condition: string) {
+    let result
+    if (condition.includes('===')) {
+      const splitCondition = condition.split(' === ')
+      result = ctx[splitCondition[0]] === splitCondition[1]
     }
 
     return result

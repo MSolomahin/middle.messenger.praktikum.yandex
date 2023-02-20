@@ -25,7 +25,7 @@ class SignUpController {
     try {
       const user = await CommonApi.getMyUser()
       store.set('user', user)
-      localStorage.setItem('signedIn', 'true')
+      localStorage.setItem('user', JSON.stringify(user))
       Router.navigate(routes.messenger)
     } catch (e: any) {
       showError(e.reason)

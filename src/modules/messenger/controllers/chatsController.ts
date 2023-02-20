@@ -9,21 +9,23 @@ import MessagesController from './messagesController'
 class ChatsController {
   @handleError()
   async getChats(query: Record<string, string> = {}) {
+    store.set('chatsStatus', 'pending')
     const chats = await API.getChats<IChat[]>(query)
 
-    chats.forEach((chat) => {
+    chats?.forEach((chat) => {
       if (chat.last_message) {
         chat.last_message.time = getTime(chat.last_message?.time)
       }
     })
 
-    chats.forEach(async (chat) => {
+    chats?.forEach(async (chat) => {
       const token = await this.getChatToken(chat.id)
       await MessagesController.connect(chat.id, token)
     })
 
     const chatFull = await this.getChatsWithUser(chats)
 
+    store.set('chatsStatus', 'success')
     store.set('chats', chatFull)
   }
 
