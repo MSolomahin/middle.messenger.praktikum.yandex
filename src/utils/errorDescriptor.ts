@@ -29,10 +29,10 @@ export function handleError() {
   }
 }
 
-const isServerError = (error: any): error is IServerErrorResponse => {
+export const isServerError = (error: any): error is IServerErrorResponse => {
   return 'reason' in error
 }
 
-const isClientError = (error: any): error is IClientErrorResponse => {
+export const isClientError = (error: any): error is IClientErrorResponse => {
   return 'message' in error
 }
