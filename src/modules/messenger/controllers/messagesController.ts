@@ -72,7 +72,7 @@ class MessagesController {
     const currentMessages = (store.getState().messages || {})[id] || []
 
     messagesToAdd = [...currentMessages, ...messagesToAdd]
-    console.log(messagesToAdd)
+
     store.set(`messages.${id}`, messagesToAdd)
   }
 
