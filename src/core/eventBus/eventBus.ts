@@ -1,4 +1,4 @@
-import { IListeners, IEventProps, IDispatchProps } from './eventBus.types'
+import { IListeners, EventSwitcher, EventDispatcher, ICallback } from './eventBus.types'
 
 export default class EventBus {
   private readonly listeners: IListeners
@@ -7,7 +7,7 @@ export default class EventBus {
     this.listeners = {}
   }
 
-  on = (event: IEventProps['event'], callback: IEventProps['callback']) => {
+  on: EventSwitcher = (event, callback) => {
     if (!this.listeners[event]) {
       this.listeners[event] = []
     }
@@ -15,22 +15,22 @@ export default class EventBus {
     this.listeners[event].push(callback)
   }
 
-  off = (event: IEventProps['event'], callback: IEventProps['callback']) => {
+  off: EventSwitcher = (event, callback) => {
     if (!this.listeners[event]) {
       throw new Error(`Don't have event: ${event}`)
     }
 
     this.listeners[event] = this.listeners[event].filter(
-      (listener) => listener !== callback
+      (listener: ICallback) => listener !== callback
     )
   }
 
-  emit = (event: IDispatchProps['event'], ...args: IDispatchProps['args']) => {
+  emit: EventDispatcher = (event, ...args) => {
     if (!this.listeners[event]) {
-      throw new Error(`Don't have event: ${event}`)
+      return
     }
 
-    this.listeners[event].forEach((listener) => {
+    this.listeners[event].forEach((listener: ICallback) => {
       listener(...args)
     })
   }

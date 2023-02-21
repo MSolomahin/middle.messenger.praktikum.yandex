@@ -5,37 +5,34 @@ import './settingMainForm.style.css'
 import { SettingMainFormProps } from './settingMainForm.types'
 import SecondInput from '../../ui/secondInput'
 import ButtonInline from '../../ui/buttonInline'
-import Link from '../../ui/link'
 
 export default class SettingMainForm extends Component<SettingMainFormProps> {
   constructor(props: SettingMainFormProps) {
-    super(props)
+    super(props, 'form')
   }
 
   protected componentDidUpdate(
     oldProps: SettingMainFormProps,
     newProps: SettingMainFormProps
   ) {
+    Object.entries(this.children).forEach(([_, value]) => {
+      if (value instanceof SecondInput && newProps.user) {
+          const key = value.props.name as keyof typeof newProps.user
+          value.setProps({
+            disabled: newProps.disabled,
+            value: newProps.user?.[key] as string
+          })
+        value.render()
+      }
+    })
+
     if (oldProps.disabled !== newProps.disabled) {
       Object.entries(this.children).forEach(([key, value]) => {
-        if (key.includes('input') && value instanceof Component) {
-          value.setProps({
-            disabled: newProps.disabled
-          })
-          value.render()
+        if (key.includes('button') && value instanceof Component) {
+          value.toggle()
         }
       })
     }
-    const {
-      buttonChangeInfo,
-      buttonChangePassword,
-      buttonLogOut,
-      buttonSaveInfo
-     } = this.children as Record<string, Component>
-     buttonChangeInfo.toggle()
-     buttonChangePassword.toggle()
-     buttonLogOut.toggle()
-     buttonSaveInfo.toggle()
 
     return super.componentDidUpdate(oldProps, newProps)
   }
@@ -43,42 +40,42 @@ export default class SettingMainForm extends Component<SettingMainFormProps> {
   init() {
     const inputEmail = new SecondInput({
       label: 'Email',
-      value: 'm.solomahin@mail.ru',
+      value: this.props.user?.email ?? '',
       name: 'email',
       disabled: this.props.disabled,
       validate: this.props.validator.checkEmail.bind(this)
     })
     const inputLogin = new SecondInput({
       label: 'Login',
-      value: 'solomahin',
+      value: this.props.user?.login ?? '',
       name: 'login',
       disabled: this.props.disabled,
       validate: this.props.validator.checkLogin.bind(this)
     })
     const inputFirstName = new SecondInput({
       label: 'First Name',
-      value: 'Maxim',
+      value: this.props.user?.first_name ?? '',
       name: 'first_name',
       disabled: this.props.disabled,
       validate: this.props.validator.checkName.bind(this)
     })
     const inputSecondName = new SecondInput({
       label: 'Second Name',
-      value: 'Solomakhin',
+      value: this.props.user?.second_name ?? '',
       name: 'second_name',
       disabled: this.props.disabled,
       validate: this.props.validator.checkName.bind(this)
     })
     const inputDisplayName = new SecondInput({
-      label: 'Login',
-      value: 'Max',
+      label: 'Display name',
+      value: this.props.user?.display_name ?? '',
       name: 'display_name',
       disabled: this.props.disabled,
-      validate: this.props.validator.checkLogin.bind(this)
+      validate: this.props.validator.checkName.bind(this)
     })
     const inputPhone = new SecondInput({
       label: 'Phone',
-      value: '89066789382',
+      value: this.props.user?.phone ?? '',
       name: 'phone',
       disabled: this.props.disabled,
       validate: this.props.validator.checkPhone.bind(this)
@@ -96,10 +93,12 @@ export default class SettingMainForm extends Component<SettingMainFormProps> {
         click: this.props.onChangePassword
       }
     })
-    const buttonLogOut = new Link({
+    const buttonLogOut = new ButtonInline({
       label: 'Log out',
-      linkTo: '/authorization',
-      isRed: true
+      isRed: true,
+      events: {
+        click: this.props.handleLogOut.bind(this)
+      }
     })
 
     const buttonSaveInfo = new ButtonPrimary({

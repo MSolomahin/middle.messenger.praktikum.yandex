@@ -1,9 +1,8 @@
 import { ComponentBaseProps } from '../../core/component/component.types'
+import { IChat } from '../../modules/messenger'
 
 export interface ChatItemProps extends ComponentBaseProps {
-  image?: string
-  name: string
-  lastMessage: string
-  countUnReading: number
-  time: string
+  chat: IChat
+  isSelected: boolean
+  withLabel?: boolean | string
 }

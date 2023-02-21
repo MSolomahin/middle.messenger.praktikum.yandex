@@ -1,9 +1,11 @@
-import { getUniqKey } from '../../utils/getUniqKey'
+import { getUniqKey } from './helpers/getUniqKey'
 import Templator from '../../utils/templator'
 import EventBus from '../eventBus'
-import { IComponentChildren, IComponentProps } from './component.types'
+import { IStore } from '../../store'
+import { ComponentBaseProps, IComponentChildren } from './component.types'
+import { PlainObject } from '../../utils/isPlainObject'
 
-class Component<P extends Record<string, any> = any> {
+class Component<P extends Record<string, any> = any | IStore> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -48,7 +50,7 @@ class Component<P extends Record<string, any> = any> {
   protected init() {}
 
   protected compile = (
-    props: IComponentProps | IComponentChildren,
+    props: PlainObject,
     template?: string
   ) => {
     const propsAndStubs = { ...props }
@@ -92,9 +94,9 @@ class Component<P extends Record<string, any> = any> {
 
   private readonly _getChildren = (
     propsAndChildren?: P
-  ): { props: P, children: IComponentChildren } => {
-    const children: IComponentChildren = {}
-    const props: IComponentProps = {}
+  ): { props: P, children: PlainObject } => {
+    const children: PlainObject = {}
+    const props: PlainObject = {}
     if (propsAndChildren) {
       Object.entries(propsAndChildren).forEach(([key, value]) => {
         if (value instanceof Component) {
@@ -148,7 +150,7 @@ class Component<P extends Record<string, any> = any> {
     return needUpdate
   }
 
-  public setProps = (nextProps: Record<string, unknown>) => {
+  public setProps = (nextProps: Partial<P & ComponentBaseProps>) => {
     Object.assign(this.props, nextProps)
   }
 
@@ -225,6 +227,7 @@ class Component<P extends Record<string, any> = any> {
     if (this.id) {
       element?.setAttribute('data-id', this.id)
     }
+
     return element
   }
 

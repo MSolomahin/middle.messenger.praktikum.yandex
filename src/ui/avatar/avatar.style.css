@@ -4,6 +4,7 @@
   &_editable {
     width: 100%;
     height: 100%;
+    z-index: 2;
 
     &:hover > label {
       opacity: 1;
@@ -13,6 +14,7 @@
   }
 
   &__container {
+    position: relative;
     border-radius: 50%;
     background: $color-grey-2 no-repeat center;
     display: flex;
@@ -56,6 +58,16 @@
     &_large {
       font-size: 40px;
     }
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    display: block;
+    object-fit: cover;
   }
 
   &__hover-block {

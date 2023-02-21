@@ -1,7 +1,8 @@
 import template from './baseInput.tmpl'
-import { BaseInputProps, InputError } from './baseInput.types'
+import { BaseInputProps } from './baseInput.types'
 import Component from '../../core/component'
 import './baseInput.style.css'
+import { sanitizeValue } from '../../utils/sanitizer'
 
 export default class BaseInput extends Component<BaseInputProps> {
   constructor(props: BaseInputProps) {
@@ -28,19 +29,10 @@ export default class BaseInput extends Component<BaseInputProps> {
     if (!this.props?.validate) return
     const validMessage = this.props.validate(value)
 
-    if (validMessage) {
-      this.setProps({
-        errorMessage: validMessage,
-        isError: InputError.true,
-        value
-      })
-    } else {
-      this.setProps({
-        errorMessage: '',
-        isError: InputError.false,
-        value
-      })
-    }
+    this.setProps({
+      errorMessage: validMessage ?? '',
+      value: sanitizeValue(value)
+    })
   }
 
   render() {

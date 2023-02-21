@@ -1,18 +1,25 @@
 @import url("../../assets/style/uikit");
 
 .chat-item {
-  display: flex;
-  align-items: flex-start;
-  padding: 12px 10px;
-  gap: 10px;
-  border-bottom: 1px solid $color-grey-2;
-  height: 71px;
-  cursor: pointer;
-  transition: $transition-base;
-
-  &:hover {
-    background: $color-main-hover;
+  &__container {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 10px;
+    gap: 10px;
+    border-bottom: 1px solid $color-grey-2;
+    height: 71px;
+    cursor: pointer;
     transition: $transition-base;
+    width: 100%;
+
+    &_selected {
+      background: $color-main-hover;
+    }
+
+    &:hover {
+      background: $color-main-hover;
+      transition: $transition-base;
+    }
   }
 
   &__content {
@@ -48,12 +55,16 @@
   }
 
   &__label {
-    display: flex;
     align-items: center;
     justify-content: center;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: $color-main;
+    display: none;
+
+    &_show {
+      display: flex;
+    }
   }
 }

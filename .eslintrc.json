@@ -31,7 +31,10 @@
     "@typescript-eslint/space-before-blocks": "off",
     "no-useless-constructor": "off",
     "@typescript-eslint/no-useless-constructor": ["off"],
-    "@typescript-eslint/indent": [0, 2]
+    "@typescript-eslint/indent": [0, 2],
+    "@typescript-eslint/no-non-null-assertion": ["off"],
+    "@typescript-eslint/return-await": ["off"],
+    "@typescript-eslint/promise-function-async": ["off"]
     
   }
 }

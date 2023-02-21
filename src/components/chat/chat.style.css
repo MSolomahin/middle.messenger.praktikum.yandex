@@ -9,6 +9,19 @@
     display: none;
   }
 
+  &__empty-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__empty-container {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+
   &__header {
     height: 54px;
     background: $color-white;

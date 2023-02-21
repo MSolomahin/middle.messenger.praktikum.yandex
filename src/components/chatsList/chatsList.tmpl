@@ -1,11 +1,15 @@
 <div class="chats__header">
   <div class="chats__userInfo">
     {{ avatar }}
-    <p class="text-s">Maxim</p>
+    <p class="text-s">{{ name }}</p>
   </div>
-  <a href="/userSettings">
+  <a href="{{ link }}">
     <p class="text-s">Profile ></p>
   </a>
 </div>
-<div class="chats__search"></div>
-<div class="chats__list">{{ chatList }}</div>
+<div class="chats__search">
+  {{ search }}
+</div>
+{% chatsStatus === pending && <div class="chats__loader">{{ loader }}</div> %}
+{% chatsStatus === success && <div class="chats__list">{{ chatList }}</div> %}
+

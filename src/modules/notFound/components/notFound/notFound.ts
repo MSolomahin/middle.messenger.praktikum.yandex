@@ -1,3 +1,4 @@
+import routes from '../../../../assets/const/routing'
 import Component from '../../../../core/component'
 import ErrorTemplate from '../../../../ui/errorTemplate/errorTemplate'
 
@@ -6,7 +7,7 @@ export class NotFound extends Component {
     this.children.content = new ErrorTemplate({
       title: '404',
       description: 'Page not found',
-      linkPath: '/'
+      linkPath: routes.messenger
     })
   }
 

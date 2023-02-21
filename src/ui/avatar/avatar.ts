@@ -2,6 +2,7 @@ import template from './avatar.tmpl'
 import { AvatarProps } from './avatar.types'
 import Component from '../../core/component'
 import './avatar.style.css'
+import { getFilePath } from '../../utils/getFilePath'
 
 export default class Avatar extends Component<AvatarProps> {
   fileInput: HTMLInputElement | null
@@ -9,10 +10,11 @@ export default class Avatar extends Component<AvatarProps> {
   constructor(props: AvatarProps) {
     super({
       ...props,
+      src: getFilePath(props.src),
       attrs: {
         class: `avatar__container avatar__container_${props.size}`
       }
-    })
+    }, 'form')
     this.fileInput = null
   }
 
@@ -24,19 +26,12 @@ export default class Avatar extends Component<AvatarProps> {
     })
   }
 
-  private readonly _uploadAvatar = (e: InputEvent) => {
-    const input = e.target as HTMLInputElement
-    const file = input?.files?.[0]
-    const reader = new FileReader()
+  private readonly _uploadAvatar = () => {
+    const form = this.getContent() as HTMLFormElement
+    const formData = new FormData(form)
 
-    reader.onloadend = () => {
-      if (this.element && typeof reader.result === 'string') {
-        this.element.style.background = `url(${reader.result}) no-repeat center center / cover`
-      }
-    }
-
-    if (file != null) {
-      reader.readAsDataURL(file)
+    if (this.props.handleUpload) {
+      this.props.handleUpload(formData)
     }
   }
 

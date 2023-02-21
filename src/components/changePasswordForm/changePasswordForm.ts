@@ -13,7 +13,7 @@ export default class ChangePasswordForm extends Component<ChangePasswordFormProp
   init() {
     const inputOldPassword = new SecondInput({
       label: 'Old password',
-      value: 'Max',
+      value: 'qwe123QWE',
       name: 'old_password',
       type: 'password',
       validate: this.props.validator.checkPassword.bind(this)
@@ -21,7 +21,7 @@ export default class ChangePasswordForm extends Component<ChangePasswordFormProp
 
     const inputNewPassword = new SecondInput({
       label: 'New password',
-      value: 'Max',
+      value: 'qwe123QWE',
       name: 'new_password',
       type: 'password',
       validate: this.props.validator.checkPassword.bind(this)
@@ -29,7 +29,7 @@ export default class ChangePasswordForm extends Component<ChangePasswordFormProp
 
     const inputNewPasswordRepeat = new SecondInput({
       label: 'Repeat password',
-      value: 'Max',
+      value: 'qwe123QWE',
       name: 'new_password_repeat',
       type: 'password',
       validate: this.props.validator.checkPassword.bind(this)

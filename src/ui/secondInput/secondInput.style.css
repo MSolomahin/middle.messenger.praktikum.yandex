@@ -10,15 +10,11 @@
 
   &__error {
     color: red;
-    display: none;
+    display: block;
     text-align: left;
     font-weight: 400;
     margin-top: 5px;
     grid-column: span 2;
-
-    &_active {
-      display: block;
-    }
   }
 
   &__input {

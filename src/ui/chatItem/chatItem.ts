@@ -16,7 +16,8 @@ export default class ChatItem extends Component<ChatItemProps> {
 
   init() {
     this.children.avatar = new Avatar({
-      size: 'middle'
+      size: 'middle',
+      src: this.props.chat.avatar
     })
   }
 

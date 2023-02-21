@@ -1,17 +1,6 @@
 @import url("../../assets/style/uikit");
 
 .setting-main {
-  &__userInfo {
-    &_hidden {
-      display: none;
-    }
-  }
-
-  &__content {
-    width: min(100%, 510px);
-    margin: 0 auto;
-  }
-
   &__buttons {
     display: flex;
     flex-direction: column;

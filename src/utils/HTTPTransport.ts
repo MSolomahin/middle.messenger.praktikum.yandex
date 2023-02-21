@@ -1,3 +1,4 @@
+import { URIs } from '../assets/const/URI'
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -6,7 +7,8 @@ enum METHODS {
 }
 
 interface IOptions {
-  data?: any
+  data?: Record<string, string>
+  body?: string | object | FormData
   timeout?: number
   headers?: Record<string, string>
   method?: METHODS
@@ -14,7 +16,7 @@ interface IOptions {
 }
 
 type IData = Record<string, string>
-type HTTPMethod = (url: string, options?: IOptions) => Promise<unknown>
+type HTTPMethod = <T>(url: string, options?: IOptions) => Promise<T>
 
 function queryStringify(data: IData) {
   if (typeof data !== 'object') {
@@ -27,76 +29,78 @@ function queryStringify(data: IData) {
   }, '?')
 }
 
-export default class HTTPTransport {
-  get: HTTPMethod = async (url, options = {}) => {
-    return await this.request(
-      url,
+class HTTPTransport {
+  get: HTTPMethod = (url, options = {}) =>
+    this.request(
+      url + queryStringify(options.data ?? {}),
       { ...options, method: METHODS.GET },
       options.timeout
     )
-  }
 
-  post: HTTPMethod = async (url, options = {}) => {
-    return await this.request(
-      url,
-      { ...options, method: METHODS.POST },
-      options.timeout
-    )
-  }
+  post: HTTPMethod = (url, options = {}) =>
+    this.request(url, { ...options, method: METHODS.POST }, options.timeout)
 
-  put: HTTPMethod = async (url, options = {}) => {
-    return await this.request(
-      url,
-      { ...options, method: METHODS.PUT },
-      options.timeout
-    )
-  }
+  put: HTTPMethod = (url, options = {}) =>
+    this.request(url, { ...options, method: METHODS.PUT }, options.timeout)
 
-  delete: HTTPMethod = async (url, options = {}) => {
-    return await this.request(
-      url,
-      { ...options, method: METHODS.DELETE },
-      options.timeout
-    )
-  }
+  delete: HTTPMethod = (url, options = {}) =>
+    this.request(url, { ...options, method: METHODS.DELETE }, options.timeout)
 
-  request = async (
+  request = <T>(
     url: string,
     options: IOptions = {},
     timeout: number = 5000
-  ) => {
-    const { headers = {}, method, data } = options
-
-    return await new Promise(function (resolve, reject) {
+  ): Promise<T> => {
+    const { headers = {}, method } = options
+    let curBody = options.body
+    return new Promise(function (resolve, reject) {
       if (!method) {
         reject(new Error('No method'))
         return
       }
-
+      const curURL = URIs.BASE_URL + url
       const xhr = new XMLHttpRequest()
-      const isGet = method === METHODS.GET
 
-      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url)
+      xhr.open(method, curURL)
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key])
       })
+      xhr.withCredentials = true
 
-      xhr.onload = function () {
-        resolve(xhr)
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status < 400) {
+            resolve(xhr.response)
+          } else {
+            reject(xhr.response)
+          }
+        }
+      }
+      if (!(curBody instanceof FormData)) {
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        curBody = JSON.stringify(curBody)
       }
 
+      xhr.setRequestHeader(
+        'Content-Security-Policy',
+        'script-src "none" img-src "none"'
+      )
       xhr.onabort = reject
       xhr.onerror = reject
 
       xhr.timeout = timeout
       xhr.ontimeout = reject
+      xhr.responseType = 'json'
 
-      if (isGet || !data) {
+      const isGet = method === METHODS.GET
+      if (isGet || !curBody) {
         xhr.send()
       } else {
-        xhr.send(data)
+        xhr.send(curBody)
       }
     })
   }
 }
+
+export default new HTTPTransport()

@@ -7,12 +7,6 @@ export interface BaseInputProps extends ComponentBaseProps {
   value?: string
   required?: boolean
   errorMessage?: string
-  isError?: InputError
   pattern?: RegExp
   validate?: (name: string) => string
-}
-
-export enum InputError {
-  true = 'input-base__error_active',
-  false = ''
 }

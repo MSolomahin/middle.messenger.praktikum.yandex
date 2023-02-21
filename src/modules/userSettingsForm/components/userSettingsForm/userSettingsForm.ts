@@ -2,69 +2,112 @@ import ChangePasswordForm from '../../../../components/changePasswordForm'
 import SettingMainForm from '../../../../components/settingMainForm'
 import Component from '../../../../core/component'
 import Avatar from '../../../../ui/avatar'
-import { AvatarEditable } from '../../../../ui/avatar/avatar.types'
-import { SecondDisabledEnum } from '../../../../ui/secondInput/secondInput.types'
 import Validator from '../../../../utils/validator'
 import template from './userSettingsForm.tmpl'
 import './userSettingsForm.style.css'
+import SettingsController from '../../controllers/settingsController'
+import { withUser } from '../../../../store/connect'
+import { IStore } from '../../../../store'
+import { isComponent } from '../../../../utils/isComponent'
+import { getFilePath } from '../../../../utils/getFilePath'
 
-export class UserSettingsForm extends Component< { validator: Validator }> {
-  constructor() {
+class UserSettingsFormModule extends Component<
+  IStore & { validator: Validator }
+> {
+  constructor(props: IStore) {
     super({
+      ...props,
       validator: new Validator()
     })
   }
 
   override componentDidMount() {
+    if (!this.props.user?.id) {
+      void SettingsController.getMyUser()
+    }
+
     this.setProps({
       events: {
-        submit: this._handleSubmit.bind(this)
+        submit: this.handleSubmit.bind(this)
       }
     })
   }
 
-  private _handleSubmit(e: SubmitEvent) {
+  protected componentDidUpdate(
+    oldProps: IStore & { validator: Validator },
+    newProps: IStore & { validator: Validator }
+  ): boolean {
+    if (isComponent(this.children.avatar)) {
+      this.children.avatar.setProps({
+        src: getFilePath(newProps.user?.avatar)
+      })
+    }
+    if (isComponent(this.children.settingMainForm)) {
+      this.children.settingMainForm.setProps({
+        user: newProps.user
+      })
+    }
+    return super.componentDidUpdate(oldProps, newProps)
+  }
+
+  private handleSubmit(e: SubmitEvent) {
     e.preventDefault()
     const target = e.target as HTMLFormElement | null
     if (!target) return
 
     const formData = new FormData(target)
     const allIsValid = this.props.validator.checkForm(formData)
-    for (const [name, value] of formData) {
-      console.log(`${name} = ${value as string}`)
-    }
     const button = e.submitter
+    const data = this.getObjectFromFormData(formData) as Record<string, string>
 
     if (!allIsValid) return
+
     if (button?.id === 'button-settings') {
-      this._toggleChangeInfo()
+      this.handleSubmitSettings(data)
     } else {
-      this._toggleChangePassword()
+      this.handleSubmitPassword(data)
     }
   }
 
-  private _toggleChangeInfo(e?: MouseEvent) {
+  private handleSubmitPassword(data: Record<string, string>) {
+    void SettingsController.updatePassword(data.old_password, data.new_password)
+    this.toggleChangePassword()
+  }
+
+  private handleSubmitSettings(data: Record<string, string>) {
+    void SettingsController.updateSettings({
+      first_name: data.first_name,
+      second_name: data.second_name,
+      display_name: data.display_name,
+      login: data.login,
+      email: data.email,
+      phone: data.phone
+    })
+    this.toggleChangeInfo()
+  }
+
+  private getObjectFromFormData(data: FormData) {
+    return Object.fromEntries(data.entries())
+  }
+
+  private toggleChangeInfo(e?: MouseEvent) {
     e?.preventDefault()
     const avatar = this.children.avatar
     if (avatar instanceof Component) {
       avatar.setProps({
-        isEditable: avatar.props.isEditable
-          ? AvatarEditable.false
-          : AvatarEditable.true
+        isEditable: !avatar.props.isEditable
       })
     }
 
     const settingMainForm = this.children.settingMainForm
     if (settingMainForm instanceof Component) {
       settingMainForm.setProps({
-        disabled: settingMainForm.props.disabled
-          ? SecondDisabledEnum.false
-          : SecondDisabledEnum.true
+        disabled: !settingMainForm.props.disabled
       })
     }
   }
 
-  private _toggleChangePassword(e?: MouseEvent) {
+  private toggleChangePassword(e?: MouseEvent) {
     e?.preventDefault()
     if (
       this.children.settingMainForm instanceof Component &&
@@ -75,17 +118,30 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
     }
   }
 
+  private handleLogOut(e: MouseEvent) {
+    e.preventDefault()
+    void SettingsController.logOut()
+  }
+
+  private handleUploadAvatar(formData: FormData) {
+    void SettingsController.uploadAvatar(formData)
+  }
+
   init() {
     this.children.avatar = new Avatar({
       size: 'large',
-      isEditable: AvatarEditable.false
+      isEditable: false,
+      handleUpload: this.handleUploadAvatar.bind(this),
+      src: this.props.user?.avatar
     })
 
     this.children.settingMainForm = new SettingMainForm({
-      onChangeInfo: this._toggleChangeInfo.bind(this),
-      onChangePassword: this._toggleChangePassword.bind(this),
+      onChangeInfo: this.toggleChangeInfo.bind(this),
+      onChangePassword: this.toggleChangePassword.bind(this),
+      handleLogOut: this.handleLogOut.bind(this),
       validator: this.props.validator,
-      disabled: SecondDisabledEnum.true
+      disabled: true,
+      user: this.props.user
     })
 
     this.children.changePasswordForm = new ChangePasswordForm({
@@ -98,3 +154,5 @@ export class UserSettingsForm extends Component< { validator: Validator }> {
     return this.compile({ ...this.props }, template)
   }
 }
+
+export const UserSettingsForm = withUser(UserSettingsFormModule)
