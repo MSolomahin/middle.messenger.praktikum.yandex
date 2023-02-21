@@ -1,4 +1,6 @@
+import { URIs } from '../assets/const/URI'
+
 export const getFilePath = (path?: string) => {
   if (!path) return ''
-  return `https://ya-praktikum.tech/api/v2/resources${path}`
+  return `${URIs.BASE_URL}/resources${path}`
 }

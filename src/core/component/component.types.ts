@@ -1,7 +1,5 @@
 import Component from './component'
 
-export type IComponentProps = Record<string, any>
-
 export type IComponentChildren = Record<string, Component | Component[]>
 
 export interface ComponentBaseProps {

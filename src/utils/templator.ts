@@ -1,4 +1,4 @@
-import { IComponentProps } from '../core/component/component.types'
+import { PlainObject } from './isPlainObject'
 
 export default class Templator {
   template: string
@@ -7,7 +7,7 @@ export default class Templator {
     this.template = template
   }
 
-  compile = (ctx: IComponentProps): string => {
+  compile = (ctx: PlainObject): string => {
     const templateVariableReg = /\{\{(.*?)\}\}/g
     const templateJSReg = /\{%(.*?)%\}/g
     let result = this.template
@@ -21,7 +21,7 @@ export default class Templator {
   private findAndReplaceJs(
     regExp: RegExp,
     template: string,
-    ctx: IComponentProps
+    ctx: PlainObject
   ) {
     let result = template
     let match: RegExpExecArray | null = null
@@ -30,18 +30,19 @@ export default class Templator {
 
       if (!jsName) continue
 
-      result = this.findAndReplaceIntersection(jsName, result, match[0], ctx)
-      result = this.findAndReplaceTernary(jsName, result, match[0], ctx)
+      result = this.handleIntersection(jsName, result, match[0], ctx)
+      result = this.handleTernary(jsName, result, match[0], ctx)
+      result = this.handleUnion(jsName, result, match[0], ctx)
     }
 
     return result
   }
 
-  private findAndReplaceIntersection(
+  private handleIntersection(
     matchString: string,
     template: string,
     match: string,
-    ctx: IComponentProps
+    ctx: PlainObject
   ) {
     let result = template
     if (matchString.includes('&&')) {
@@ -60,8 +61,8 @@ export default class Templator {
     return result
   }
 
-  private handleComparison(ctx: IComponentProps, condition: string) {
-    let result
+  private handleComparison(ctx: PlainObject, condition: string) {
+    let result = false
     if (condition.includes('===')) {
       const splitCondition = condition.split(' === ')
       result = ctx[splitCondition[0]] === splitCondition[1]
@@ -70,11 +71,11 @@ export default class Templator {
     return result
   }
 
-  private findAndReplaceTernary(
+  private handleTernary(
     matchString: string,
     template: string,
     match: string,
-    ctx: IComponentProps
+    ctx: PlainObject
   ) {
     let result = template
 
@@ -96,10 +97,30 @@ export default class Templator {
     return result
   }
 
+  private handleUnion(matchString: string, template: string, match: string, ctx: PlainObject) {
+    let result = template
+    if (matchString.includes('||')) {
+    const [first, second] = matchString.split(' || ')
+
+    const data1 = this.getNestedValue(ctx, first)
+    const data2 = this.getNestedValue(ctx, second)
+
+    if (match.includes('||')) {
+      match = match.replace(/\|\|/gi, '\\|\\|')
+    }
+
+    result = template.replace(
+      new RegExp(match, 'gi'),
+      data1 || data2
+    )
+    }
+    return result
+  }
+
   private findAndReplaceVariables(
     regExp: RegExp,
     template: string,
-    ctx: IComponentProps
+    ctx: PlainObject
   ) {
     let result = template
     let match: RegExpExecArray | null = null
@@ -110,13 +131,7 @@ export default class Templator {
         continue
       }
 
-      const data = variableName.includes('||')
-        ? this.handleUnion(ctx, variableName)
-        : this.getNestedValue(ctx, variableName)
-
-      if (match[0].includes('||')) {
-        match[0] = match[0].replace(/\|\|/gi, '\\|\\|')
-      }
+      const data = this.getNestedValue(ctx, variableName)
 
       result = result.replace(new RegExp(match[0], 'gi'), String(data))
     }
@@ -124,7 +139,7 @@ export default class Templator {
     return result
   }
 
-  private getNestedValue(obj: Record<string, any>, path: string) {
+  private getNestedValue(obj: PlainObject, path: string) {
     if (!path.includes('.')) return path === '0' ? '0' : obj[path]
     const variableArray = path.split('.')
     let temp = obj
@@ -137,14 +152,5 @@ export default class Templator {
       }
     }
     return temp
-  }
-
-  private handleUnion(ctx: Record<string, any>, variableName: string) {
-    const first = variableName.split('||')[0].trim()
-    const second = variableName.split('||')[1].trim()
-    const data1 = this.getNestedValue(ctx, first)
-    const data2 = this.getNestedValue(ctx, second)
-
-    return data1 || data2
   }
 }

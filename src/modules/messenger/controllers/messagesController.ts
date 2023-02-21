@@ -1,3 +1,4 @@
+import { URIs } from '../../../assets/const/URI'
 import store from '../../../store'
 import { sanitizeHTML } from '../../../utils/sanitizer'
 import WSTransport, { WSTransportEvents } from '../helpers/WSTransport'
@@ -14,7 +15,7 @@ class MessagesController {
     const userId = store.getState().user?.id
 
     const wsTransport = new WSTransport(
-      `wss://ya-praktikum.tech/ws/chats/${userId!}/${id}/${token}`
+      `${URIs.WSS}/${userId!}/${id}/${token}`
     )
 
     this.sockets.set(id, wsTransport)

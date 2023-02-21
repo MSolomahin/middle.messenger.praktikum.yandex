@@ -1,25 +1,11 @@
-type PlainObject<T = any> = {
-  [k in string]: T
-}
+import { PlainObject, isPlainObject } from '../../utils/isPlainObject'
 
-function isPlainObject(value: unknown): value is PlainObject {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    value.constructor === Object &&
-    Object.prototype.toString.call(value) === '[object Object]'
-  )
-}
+const isArray = (value: unknown): value is [] => Array.isArray(value)
 
-function isArray(value: unknown): value is [] {
-  return Array.isArray(value)
-}
+const isArrayOrObject = (value: unknown): value is [] | PlainObject =>
+  isPlainObject(value) || isArray(value)
 
-function isArrayOrObject(value: unknown): value is [] | PlainObject {
-  return isPlainObject(value) || isArray(value)
-}
-
-function isEqual<T extends PlainObject>(lhs: T, rhs: T) {
+function isEqual(lhs: PlainObject, rhs: PlainObject) {
   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false
   }

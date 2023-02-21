@@ -1,23 +1,23 @@
-import routes from '../../../assets/const/routing'
 import API from '../api/signInApi'
-import Router from '../../../router'
-import store from '../../../store'
-import CommonApi from '../../../api/commonApi'
 import {
   handleError,
   isClientError,
   isServerError
 } from '../../../utils/errorDescriptor'
 import { showError } from '../../../ui/toast/toast'
+import { Errors } from '../../../assets/const/errors'
+import CommonController from '../../../controllers/commonController'
+import Router from '../../../router/index'
+import routes from '../../../assets/const/routing'
 
 class SignInController {
   async logIn(data: Record<string, FormDataEntryValue>) {
     try {
       await API.logIn(data)
       await this.getMyUser()
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (isServerError(error)) {
-        if (error.reason === 'User already in system') {
+        if (error.reason === Errors.ALREADY_IN_SYSTEM) {
           await this.getMyUser()
         } else {
           showError(error.reason)
@@ -29,10 +29,7 @@ class SignInController {
 
   @handleError()
   async getMyUser() {
-    const user = await CommonApi.getMyUser()
-    store.set('user', user)
-    localStorage.setItem('user', JSON.stringify(user))
-
+    await CommonController.getMyUser()
     Router.navigate(routes.messenger)
   }
 }

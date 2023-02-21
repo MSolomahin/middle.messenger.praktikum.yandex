@@ -2,7 +2,8 @@ import { getUniqKey } from './helpers/getUniqKey'
 import Templator from '../../utils/templator'
 import EventBus from '../eventBus'
 import { IStore } from '../../store'
-import { ComponentBaseProps, IComponentChildren, IComponentProps } from './component.types'
+import { ComponentBaseProps, IComponentChildren } from './component.types'
+import { PlainObject } from '../../utils/isPlainObject'
 
 class Component<P extends Record<string, any> = any | IStore> {
   static EVENTS = {
@@ -49,7 +50,7 @@ class Component<P extends Record<string, any> = any | IStore> {
   protected init() {}
 
   protected compile = (
-    props: IComponentProps | IComponentChildren,
+    props: PlainObject,
     template?: string
   ) => {
     const propsAndStubs = { ...props }
@@ -93,9 +94,9 @@ class Component<P extends Record<string, any> = any | IStore> {
 
   private readonly _getChildren = (
     propsAndChildren?: P
-  ): { props: P, children: IComponentChildren } => {
-    const children: IComponentChildren = {}
-    const props: IComponentProps = {}
+  ): { props: P, children: PlainObject } => {
+    const children: PlainObject = {}
+    const props: PlainObject = {}
     if (propsAndChildren) {
       Object.entries(propsAndChildren).forEach(([key, value]) => {
         if (value instanceof Component) {

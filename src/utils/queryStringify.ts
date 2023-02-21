@@ -1,6 +1,6 @@
-type StringIndexed = Record<string, any>
+import { isPlainObject, PlainObject } from './isPlainObject'
 
-function queryStringify(data: StringIndexed): string | never {
+function queryStringify(data: PlainObject): string | never {
   if (typeof data !== 'object') {
     throw new Error('Data must be object')
   }
@@ -11,7 +11,7 @@ function queryStringify(data: StringIndexed): string | never {
     const endLine = index < keys.length - 1 ? '&' : ''
 
     if (Array.isArray(value)) {
-      const arrayValue = value.reduce<StringIndexed>(
+      const arrayValue = value.reduce<PlainObject>(
         (result, arrData, index) => ({
           ...result,
           [`${key}[${index}]`]: arrData
@@ -22,8 +22,8 @@ function queryStringify(data: StringIndexed): string | never {
       return `${result}${queryStringify(arrayValue)}${endLine}`
     }
 
-    if (typeof value === 'object') {
-      const objValue = Object.keys(value || {}).reduce<StringIndexed>(
+    if (isPlainObject(value)) {
+      const objValue = Object.keys(value ?? {}).reduce<PlainObject>(
         (result, objKey) => ({
           ...result,
           [`${key}[${objKey}]`]: value[objKey]

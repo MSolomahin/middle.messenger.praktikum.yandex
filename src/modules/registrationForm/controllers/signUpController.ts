@@ -1,9 +1,8 @@
-import routes from '../../../assets/const/routing'
-import CommonApi from '../../../api/commonApi'
-import store from '../../../store'
-import Router from '../../../router'
-import { showError } from '../../../ui/toast/toast'
 import API, { SignUpAPI } from '../api/signUpApi'
+import { handleError } from '../../../utils/errorDescriptor'
+import CommonController from '../../../controllers/commonController'
+import routes from '../../../assets/const/routing'
+import Router from '../../../router/index'
 
 class SignUpController {
   private readonly api: SignUpAPI
@@ -12,24 +11,16 @@ class SignUpController {
     this.api = API
   }
 
+  @handleError()
   async signUp(data: Record<string, FormDataEntryValue>) {
-    try {
       await this.api.signUp(data)
       await this.getMyUser()
-    } catch (e: any) {
-      showError(e.reason)
-    }
   }
 
+  @handleError()
   async getMyUser() {
-    try {
-      const user = await CommonApi.getMyUser()
-      store.set('user', user)
-      localStorage.setItem('user', JSON.stringify(user))
-      Router.navigate(routes.messenger)
-    } catch (e: any) {
-      showError(e.reason)
-    }
+    await CommonController.getMyUser()
+    Router.navigate(routes.messenger)
   }
 }
 

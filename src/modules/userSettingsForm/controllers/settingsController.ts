@@ -2,22 +2,21 @@ import routes from '../../../assets/const/routing'
 import store from '../../../store'
 import Router from '../../../router'
 import API from '../api/settingsApi'
-import CommonApi from '../../../api/commonApi'
 import { handleError } from '../../../utils/errorDescriptor'
 import { IUser } from '../../../store/types'
 import { MessagesController } from '../../messenger'
+import CommonController from '../../../controllers/commonController'
 
 class SettingsController {
   @handleError()
   async getMyUser() {
-      const user = await CommonApi.getMyUser()
-      store.set('user', user)
+    await CommonController.getMyUser()
   }
 
   @handleError()
   async logOut() {
       await API.logOut()
-      localStorage.setItem('user', '')
+      localStorage.removeItem('user')
       MessagesController.closeAll()
       Router.navigate(routes.auth)
   }

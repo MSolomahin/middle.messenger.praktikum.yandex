@@ -3,7 +3,7 @@ import { render } from '../utils/renderDOM'
 
 export default class Route {
   _pathname: string = ''
-  component: any
+  component: typeof Component
   constructor(pathname: string, component: typeof Component) {
     this.component = component
     this._pathname = pathname

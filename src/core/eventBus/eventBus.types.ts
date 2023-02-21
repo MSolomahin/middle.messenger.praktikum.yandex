@@ -1,13 +1,7 @@
-import { IComponentProps } from '../component/component.types'
+import { PlainObject } from '../../utils/isPlainObject'
 
 export type ICallback = (...args: any[]) => void
-export type IListeners = Record<string, any>
+export type IListeners = Record<string, ICallback[]>
 
-export interface IEventProps {
-  event: string
-  callback: ICallback
-}
-export interface IDispatchProps {
-  event: string
-  args: IComponentProps[]
-}
+export type EventSwitcher = (event: string, callback: ICallback) => void
+export type EventDispatcher = (event: string, ...args: PlainObject[] | Event[]) => void

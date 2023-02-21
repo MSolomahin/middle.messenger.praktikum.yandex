@@ -1,4 +1,8 @@
-function cloneDeep<T extends (object | null) = object>(obj: T) {
+type Object<T = unknown> = {
+  [k in string]: T
+}
+
+function cloneDeep<T>(obj: T | null) {
   if (isArray(obj)) {
     return cloneArray(obj)
   } else if (isObject(obj)) {
@@ -8,7 +12,7 @@ function cloneDeep<T extends (object | null) = object>(obj: T) {
   }
 }
 
-function isObject(value: unknown): value is Record<string, string> {
+function isObject(value: unknown): value is Record<string, string | Object> {
   return (
     value != null &&
     typeof value === 'object'
@@ -20,7 +24,7 @@ function isArray(value: unknown): value is [] {
 }
 
 function cloneArray(array: unknown[]): unknown[] {
-  return array.map((item: any) => {
+  return array.map((item: unknown) => {
     if (isArray(item) || isObject(item)) {
       return cloneDeep(item)
     }
@@ -28,14 +32,14 @@ function cloneArray(array: unknown[]): unknown[] {
   })
 }
 
-function cloneObj(obj: unknown) {
-  const result: Record<string, unknown> = {}
+function cloneObj<T extends Object>(obj: T) {
+  const result: Object = {}
 
-  for (const key of Object.keys((obj as any))) {
-    if (isObject((obj as any)[key]) || isArray((obj as any)[key])) {
-      result[key] = cloneDeep((obj as any)[key])
+  for (const key of Object.keys((obj))) {
+    if (isObject(obj[key]) || isArray(obj[key])) {
+      result[key] = cloneDeep(obj[key])
     } else {
-      result[key] = (obj as any)[key]
+      result[key] = obj[key]
     }
   }
   return result
