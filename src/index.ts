@@ -8,6 +8,7 @@ import ServerErrorPage from '../src/pages/serverErrorPage'
 import UserSettingsPage from '../src/pages/userSettingsPage'
 import routes from './assets/const/routing'
 import './utils/redirect'
+import './style.css'
 
 Router
   .addRoute(routes.auth, AuthorizationPage)

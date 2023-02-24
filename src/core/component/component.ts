@@ -113,7 +113,7 @@ class Component<P extends Record<string, any> = any | IStore> {
     this.componentDidMount()
   }
 
-  protected componentDidMount(oldProps?: P) {}
+  protected componentDidMount(_?: P) {}
 
   public dispatchComponentDidMount = () => {
     this.eventBus.emit(Component.EVENTS.FLOW_CDM)
