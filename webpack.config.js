@@ -2,6 +2,7 @@ const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -18,22 +19,11 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist')
     },
-    https: true,
     compress: true,
-    port: 1234,
+    port: 3000,
     hot: true,
     open: true,
-    proxy: [
-      {
-        context: ['/proxy-api/**'],
-        target: 'https://proxy-api/api/',
-        pathRewrite: { '^/api/': '/' },
-        secure: false,
-        onProxyReq: (proxyReq) => {
-          proxyReq.setHeader('Host', 'my-custom-host')
-        }
-      }
-    ]
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -72,14 +62,14 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        use: 'url-loader'
+        type: 'asset/resource'
       }
     ]
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './static/index.html',
+      template: './public/index.html',
       filename: 'index.html',
       minify: {
         collapseWhitespace: true,
@@ -90,6 +80,12 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'style-[hash].css'
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'public/favicon128.png', to: './' },
+        { from: 'public/favicon76.png', to: './' }
+      ]
     })
   ]
 }
