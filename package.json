@@ -5,8 +5,10 @@
   "scripts": {
     "start": "npx webpack serve",
     "build": "npx webpack",
-    "stylelint": "npx stylelint '**/*.css'",
-    "lint": "npx eslint src"
+    "lint:style": "npx stylelint '**/*.css' --fix",
+    "lint:code": "npx eslint src --fix",
+    "lint": "npm-run-all lint:style lint:code",
+    "prepare": "husky install"
   },
   "keywords": [],
   "license": "MIT",
@@ -28,7 +30,9 @@
     "eslint-plugin-promise": "6.0.0",
     "html-loader": "4.2.0",
     "html-webpack-plugin": "5.5.0",
+    "husky": "8.0.3",
     "mini-css-extract-plugin": "2.7.2",
+    "npm-run-all": "4.1.5",
     "postcss": "8.4.21",
     "postcss-autoreset": "3.0.4",
     "postcss-custom-properties": "12.1.11",
@@ -50,5 +54,10 @@
   },
   "dependencies": {
     "express": "4.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   }
 }
