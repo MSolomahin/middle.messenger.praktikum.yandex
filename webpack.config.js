@@ -32,9 +32,8 @@ module.exports = {
         loader: 'html-loader'
       },
       {
-        test: /\.tsx?$/,
-        use: ['ts-loader'],
-        exclude: /(node_modules)/
+        test: /\.ts$/,
+        use: ['ts-loader']
       },
       {
         test: /\.css$/i,
@@ -57,12 +56,16 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource'
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource'
+        test: /\.svg$/i,
+        use: 'url-loader'
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|)$/,
+        type: 'asset/inline'
       }
     ]
   },

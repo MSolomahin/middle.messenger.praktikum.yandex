@@ -10,7 +10,9 @@
     height: 28px;
     display: flex;
     border-radius: 50%;
-    background: url("../../assets/icons/arrowRight.svg") 50% 50% no-repeat;
     background-color: $color-main;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

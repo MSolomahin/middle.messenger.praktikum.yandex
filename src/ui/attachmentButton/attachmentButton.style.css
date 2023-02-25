@@ -5,6 +5,8 @@
     width: 32px;
     cursor: pointer;
     height: 32px;
-    background: url("../../assets/icons/clip.svg") no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
