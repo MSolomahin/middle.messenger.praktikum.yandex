@@ -4,11 +4,11 @@ RUN mkdir "app"
 WORKDIR app
 
 COPY ./package.json .
-COPY ./yarn.lock .
+COPY ./package-lock.json .
 COPY . .
 
-RUN yarn install --frozen-lockfile
+RUN npm ci
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["npm", "run", "start"]
