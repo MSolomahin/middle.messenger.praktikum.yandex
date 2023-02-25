@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -14,22 +13,11 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.json']
   },
-  watch: true,
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist')
-    },
-    compress: true,
-    port: 3000,
-    hot: true,
-    open: true,
-    historyApiFallback: true
-  },
   module: {
     rules: [
       {
         test: /\.tmpl$/i,
-        loader: 'html-loader'
+        loader: 'raw-loader'
       },
       {
         test: /\.ts$/,
