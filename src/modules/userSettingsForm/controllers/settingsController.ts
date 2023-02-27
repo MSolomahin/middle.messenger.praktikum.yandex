@@ -35,7 +35,9 @@ class SettingsController {
   @handleError()
   async uploadAvatar(data: FormData) {
       const user = await API.uploadAvatar(data)
-      store.set('user', user)
+      if (user) {
+        store.set('user', user)
+      }
   }
 }
 

@@ -10,3 +10,4 @@ dist/
 .git/
 .github/
 .gitignore
+.husky

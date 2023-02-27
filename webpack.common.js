@@ -1,6 +1,5 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
@@ -21,34 +20,11 @@ module.exports = {
       },
       {
         test: /\.ts$/,
-        use: ['ts-loader']
+        use: ['ts-loader'],
+        exclude: /node_modules/
       },
       {
-        test: /\.css$/i,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                config: path.resolve(__dirname, './postcss.config.js')
-              }
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif)$/i,
-        type: 'asset/resource'
-      },
-      {
-        test: /\.svg$/i,
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
         use: 'url-loader'
       },
       {
@@ -68,9 +44,6 @@ module.exports = {
         removeRedundantAttributes: true,
         useShortDoctype: true
       }
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'style-[hash].css'
     }),
     new CopyPlugin({
       patterns: [
