@@ -11,6 +11,7 @@
     "strictNullChecks": true,
     "strict": true,
     "strictFunctionTypes": false,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true
   }
 }

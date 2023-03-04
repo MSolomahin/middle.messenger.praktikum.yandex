@@ -29,7 +29,7 @@ function queryStringify(data: IData) {
   }, '?')
 }
 
-class HTTPTransport {
+export class HTTPTransport {
   get: HTTPMethod = (url, options = {}) =>
     this.request(
       url + queryStringify(options.data ?? {}),
