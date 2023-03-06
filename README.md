@@ -37,6 +37,10 @@ Builds the app for production to the `dist` folder.\
 
 Check code and style for problematic patterns found in code.
 
+#### `npm run test`
+
+Starts a test of the application logic.
+
 ## Explanations
 This project has specific file associations. To display correctly, you need to add the following lines to your settings.json:
 
