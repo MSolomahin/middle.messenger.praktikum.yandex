@@ -11,3 +11,4 @@ dist/
 .github/
 .gitignore
 .husky
+README.md

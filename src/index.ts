@@ -1,5 +1,5 @@
 import Router from './router/index'
-import './utils/navBar'
+import './navBar'
 import AuthorizationPage from '../src/pages/authorizationPage'
 import MessengerPage from '../src/pages/messengerPage'
 import NotFoundPage from '../src/pages/notFoundPage'

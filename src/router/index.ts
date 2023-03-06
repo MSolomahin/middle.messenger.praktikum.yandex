@@ -3,7 +3,7 @@ import Route from './route'
 
 class Router {
   routes: Route[] = []
-  page: Component | null = null
+  currentRoute: Route | null = null
   static _instance: Router
   private _notFoundRoute: Route | null = null
 
@@ -37,8 +37,10 @@ class Router {
 
     if (route) {
       route.render()
+      this.currentRoute = route
     } else {
       this._notFoundRoute?.render()
+      this.currentRoute = this._notFoundRoute
     }
   }
 
