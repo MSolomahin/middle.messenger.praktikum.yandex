@@ -34,7 +34,8 @@
     "@typescript-eslint/indent": [0, 2],
     "@typescript-eslint/no-non-null-assertion": ["off"],
     "@typescript-eslint/return-await": ["off"],
-    "@typescript-eslint/promise-function-async": ["off"]
+    "@typescript-eslint/promise-function-async": ["off"],
+    "@typescript-eslint/no-var-requires": ["off"]
     
   }
 }
