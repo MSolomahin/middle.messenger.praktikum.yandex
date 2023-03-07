@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .drop-down-item {
   display: flex;
@@ -9,12 +9,12 @@
   cursor: pointer;
 
   &:hover {
-    background: $color-light-blue;
+    background: var(--color-light-blue);
     border-radius: 10px;
   }
 
   & > p {
-    color: $color-text-primary;
+    color: var(--color-text-primary);
     white-space: nowrap;
   }
 }

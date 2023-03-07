@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .empty-chat {
   width: 75vw;
@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
 
-  @media (max-width: $mediaTablet) {
+  @media (max-width: var(--mediaTablet)) {
     display: none;
   }
 }

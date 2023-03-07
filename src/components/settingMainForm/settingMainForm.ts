@@ -1,7 +1,7 @@
 import template from './settingMainForm.tmpl'
 import Component from '../../core/component'
 import ButtonPrimary from '../../ui/buttonPrimary'
-import './settingMainForm.style.css'
+import './settingMainForm.style.scss'
 import { SettingMainFormProps } from './settingMainForm.types'
 import SecondInput from '../../ui/secondInput'
 import ButtonInline from '../../ui/buttonInline'

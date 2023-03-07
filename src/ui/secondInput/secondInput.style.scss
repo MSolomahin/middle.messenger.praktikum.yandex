@@ -1,10 +1,10 @@
-@import url("../../assets/style/uikit");
+
 
 .second-input {
   position: relative;
   flex: 1 1 auto;
   padding: 10px 0;
-  border-bottom: 1px solid $color-grey;
+  border-bottom: 1px solid var(--color-grey);
   display: grid;
   grid-template-columns: 110px 1fr;
 
@@ -20,11 +20,11 @@
   &__input {
     border: 0;
     width: 100%;
-    font-family: $font-base;
+    font-family: var(--font-base);
     font-size: 13px;
     justify-self: end;
     text-align-last: end;
-    color: $color-text-primary;
+    color: var(--color-text-primary);
 
     &:focus {
       outline: none;
@@ -32,13 +32,13 @@
 
     &:disabled {
       background: none;
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
     }
   }
 
   & label {
     flex: 1 1 auto;
     font-size: 13px;
-    color: $color-text-primary;
+    color: var(--color-text-primary);
   }
 }

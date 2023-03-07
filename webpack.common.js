@@ -50,6 +50,7 @@ module.exports = {
         { from: 'public/favicon128.png', to: './' },
         { from: 'public/favicon76.png', to: './' }
       ]
-    })
+    }),
+    require('postcss-nested'),
   ]
 }

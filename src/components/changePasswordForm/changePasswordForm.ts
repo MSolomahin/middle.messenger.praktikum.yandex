@@ -1,7 +1,7 @@
 import template from './changePasswordForm.tmpl'
 import Component from '../../core/component'
 import ButtonPrimary from '../../ui/buttonPrimary'
-import './changePasswordForm.style.css'
+import './changePasswordForm.style.scss'
 import { ChangePasswordFormProps } from './changePasswordForm.types'
 import SecondInput from '../../ui/secondInput'
 

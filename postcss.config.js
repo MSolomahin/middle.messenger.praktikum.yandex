@@ -4,6 +4,6 @@ module.exports = {
     'postcss-import': true,
     'postcss-url': true,
     'postcss-custom-properties': true,
-    precss: true
+    'postcss-nested': true
   }
 }

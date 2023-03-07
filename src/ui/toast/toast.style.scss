@@ -1,8 +1,8 @@
-@import url("../../assets/style/uikit");
+
 
 .toast {
   min-width: 250px;
-  font-family: $font-base;
+  font-family: var(--font-base);
   background-color: #fff;
   color: #000;
   text-align: center;

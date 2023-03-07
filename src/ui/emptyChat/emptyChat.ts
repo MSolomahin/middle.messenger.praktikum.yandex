@@ -1,6 +1,6 @@
 import template from './emptyChat.tmpl'
 import Component from '../../core/component'
-import './emptyChat.style.css'
+import './emptyChat.style.scss'
 
 export default class EmptyChat extends Component {
   constructor() {

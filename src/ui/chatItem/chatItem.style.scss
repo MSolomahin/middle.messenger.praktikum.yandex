@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .chat-item {
   &__container {
@@ -6,19 +6,19 @@
     align-items: flex-start;
     padding: 12px 10px;
     gap: 10px;
-    border-bottom: 1px solid $color-grey-2;
+    border-bottom: 1px solid var(--color-grey-2);
     height: 71px;
     cursor: pointer;
-    transition: $transition-base;
+    transition: var(--transition-base);
     width: 100%;
 
     &_selected {
-      background: $color-main-hover;
+      background: var(--color-main-hover);
     }
 
     &:hover {
-      background: $color-main-hover;
-      transition: $transition-base;
+      background: var(--color-main-hover);
+      transition: var(--transition-base);
     }
   }
 
@@ -60,7 +60,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: $color-main;
+    background: var(--color-main);;
     display: none;
 
     &_show {

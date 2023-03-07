@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .form {
   width: 100%;
@@ -12,18 +12,18 @@
     text-align: center;
     min-height: 450px;
     padding: 50px 30px 30px;
-    background: $color-white;
-    box-shadow: $shadow;
+    background: var(--color-white);
+    box-shadow: var(--shadow);
     border-radius: 12px;
 
-    @media (max-width: $mediaMobile) {
+    @media (max-width: var(--mediaMobile)) {
       padding: 50px 20px 30px;
     }
   }
 
   &__link {
     font-size: 11px;
-    color: $color-main;
+    color: var(--color-main);;
   }
 
   &__form {

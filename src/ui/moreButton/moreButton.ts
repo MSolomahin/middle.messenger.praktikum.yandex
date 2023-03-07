@@ -1,7 +1,7 @@
 import template from './moreButton.tmpl'
 import Component from '../../core/component'
 import { MoreButtonProps } from './moreButton.types'
-import './moreButton.style.css'
+import './moreButton.style.scss'
 
 export default class MoreButton extends Component<MoreButtonProps> {
   constructor() {

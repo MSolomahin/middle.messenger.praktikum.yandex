@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .input-base {
   position: relative;
@@ -18,18 +18,18 @@
     font-size: 13px;
     top: 15px;
     left: 0;
-    transition: $transition-base;
-    color: $color-text-secondary;
+    transition: var(--transition-base);
+    color: var(--color-text-secondary);
     pointer-events: none;
   }
 
   & input {
     border: 0;
-    border-bottom: 1.5px solid $color-main;
+    border-bottom: 1.5px solid var(--color-main);;
     padding: 11px 0;
     width: 100%;
-    transition: $transition-base;
-    font-family: $font-base;
+    transition: var(--transition-base);
+    font-family: var(--font-base);
     font-size: 13px;
 
     &:focus,
@@ -38,14 +38,14 @@
 
       & + label {
         transform: translateY(-20px);
-        transition: $transition-base;
+        transition: var(--transition-base);
         font-size: 9px;
       }
     }
 
     &:hover + label {
-      color: $color-main;
-      transition: $transition-base;
+      color: var(--color-main);;
+      transition: var(--transition-base);
     }
   }
 }

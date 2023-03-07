@@ -1,7 +1,7 @@
 import Component from '../../core/component'
 import template from './chatsList.tmpl'
 import { ChatsListProps } from './chatsList.types'
-import './chatsList.style.css'
+import './chatsList.style.scss'
 import Avatar from '../../ui/avatar'
 import connect from '../../store/connect'
 import ChatItem from '../../ui/chatItem'

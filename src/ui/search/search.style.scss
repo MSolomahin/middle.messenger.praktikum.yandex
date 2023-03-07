@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .search {
   display: flex;
@@ -10,20 +10,20 @@
   &:hover {
     & > div {
       transform: translateX(0);
-      transition: $transition-base;
+      transition: var(--transition-base);
       width: 28px;
       margin-left: 10px;
     }
 
     & > button {
       transform: scale(0.8) translateX(-47px);
-      transition: $transition-base;
+      transition: var(--transition-base);
     }
   }
 
   &__field {
     flex: 1;
-    background: $color-grey-2;
+    background: var(--color-grey-2);
     border-radius: 5px;
     height: 32px;
     width: 100%;
@@ -33,15 +33,15 @@
     overflow: hidden;
 
     &::placeholder {
-      color: $color-text-secondary;
+      color: var(--color-text-secondary);
       transform: translateX(calc(50% - 30px));
-      transition: $transition-base;
+      transition: var(--transition-base);
     }
 
     &:hover {
       &::placeholder {
         transform: translateX(0);
-        transition: $transition-base;
+        transition: var(--transition-base);
       }
     }
   }
@@ -49,7 +49,7 @@
   &__button {
     width: 0;
     transform: translateX(50px);
-    transition: $transition-base;
+    transition: var(--transition-base);
   }
 
   &__clean {
@@ -63,6 +63,6 @@
     top: 7px;
     transform: scale(0.8) translateX(0);
     z-index: 2;
-    transition: $transition-base;
+    transition: var(--transition-base);
   }
 }

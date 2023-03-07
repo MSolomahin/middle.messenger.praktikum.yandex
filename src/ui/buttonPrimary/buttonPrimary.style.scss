@@ -1,22 +1,22 @@
-@import url("../../assets/style/uikit");
+
 
 .button-primary {
-  background: $color-main;
+  background: var(--color-main);
   border-radius: 8px;
   flex: 1 1 auto;
   width: 100%;
   padding: 12px;
-  color: $color-white;
-  transition: $transition-base;
+  color: var(--color-white);
+  transition: var(--transition-base);
 
   &:hover {
     box-shadow: 0 4px 18px #000a2c3b, inset 0 -1px #ffffff26;
-    transition: $transition-base;
+    transition: var(--transition-base);
   }
 
   &:active {
     box-shadow: 0 2px 8px #000a2c3b, inset 0 -1px #ffffff26;
-    transition: $transition-base;
+    transition: var(--transition-base);
     opacity: 0.8;
   }
 }

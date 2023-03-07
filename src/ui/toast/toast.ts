@@ -1,6 +1,6 @@
 import template from './toast.tmpl'
 import Component from '../../core/component'
-import './toast.style.css'
+import './toast.style.scss'
 import { ToastProps } from './toast.types'
 
 class Toast extends Component {

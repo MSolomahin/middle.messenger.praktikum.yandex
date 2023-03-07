@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit.css");
+
 
 .back-button-layout {
   &__container {
@@ -8,17 +8,17 @@
 
   &__comeback {
     width: 64px;
-    background: $color-bg;
-    border-right: 2px solid $color-grey;
+    background: var(--color-bg);
+    border-right: 2px solid var(--color-grey);
     display: flex;
     align-items: center;
     justify-content: center;
 
     &:hover {
-      background: $color-bg;
+      background: var(--color-bg);
     }
 
-    @media (max-width: $mediaTablet) {
+    @media (max-width: var(--mediaTablet)) {
       background: none;
       border: none;
       position: absolute;
@@ -32,7 +32,7 @@
     width: calc(100% - 64px);
     padding: 10px;
 
-    @media (max-width: $mediaTablet) {
+    @media (max-width: var(--mediaTablet)) {
       width: 100%;
     }
   }

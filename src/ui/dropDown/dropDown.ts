@@ -2,7 +2,7 @@ import template from './dropDown.tmpl'
 import { DropDownProps } from './dropDown.types'
 import Component from '../../core/component'
 import DropDownItem from '../dropDownItem/dropDownItem'
-import './dropDown.style.css'
+import './dropDown.style.scss'
 
 export default class DropDown extends Component<DropDownProps> {
   constructor(props: DropDownProps) {

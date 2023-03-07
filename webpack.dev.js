@@ -18,7 +18,7 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.(css|scss)$/i,
         use: [
           'style-loader',
           {
@@ -31,7 +31,12 @@ module.exports = merge(common, {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                config: path.resolve(__dirname, './postcss.config.js')
+                plugins: [
+                  'postcss-import',
+                  'postcss-url',
+                  'postcss-custom-properties',
+                  'postcss-nested'
+                ]
               }
             }
           }

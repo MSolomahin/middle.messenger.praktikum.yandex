@@ -1,7 +1,7 @@
 import template from './messageText.tmpl'
 import { MessageTextProps } from './messageText.types'
 import Component from '../../core/component'
-import './messageText.style.css'
+import './messageText.style.scss'
 
 export default class MessageText extends Component<MessageTextProps> {
   constructor(props: MessageTextProps) {

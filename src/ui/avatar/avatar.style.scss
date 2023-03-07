@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .avatar {
   &_editable {
@@ -16,7 +16,7 @@
   &__container {
     position: relative;
     border-radius: 50%;
-    background: $color-grey-2 no-repeat center;
+    background: var(--color-grey)-2 no-repeat center;
     display: flex;
     align-items: center;
     justify-content: center;

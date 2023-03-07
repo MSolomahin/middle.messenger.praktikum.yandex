@@ -1,7 +1,7 @@
 import template from './messageInput.tmpl'
 import { MessageInputProps } from './messageInput.types'
 import Component from '../../core/component'
-import './messageInput.style.css'
+import './messageInput.style.scss'
 
 export default class MessageInput extends Component<MessageInputProps> {
   constructor(props: MessageInputProps) {

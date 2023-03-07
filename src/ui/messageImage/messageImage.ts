@@ -1,7 +1,7 @@
 import template from './messageImage.tmpl'
 import { MessageImageProps } from './messageImage.types'
 import Component from '../../core/component'
-import './messageImage.style.css'
+import './messageImage.style.scss'
 
 export default class MessageImage extends Component<MessageImageProps> {
   constructor(props: MessageImageProps) {

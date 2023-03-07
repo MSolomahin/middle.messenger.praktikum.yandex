@@ -1,6 +1,6 @@
 import template from './search.tmpl'
 import Component from '../../core/component'
-import './search.style.css'
+import './search.style.scss'
 import { SearchProps } from './search.types'
 import ArrowButton from '../arrowButton/arrowButton'
 import DeleteIcon from '../../assets/icons/delete.svg'

@@ -1,5 +1,5 @@
 body {
-  font-family: $font-base;
+  font-family: var(--font-base);
   overflow: hidden;
 }
 
@@ -20,59 +20,59 @@ a {
 }
 
 .text-xxxl {
-  font-size: $font-size-xxxl;
+  font-size: var(--font-size-xxxl);
   font-weight: 500;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .text-xxl {
-  font-size: $font-size-xxl;
+  font-size: var(--font-size-xxl);
   font-weight: 500;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .text-xl {
-  font-size: $font-size-xl;
+  font-size: var(--font-size-xl);
   font-weight: 600;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .text-l {
-  font-size: $font-size-l;
+  font-size: var(--font-size-l);
   font-weight: 500;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .text-m {
-  font-size: $font-size-m;
+  font-size: var(--font-size-m);
   font-weight: 600;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .text-s {
-  font-size: $font-size-s;
+  font-size: var(--font-size-s);
   font-weight: 500;
-  color: $color-text-secondary;
+  color: var(--color-text-secondary);
 }
 
 .text-xs {
-  font-size: $font-size-xs;
+  font-size: var(--font-size-xs);
   font-weight: 500;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .text-xxs {
-  font-size: $font-size-xxs;
+  font-size: var(--font-size-xxs);
   font-weight: 500;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .text-xxxs {
-  font-size: $font-size-xxxs;
+  font-size: var(--font-size-xxxs);
   font-weight: 400;
-  color: $color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .text-white {
-  color: $color-white;
+  color: var(--color-white);
 }

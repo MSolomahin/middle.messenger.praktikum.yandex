@@ -2,7 +2,7 @@ import template from './chatItem.tmpl'
 import { ChatItemProps } from './chatItem.types'
 import Component from '../../core/component'
 import Avatar from '../avatar'
-import './chatItem.style.css'
+import './chatItem.style.scss'
 
 export default class ChatItem extends Component<ChatItemProps> {
   constructor(props: ChatItemProps) {

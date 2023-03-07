@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .modal {
   position: fixed;
@@ -13,7 +13,7 @@
   &__body {
     max-width: 340px;
     padding: 40px 30px 30px;
-    background: $color-white;
+    background: var(--color-white);
     box-shadow: 0 0 6px rgb(0 0 0 / 14%);
     border-radius: 12px;
     display: flex;

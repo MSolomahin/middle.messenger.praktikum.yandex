@@ -1,12 +1,12 @@
-@import url("../../assets/style/uikit");
+
 
 .chats {
   width: 25vw;
   height: 100vh;
-  background: $color-bg;
-  border-right: 2px solid $color-grey;
+  background: var(--color-bg);
+  border-right: 2px solid var(--color-grey);
 
-  @media (max-width: $mediaTablet) {
+  @media (max-width: var(--mediaTablet)) {
     width: 100vw;
   }
 
@@ -39,7 +39,7 @@
       width: calc(100% + 20px);
       left: -10px;
       height: 1px;
-      background: $color-grey-2;
+      background: var(--color-grey-2);
       bottom: -15px;
     }
   }

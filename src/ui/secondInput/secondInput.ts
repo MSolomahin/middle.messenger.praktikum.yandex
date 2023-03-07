@@ -1,7 +1,7 @@
 import template from './secondInput.tmpl'
 import { SecondInputProps } from './secondInput.types'
 import Component from '../../core/component'
-import './secondInput.style.css'
+import './secondInput.style.scss'
 import { sanitizeValue } from '../../utils/sanitizer'
 
 export default class SecondInput extends Component<SecondInputProps> {

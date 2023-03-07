@@ -1,4 +1,4 @@
-@import url("../../assets/style/uikit");
+
 
 .arrow-button {
   &_right {
@@ -9,7 +9,7 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background-color: $color-main;
+    background-color: var(--color-main);;
     display: flex;
     align-items: center;
     justify-content: center;
