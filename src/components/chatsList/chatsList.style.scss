@@ -1,12 +1,10 @@
-
-
 .chats {
   width: 25vw;
   height: 100vh;
   background: var(--color-bg);
   border-right: 2px solid var(--color-grey);
 
-  @media (max-width: var(--mediaTablet)) {
+  @media (max-width: var(--media-tablet)) {
     width: 100vw;
   }
 

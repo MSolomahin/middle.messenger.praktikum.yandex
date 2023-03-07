@@ -1,9 +1,7 @@
-
-
 .more-button {
   width: 25px;
   height: 25px;
-  background: var(--color-grey)-3;
+  background: var(--color-grey) -3;
   border-radius: 50%;
   position: relative;
   padding: 4px;
@@ -22,6 +20,6 @@
     width: 3px;
     border-radius: 50%;
     height: 3px;
-    background: var(--color-main);;
+    background: var(--color-main);
   }
 }

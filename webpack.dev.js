@@ -35,7 +35,8 @@ module.exports = merge(common, {
                   'postcss-import',
                   'postcss-url',
                   'postcss-custom-properties',
-                  'postcss-nested'
+                  'postcss-nested',
+                  'postcss-scss'
                 ]
               }
             }

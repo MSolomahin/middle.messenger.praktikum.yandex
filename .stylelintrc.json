@@ -1,10 +1,11 @@
 {
-    "extends": "stylelint-config-standard",
-    "rules": {
-      "color-hex-case": "lower",
-      "no-duplicate-selectors": true
-    },
-    "ignoreFiles": [
-      "dist/*"
-    ]
-  } 
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "color-hex-case": "lower",
+    "no-duplicate-selectors": true
+  },
+  "customSyntax": "postcss-scss",
+  "ignoreFiles": [
+    "dist/*"
+  ]
+}

@@ -1,7 +1,5 @@
-
-
 .button-inline {
-  color: var(--color-main);;
+  color: var(--color-main);
   font-size: 13px;
   background: none;
   transition: var(--transition-base);
@@ -22,7 +20,7 @@
     width: calc(100% - 8px);
     height: 1px;
     border-radius: 4px;
-    background-color: var(--color-main);;
+    background-color: var(--color-main);
     bottom: 0;
     left: 0;
     margin: 0 4px;
