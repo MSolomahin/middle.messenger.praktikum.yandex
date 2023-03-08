@@ -18,7 +18,7 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.(css|scss)$/i,
+        test: /\.scss$/i,
         use: [
           'style-loader',
           {
@@ -36,7 +36,6 @@ module.exports = merge(common, {
                   'postcss-url',
                   'postcss-custom-properties',
                   'postcss-nested',
-                  'postcss-scss'
                 ]
               }
             }
