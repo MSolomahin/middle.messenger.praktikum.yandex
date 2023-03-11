@@ -1,7 +1,7 @@
 import template from './buttonInline.tmpl'
 import { ButtonInlineProps } from './buttonInline.types'
 import Component from '../../core/component'
-import './buttonInline.style.css'
+import './buttonInline.style.scss'
 
 export default class ButtonInline extends Component<
 ButtonInlineProps

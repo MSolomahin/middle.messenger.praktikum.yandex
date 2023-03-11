@@ -1,0 +1,30 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  z-index: 100;
+  background: rgb(0 0 0 / 50%);
+
+  &__body {
+    max-width: 340px;
+    padding: 40px 30px 30px;
+    background: var(--color-white);
+    box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    align-items: center;
+    min-width: 340px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+}

@@ -1,7 +1,7 @@
 import template from './loader.tmpl'
 import Component from '../../core/component'
 import { LoaderProps } from './loader.types'
-import './loader.style.css'
+import './loader.style.scss'
 
 export default class Loader extends Component<LoaderProps> {
   constructor(props: LoaderProps) {

@@ -1,0 +1,11 @@
+.empty-chat {
+  width: 75vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: var(--media-tablet)) {
+    display: none;
+  }
+}

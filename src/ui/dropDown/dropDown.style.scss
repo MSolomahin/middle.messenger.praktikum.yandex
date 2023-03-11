@@ -1,0 +1,29 @@
+.drop-down {
+  position: relative;
+
+  &__container {
+    background: var(--color-white);
+    box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+    border-radius: 12px;
+    display: none;
+    padding: 7.5px;
+    z-index: 1000;
+    position: absolute;
+  }
+
+  &_top {
+    bottom: calc(100% + 20px);
+  }
+
+  &_right {
+    left: 0;
+  }
+
+  &_left {
+    right: 0;
+  }
+
+  &_bottom {
+    top: calc(100% + 20px);
+  }
+}

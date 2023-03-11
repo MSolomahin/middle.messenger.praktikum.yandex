@@ -1,6 +1,6 @@
 import Component from '../../core/component'
 import { MainLayoutProps } from './mainLayout.types'
-import './mainLayout.style.css'
+import './mainLayout.style.scss'
 
 export default class MainLayout extends Component<MainLayoutProps> {
   constructor(props: MainLayoutProps) {

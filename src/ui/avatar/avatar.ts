@@ -1,7 +1,7 @@
 import template from './avatar.tmpl'
 import { AvatarProps } from './avatar.types'
 import Component from '../../core/component'
-import './avatar.style.css'
+import './avatar.style.scss'
 import { getFilePath } from '../../utils/getFilePath'
 
 export default class Avatar extends Component<AvatarProps> {

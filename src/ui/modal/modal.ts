@@ -2,7 +2,7 @@ import template from './modal.tmpl'
 import { ModalProps } from './modal.types'
 import Component from '../../core/component'
 import ButtonPrimary from '../buttonPrimary/buttonPrimary'
-import './modal.style.css'
+import './modal.style.scss'
 
 export default class Modal extends Component<ModalProps> {
   constructor(props: ModalProps) {

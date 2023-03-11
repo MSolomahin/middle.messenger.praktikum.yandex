@@ -1,7 +1,7 @@
 import template from './messageFile.tmpl'
 import { MessageFileProps } from './messageFile.types'
 import Component from '../../core/component'
-import './messageFile.style.css'
+import './messageFile.style.scss'
 
 export default class MessageFile extends Component<MessageFileProps> {
   constructor(props: MessageFileProps) {

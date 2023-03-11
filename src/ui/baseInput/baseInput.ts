@@ -1,7 +1,7 @@
 import template from './baseInput.tmpl'
 import { BaseInputProps } from './baseInput.types'
 import Component from '../../core/component'
-import './baseInput.style.css'
+import './baseInput.style.scss'
 import { sanitizeValue } from '../../utils/sanitizer'
 
 export default class BaseInput extends Component<BaseInputProps> {

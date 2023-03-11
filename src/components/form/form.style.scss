@@ -1,0 +1,42 @@
+.form {
+  width: 100%;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    min-width: 340px;
+    max-width: 340px;
+    text-align: center;
+    min-height: 450px;
+    padding: 50px 30px 30px;
+    background: var(--color-white);
+    box-shadow: var(--shadow);
+    border-radius: 12px;
+
+    @media (max-width: var(--media-mobile)) {
+      padding: 50px 20px 30px;
+    }
+  }
+
+  &__link {
+    font-size: 11px;
+    color: var(--color-main);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__footer {
+    margin-top: auto;
+  }
+
+  &__button {
+    &_primary {
+      margin-bottom: 14px;
+    }
+  }
+}

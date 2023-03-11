@@ -3,12 +3,14 @@ import {
   ArrowButtonProps
 } from './arrowButton.types'
 import Component from '../../core/component'
-import './arrowButton.style.css'
+import './arrowButton.style.scss'
+import ArrowIcon from '../../assets/icons/arrowRight.svg'
 
 export default class ArrowButton extends Component<ArrowButtonProps> {
   constructor(props: ArrowButtonProps) {
     super({
       ...props,
+      image: ArrowIcon,
       tag: props.link ? 'a' : 'button',
       type: props.link ? '' : 'submit',
       attrs: {

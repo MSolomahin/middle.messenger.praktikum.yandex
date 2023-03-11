@@ -4,6 +4,8 @@ import Route from './route'
 class Router {
   routes: Route[] = []
   page: Component | null = null
+  currentRoute: Route | null = null
+  history = window.history
   static _instance: Router
   private _notFoundRoute: Route | null = null
 
@@ -37,21 +39,23 @@ class Router {
 
     if (route) {
       route.render()
+      this.currentRoute = route
     } else {
       this._notFoundRoute?.render()
+      this.currentRoute = this._notFoundRoute
     }
   }
 
   getRoute(pathname: string) {
     return this.routes.find(route => route.match(pathname))
-}
+  }
 
   back() {
-    window.history.back()
+    this.history.back()
   }
 
   forward() {
-    window.history.forward()
+    this.history.forward()
   }
 
   public changePage(pathname: string) {
@@ -64,7 +68,7 @@ class Router {
   }
 
   navigate(path: string) {
-    history.pushState(null, '', path)
+    this.history.pushState(null, '', path)
     this.route()
   }
 
@@ -76,8 +80,7 @@ class Router {
   }
 
   setNotFoundPagePath(pathname: string, component: typeof Component) {
-    const route = new Route(pathname, component)
-    this._notFoundRoute = route
+    this._notFoundRoute = new Route(pathname, component)
     return this
   }
 

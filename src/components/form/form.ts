@@ -3,7 +3,7 @@ import Component from '../../core/component'
 import { FromProps } from './form.types'
 import Link from '../../ui/link'
 import ButtonPrimary from '../../ui/buttonPrimary'
-import './form.style.css'
+import './form.style.scss'
 
 export default class Form extends Component<FromProps> {
   constructor(props: FromProps) {

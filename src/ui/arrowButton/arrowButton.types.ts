@@ -5,4 +5,5 @@ export interface ArrowButtonProps extends ComponentBaseProps {
   tag?: string
   type?: string
   side: string
+  image?: string
 }

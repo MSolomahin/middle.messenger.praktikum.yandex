@@ -1,0 +1,15 @@
+.arrow-button {
+  &_right {
+    transform: rotate(180deg);
+  }
+
+  &__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--color-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

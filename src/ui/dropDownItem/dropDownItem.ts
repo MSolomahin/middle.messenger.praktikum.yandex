@@ -1,7 +1,7 @@
 import template from './dropDownItem.tmpl'
 import { DropDownItemProps } from './dropDownItem.types'
 import Component from '../../core/component'
-import './dropDownItem.style.css'
+import './dropDownItem.style.scss'
 
 export default class DropDownItem extends Component<DropDownItemProps> {
   constructor(props: DropDownItemProps) {

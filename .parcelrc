@@ -1,9 +1,0 @@
-{
-  "extends": "@parcel/config-default",
-  "transformers": {
-    "*.tmpl": [
-      "@parcel/transformer-inline-string", 
-      "..."
-    ]
-  }
-}

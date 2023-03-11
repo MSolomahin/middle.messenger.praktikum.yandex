@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+
+.DS_Store
+.idea/
+.vscode/
+
+# Project exclude paths
+dist/
+.git/
+.github/
+.gitignore
+.husky
+README.md

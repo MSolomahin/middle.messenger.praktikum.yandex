@@ -1,7 +1,7 @@
 import template from './buttonPrimary.tmpl'
 import { ButtonPrimaryProps } from './buttonPrimary.types'
 import Component from '../../core/component'
-import './buttonPrimary.style.css'
+import './buttonPrimary.style.scss'
 
 export default class ButtonPrimary extends Component<ButtonPrimaryProps> {
   constructor(props: ButtonPrimaryProps) {

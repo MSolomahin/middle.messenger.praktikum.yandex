@@ -1,0 +1,10 @@
+.attachment-button {
+  &__icon {
+    width: 32px;
+    cursor: pointer;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

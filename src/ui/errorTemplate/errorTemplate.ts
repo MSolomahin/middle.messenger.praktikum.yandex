@@ -2,7 +2,7 @@ import template from './errorTemplate.tmpl'
 import Component from '../../core/component'
 import { ErrorTemplateProps } from './errorTemplate.types'
 import Link from '../link'
-import './errorTemplate.style.css'
+import './errorTemplate.style.scss'
 
 export default class ErrorTemplate extends Component<ErrorTemplateProps> {
   constructor(props: ErrorTemplateProps) {
